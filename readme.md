@@ -2,6 +2,8 @@ Social Frames (alias "Beta Frames"), was advised by Emma Fyrmark, a screen write
 
 Social Frames was developed on a Macintosh ("Mac" for short), because some crucial features for development are only available on Linux and MacOS.
 
+Repository setup
+------
 The repository was accessed from Visual Studio Code ("VS Code" for short). To access the repository from VS Code, one of many ways are following:
 1. download the extention: Github,
 2. Make sure no file or document is open,
@@ -10,11 +12,6 @@ The repository was accessed from Visual Studio Code ("VS Code" for short). To ac
 5. Finally, pick a destination inside the Finder.
 
 For security reasons, type in `.DS_Store` to the `.gitignore` file.
-
-1. Install Django and the supporting libraries
-2. Create a new, blank Django project and app
-3. Set the project to use Cloudinary and PostgreSQL
-4. Deploy empty version to Heroku
 
 Using the terminal in VS Code, the following prompts was entered in the terminal:
 ------
