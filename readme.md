@@ -50,7 +50,10 @@ Social frames was setup on Cloudinary in following steps:
 - Inside the Dashboard tab, there's an API enviroment variable"
 - The API key can be found inside env.py
 
-
+If you're new to Django
+------
+- Inside `social_frames` folder, there's the `urls.py` folder which will know which html to render html. The html documents are inside the `storyboard folder` inside the `templates` folder.
+- First exhibition would be the `urls.py` file.
 
 Manual testing
 ------
