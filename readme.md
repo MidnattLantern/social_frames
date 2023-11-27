@@ -36,6 +36,10 @@ Social frames was setup on Heroku in following steps:
 - click "New app"
 - Give the app a name, and pick Europe
 - Inside the "Settings tab", is where the "config vars" is setup.
+- The file "Procfile" and its content is neccessary before deployment.
+- Inside the Deploy tab, click "Github" as deployment method.
+- In the field, social_frames was entered and selected.
+- Click "deploy branch".
 Social frames was setup on ElephantSQL in following steps:
 - Click "Create new instance".
 - Give it a name, as of 27 nov 2023, Social Frames has the "Tiny turtle" plan.
@@ -53,3 +57,5 @@ Manual testing
 - `python3 manage.py runserver`
 - `control^ + C
 This is how Social Frames was tested. the `runserver` prompt open up a server, the `^ + C` close the server, and to access the server, the terminal reveals an address, meaning anyone around the world could technically run Social Frames in this stage if they know the address while it's open.
+
+The deployment on Heroku is done manually
