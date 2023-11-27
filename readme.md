@@ -30,6 +30,21 @@ These prompts genrates the skeleton setup for Django implimentation.
 - `python3 manage.py migrate`
 For every new app, it's neccessary to migrate to keep the database up to date.
 
+Cloud service setup:
+------
+Social frames was setup on Heroku in following steps:
+- click "New app"
+- Give the app a name, and pick Europe
+- 
+Social frames was setup on ElephantSQL in following steps:
+- Click "Create new instance".
+- Give it a name, as of 27 nov 2023, Social Frames has the "Tiny turtle" plan.
+- Click "location", Social Frames use Stockholm as its data center.
+- Click "Create instance"
+- The link can be found in env.py
+
+Manual testing
+------
 - `python3 manage.py runserver`
 - `control^ + C
 This is how Social Frames was tested. the `runserver` prompt open up a server, the `^ + C` close the server, and to access the server, the terminal reveals an address, meaning anyone around the world could technically run Social Frames in this stage if they know the address while it's open.
