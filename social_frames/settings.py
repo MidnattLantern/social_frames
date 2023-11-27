@@ -33,7 +33,7 @@ SECRET_KEY = 'animeforscandinavia'
 DEBUG = True
 
 # Add host before deployment for accessibility
-ALLOWED_HOSTS = ['social-frames.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['social-frames.herokuapp.com', 'localhost', '127.0.0.1', 'social-frames-ecd39961bdfa.herokuapp.com']
 
 
 # Additional: storyboard, cloudinary, cloudinary_storage
