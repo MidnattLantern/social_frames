@@ -35,13 +35,18 @@ Cloud service setup:
 Social frames was setup on Heroku in following steps:
 - click "New app"
 - Give the app a name, and pick Europe
-- 
+- Inside the "Settings tab", is where the "config vars" is setup.
 Social frames was setup on ElephantSQL in following steps:
 - Click "Create new instance".
 - Give it a name, as of 27 nov 2023, Social Frames has the "Tiny turtle" plan.
 - Click "location", Social Frames use Stockholm as its data center.
 - Click "Create instance"
 - The link can be found in env.py
+Social frames was setup on Cloudinary in following steps:
+- Inside the Dashboard tab, there's an API enviroment variable"
+- The API key can be found inside env.py
+
+
 
 Manual testing
 ------
