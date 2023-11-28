@@ -9,9 +9,9 @@ PIN = ((0, "not pinned"), (1, "Pinned"))
 
 
 class ProjectItem(models.Model):
-    project_name = models.CharField(max_length=50, null=False, blank=False)
+    project_name = models.CharField(max_length=50, null=False, blank=False, default='My Project')
     property_to_director = models.CharField(max_length=50, null=False, blank=False)
-    artist_team = models.CharField(max_length=300)
+    artist_team = models.CharField(max_length=300, null=False, blank=False)
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -24,8 +24,8 @@ class ProjectItem(models.Model):
 
 class EpisodeItem(models.Model):
     chronology = models.IntegerField(null=False, blank=False)
-    episode_name = models.CharField(max_length=50, null=False, blank=False)
-    property_to_project = models.CharField(max_length=50)
+    episode_name = models.CharField(max_length=50, null=False, blank=False, default='None')
+    property_to_project = models.CharField(max_length=50, null=False, blank=False, default='None')
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
@@ -38,8 +38,8 @@ class EpisodeItem(models.Model):
 
 class SceneItem(models.Model):
     chronology = models.IntegerField(null=False, blank=False)
-    scene_name = models.CharField(max_length=50, null=False, blank=False)
-    property_to_episode = models.CharField(max_length=50)
+    scene_name = models.CharField(max_length=50, null=False, blank=False, default='None')
+    property_to_episode = models.CharField(max_length=50, null=False, blank=False, default='None')
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     scene_event_notes = models.TextField(max_length=300, null=True, blank=True)
@@ -54,8 +54,8 @@ class SceneItem(models.Model):
 
 class SketchItem(models.Model):
     sketch_upload = CloudinaryField('image', default='placeholder')
-    artist = models.CharField(max_length=50, null=False, blank=False)
-    property_to_scene = models.CharField(max_length=50)
+    artist = models.CharField(max_length=50, null=False, blank=False, default='None')
+    property_to_scene = models.CharField(max_length=50, null=False, blank=False, default='None')
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     pin = models.IntegerField(choices=PIN, default=False)
