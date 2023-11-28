@@ -1,2 +1,10 @@
 .DS_Store
 env.py
+core.Microsoft*
+core.mongo*
+core.python*
+__pycache__/
+*.py[cod]
+node_modules/
+.github/
+cloudinary_python.txt
