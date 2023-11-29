@@ -18,25 +18,16 @@ def render_sign_up(request):
 def render_home(request):
     render_project = ProjectItem.objects.all()
     context = {
-        'project': render_project
+        'show_projects': render_project
     }
     return render(request, 'storyboard/home_page.html', context)
-
-"""
-def render_project_view(request):
-    render_episode = EpisodeItem.objects.all()
-    context = {
-        'episode': render_episode
-    }
-    return render(request, 'storyboard/project_view.html', context)
-"""
 
 # user enter a project, expects to see episodes
 
 def render_project_view(request):
     render_episode = EpisodeItem.objects.all()
     context = {
-        'episode': render_episode
+        'show_episodes': render_episode
     }
     return render(request, 'storyboard/project_view.html', context)
 
@@ -45,7 +36,7 @@ def render_project_view(request):
 def render_episode_view(request):
     render_scene = SceneItem.objects.all()
     context = {
-        'scene': render_scene
+        'show_scenes': render_scene
     }
     return render(request, 'storyboard/episode_view.html', context)
 
@@ -54,6 +45,6 @@ def render_episode_view(request):
 def render_scene_view(request):
     render_sketches = SketchItem.objects.all()
     context = {
-        'sketches': render_sketches
+        'show_sketches': render_sketches
     }
     return render(request, 'storyboard/sketches_view.html', context)

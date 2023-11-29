@@ -1,3 +1,4 @@
+<!-- /project/episode/scene -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,5 +8,26 @@
 </head>
 <body>
     <h1>all submitted sketches</h1>
+
+    <!-- see models.py SketchItem() -->
+    {% for i in show_sketches%}
+    <div>
+        <p>
+            (pin sketch goes here)
+        </p>
+        <div>
+            Sketch upload: {{ i.sketch_upload }}
+        </div>
+        <h2>
+            Pinned: {{ i.pin }}
+        </h2>
+        <p>
+            Artist: {{ i.artist }}
+        </p>
+        <p>
+            Most recent update: {{ i.updated_date }}
+        </p>
+    </div>
+    {% endfor %}
 </body>
 </html>

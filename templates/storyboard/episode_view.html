@@ -1,3 +1,4 @@
+<!-- /project/episode -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,5 +8,27 @@
 </head>
 <body>
     <h1>episode view</h1>
+
+    <!-- see models.py SceneItem() -->
+    {% for i in show_scenes %}
+    <div>
+        <h2>
+            chronology: {{ i.chronology}}
+        </h2>
+        <h2>
+            Scene name: {{ i.scene_name }}
+        </h2>
+        <div>
+            <p>(pin image goes here)</p>
+        </div>
+        <p>
+            Notes: {{ i.scene_event_notes }}
+        </p>
+        <p>
+            Most recent update: {{ i.updated_date }}
+        </p>
+    </div>
+
+    {% endfor %}
 </body>
 </html>

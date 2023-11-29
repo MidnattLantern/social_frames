@@ -1,3 +1,4 @@
+<!-- /project -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,20 @@
 </head>
 <body>
     <h1>Project view</h1>
-    
+
+    <!-- see models.py EpisodeItem() -->
+    {% for i in show_episodes%}
+    <div>
+        <h2>
+            Chronology: {{ i.chronology}}
+        </h2>
+        <h2>
+            Episode name: {{ i.episode_name }}
+        </h2>
+        <p>
+            Most recent update: {{ i.updated_date }}
+        </p>
+    </div>
+    {% endfor %}
 </body>
 </html>
