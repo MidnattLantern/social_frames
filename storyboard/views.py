@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import ProjectItem, EpisodeItem, SceneItem, SketchItem
+from django.views import generic
 
 
 def render_sign_in(request):

@@ -61,4 +61,4 @@ Manual testing
 - `control^ + C
 This is how Social Frames was tested. the `runserver` prompt open up a server, the `^ + C` close the server, and to access the server, the terminal reveals an address, meaning anyone around the world could technically run Social Frames in this stage if they know the address while it's open.
 
-The deployment on Heroku is done manually
+The deployment on Heroku is done manually, which prevents complications during development between updates.
