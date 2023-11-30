@@ -19,16 +19,16 @@ empty string '' is the Django equivalent to index.html
 
     social_frames_testuser1
     testpass1
+
+    testuser2
+    testpass2
 """
 
 urlpatterns = [
     path('django_admin/', admin.site.urls),
 
     # account:
-    path('sign_in', render_sign_in, name='sign in'),
-    path('sign_out', render_sign_out, name='sign out'),
-    path('sign_up', render_sign_up, name='sign up'),
-    path('accounts', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
 
     # main:
     path('', render_home, name='home'),
