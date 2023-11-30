@@ -12,12 +12,12 @@
     <!-- see models.py SceneItem() -->
     {% for i in show_scenes %}
     <div>
-        <h2>
+        <p>
             chronology: {{ i.chronology}}
-        </h2>
-        <h2>
+        </p>
+        <a href="{% url 'scene' %}">
             Scene name: {{ i.scene_name }}
-        </h2>
+        </a>
         <div>
             <p>(pin image goes here)</p>
         </div>
