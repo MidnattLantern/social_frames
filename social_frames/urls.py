@@ -28,6 +28,7 @@ urlpatterns = [
     path('sign_in', render_sign_in, name='sign in'),
     path('sign_out', render_sign_out, name='sign out'),
     path('sign_up', render_sign_up, name='sign up'),
+    path('accounts', include('allauth.urls')),
 
     # main:
     path('', render_home, name='home'),

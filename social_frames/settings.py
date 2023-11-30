@@ -36,19 +36,31 @@ DEBUG = True
 # Delete personal IP address before release!
 ALLOWED_HOSTS = ['social-frames.herokuapp.com', 'localhost', '127.0.0.1', 'social-frames-ecd39961bdfa.herokuapp.com']
 
-
-# Additional: storyboard, cloudinary, cloudinary_storage
+"""
+Additional: storyboard, cloudinary, cloudinary_storage, django.contrib.sites,
+ allauth, allauth.account, allauth.social.account
+"""
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
     'storyboard',
 ]
+
+# additional
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
