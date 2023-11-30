@@ -55,6 +55,13 @@ If you're new to Django
 - Inside `social_frames` folder, there's the `urls.py` folder which will know which html to render html. The html documents are inside the `storyboard folder` inside the `templates` folder.
 - First exhibition would be the `urls.py` file.
 
+Technology:
+------
+- Social frames use Django to handle database
+- The account registration and accessibility is handled by Allauth extention
+- Social frames is hosted by Heroku
+- Social frames is handling its storage on PostgreSQL
+
 Manual testing
 ------
 - `python3 manage.py runserver`
