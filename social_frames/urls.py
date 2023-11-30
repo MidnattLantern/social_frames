@@ -1,7 +1,7 @@
 #social_frames URL Configuration
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 #everything productivity:
 from storyboard.views import render_home, render_project_view
