@@ -12,12 +12,12 @@
     <!-- see models.py EpisodeItem() -->
     {% for i in show_episodes%}
     <div>
-        <h2>
+        <p>
             Chronology: {{ i.chronology}}
-        </h2>
-        <h2>
+        </p>
+        <a href="{% url 'episode' %}">
             Episode name: {{ i.episode_name }}
-        </h2>
+        </a>
         <p>
             Most recent update: {{ i.updated_date }}
         </p>

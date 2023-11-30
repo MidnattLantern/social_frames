@@ -10,7 +10,6 @@ PIN = ((0, "not pinned"), (1, "Pinned"))
 
 class ProjectItem(models.Model):
     project_name = models.CharField(max_length=50, null=False, blank=False, default='')
-#    property_to_director = models.CharField(max_length=50, null=False, blank=False)
     artist_team = models.CharField(max_length=300, null=False, blank=False)
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
@@ -44,7 +43,6 @@ class SceneItem(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     scene_event_notes = models.TextField(max_length=300, null=True, blank=True)
-#    artist_assignment = models.TextField(max_length=300, null=True, blank=True)
     artist_assignment = models.ForeignKey(User, on_delete=models.CASCADE, default='')
 
 

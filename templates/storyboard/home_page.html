@@ -8,10 +8,12 @@
 </head>
 <body>
     <h1>This is the home banner</h1>
+    <!-- Display if signed in -->
     {% if user.is_authenticated %}
     <a>{{ user.username }}</a>
     <br>
     <a href="{% url 'account_logout' %}">sign_out</a>
+    <!-- Display if not signed in -->
     {% else %}
     <a href="{% url 'account_login' %}">sign_in</a>
     <br>
@@ -24,9 +26,9 @@
     <table>
     <!-- see models.py ProjectItem() -->
     {% for i in show_projects%}
-        <h2>
+        <a href="{% url 'project' %}">
             Project name: {{ i.project_name }}
-        </h2>
+        </a>
         <p>
             Most recent update: {{ i.updated_date }}
         </p>
