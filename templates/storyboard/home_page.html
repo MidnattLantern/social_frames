@@ -1,4 +1,3 @@
-<!-- / -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+
+{% extends "base.html" %}
+{% block content %}
     <h1>This is the home banner</h1>
     <!-- Display if signed in -->
     {% if user.is_authenticated %}
@@ -34,6 +36,7 @@
         </p>
     </table>
     {% endfor %}
+{% endblock %}
 
 </body>
 </html>
