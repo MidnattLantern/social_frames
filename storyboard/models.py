@@ -66,10 +66,10 @@ class SketchItem(models.Model):
 
 #Sketch: submission by director
 class SketchItemComment(models.Model):
-    comment = models.CharField(max_length=500, null=False, blank=False, default='')
+    body = models.TextField(default='')
     creation_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['creation_date']
     def __str__(self):
-        return self.comment
+        return self.body

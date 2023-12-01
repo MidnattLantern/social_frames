@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from .models import ProjectItem, EpisodeItem, SceneItem, SketchItem
 from .forms import SketchItemComment
-from django.views import generic
+from django.views import generic, view
 
-
+#outdated
 def render_sign_in(request):
     return render(request, 'storyboard/sign_in.html')
 
-
+#outdated
 def render_sign_out(request):
     return render(request, 'storyboard/sign_out.html')
 
-
+#outdated
 def render_sign_up(request):
     return render(request, 'storyboard/sign_up.html')
 
@@ -24,8 +24,8 @@ def render_home(request):
     }
     return render(request, 'storyboard/home_page.html', context)
 
-# user enter a project, expects to see episodes
 
+# user enter a project, expects to see episodes
 def render_project_view(request):
     render_episode = EpisodeItem.objects.all()
     context = {
@@ -48,5 +48,9 @@ def render_scene_view(request):
     render_sketches = SketchItem.objects.all()
     context = {
         'show_sketches': render_sketches,
+        'show_directors_sketch_comment': SketchItemComment()
     }
     return render(request, 'storyboard/sketches_view.html', context)
+
+#attempt
+class (view):

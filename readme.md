@@ -75,3 +75,7 @@ Some code is fragile with letters, one misplaced `/` can make the service dysfun
 Test accounts at urls.py
 
 there's a csrf token for each for security {% csrf_token %}
+
+During earlt staes, there's no styling. This was because functionality had to take more priority than form.
+
+During early stages, there were no director and artist and spectator's role. This was because at that stage, it's only relevant to make sure every content is able to be rendered.
