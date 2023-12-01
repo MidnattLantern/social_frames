@@ -73,3 +73,5 @@ The deployment on Heroku is done manually, which prevents complications during d
 Some code is fragile with letters, one misplaced `/` can make the service dysfunctional.
 
 Test accounts at urls.py
+
+there's a csrf token for each for security {% csrf_token %}

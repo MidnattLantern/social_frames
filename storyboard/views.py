@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import ProjectItem, EpisodeItem, SceneItem, SketchItem
+from .forms import SketchItemComment
 from django.views import generic
 
 
@@ -19,7 +20,7 @@ def render_sign_up(request):
 def render_home(request):
     render_project = ProjectItem.objects.all()
     context = {
-        'show_projects': render_project
+        'show_projects': render_project,
     }
     return render(request, 'storyboard/home_page.html', context)
 
@@ -28,7 +29,7 @@ def render_home(request):
 def render_project_view(request):
     render_episode = EpisodeItem.objects.all()
     context = {
-        'show_episodes': render_episode
+        'show_episodes': render_episode,
     }
     return render(request, 'storyboard/project_view.html', context)
 
@@ -37,7 +38,7 @@ def render_project_view(request):
 def render_episode_view(request):
     render_scene = SceneItem.objects.all()
     context = {
-        'show_scenes': render_scene
+        'show_scenes': render_scene,
     }
     return render(request, 'storyboard/episode_view.html', context)
 
@@ -46,6 +47,6 @@ def render_episode_view(request):
 def render_scene_view(request):
     render_sketches = SketchItem.objects.all()
     context = {
-        'show_sketches': render_sketches
+        'show_sketches': render_sketches,
     }
     return render(request, 'storyboard/sketches_view.html', context)

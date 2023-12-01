@@ -38,7 +38,7 @@ ALLOWED_HOSTS = ['social-frames.herokuapp.com', 'localhost', '127.0.0.1', 'socia
 
 """
 Additional: storyboard, cloudinary, cloudinary_storage, django.contrib.sites,
- allauth, allauth.account, allauth.social.account
+ allauth, allauth.account, allauth.social.account, crispy_form
 """
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -53,14 +53,15 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    'crispy_forms',
     'storyboard',
 ]
 
 # additional
 SITE_ID = 1
-
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

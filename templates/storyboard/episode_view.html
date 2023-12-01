@@ -4,6 +4,7 @@
     <h1>episode view</h1>
 
     <!-- see models.py SceneItem() -->
+    {% if user.is_authenticated %}
     {% for i in show_scenes %}
     <div>
         <p>
@@ -23,4 +24,5 @@
         </p>
     </div>
     {% endfor %}
+    {% endif %}
 {% endblock %}

@@ -4,6 +4,7 @@
     <h1>Project view</h1>
 
     <!-- see models.py EpisodeItem() -->
+    {% if user.is_authenticated %}
     {% for i in show_episodes%}
     <div>
         <p>
@@ -17,4 +18,5 @@
         </p>
     </div>
     {% endfor %}
+    {% endif %}
 {% endblock %}

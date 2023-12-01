@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>This is the home banner</h1>
-    <!-- Display if signed in -->
+    <!-- Note for all views: any content is only accessible when signed in -->
     {% if user.is_authenticated %}
     <a>{{ user.username }}</a>
     <br>
@@ -18,6 +18,7 @@
 
     <table>
     <!-- see models.py ProjectItem() -->
+    {% if user.is_authenticated %}
     {% for i in show_projects%}
         <a href="{% url 'project' %}">
             Project name: {{ i.project_name }}
@@ -27,4 +28,5 @@
         </p>
     </table>
     {% endfor %}
+    {% endif %}
 {% endblock %}

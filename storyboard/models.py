@@ -17,7 +17,6 @@ class ProjectItem(models.Model):
 
     class Meta:
         ordering = ['updated_date']
-
     def __str__(self):
         return self.project_name
 
@@ -31,7 +30,6 @@ class EpisodeItem(models.Model):
 
     class Meta:
         ordering = ['chronology']
-
     def __str__(self):
         return self.episode_name
 
@@ -48,11 +46,10 @@ class SceneItem(models.Model):
 
     class Meta:
         ordering = ['chronology']
-
     def __str__(self):
         return self.scene_name
 
-
+# Sketch: submission by artist
 class SketchItem(models.Model):
     sketch_upload = CloudinaryField('image', default='placeholder')
 #    artist = models.CharField(max_length=50, null=False, blank=False, default='')
@@ -64,6 +61,15 @@ class SketchItem(models.Model):
 
     class Meta:
         ordering = ['updated_date']
-
     def __str__(self):
         return self.property_to_scene
+
+#Sketch: submission by director
+class SketchItemComment(models.Model):
+    comment = models.CharField(max_length=500, null=False, blank=False, default='')
+    creation_date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['creation_date']
+    def __str__(self):
+        return self.comment

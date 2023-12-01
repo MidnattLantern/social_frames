@@ -1,9 +1,12 @@
 <!-- /project/episode/scene -->
 {% extends "base.html" %}
 {% block content %}
+{% load crispy_forms_tags %}
+
     <h1>all submitted sketches</h1>
 
     <!-- see models.py SketchItem() -->
+    {% if user.is_authenticated %}
     {% for i in show_sketches%}
     <div>
         <p>
@@ -22,5 +25,14 @@
             Most recent update: {{ i.updated_date }}
         </p>
     </div>
+    <!-- director's feedback goes here -->
+    <h3>Leave a comment:</h3>
+        <form method="post" style="margin-top: 1.3em;">
+            {{ show_direcotrs_sketch_comment | crispy }}
+            {% csrf_token %}
+            <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+        </form>
     {% endfor %}
+    {% endif %}
+
 {% endblock %}
