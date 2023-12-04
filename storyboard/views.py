@@ -1,8 +1,13 @@
+# 3rd party
 from django.shortcuts import render, get_object_or_404
-from .models import ProjectItem, EpisodeItem
-from .models import SceneItem, SketchItem, SketchItemComment
-from .forms import SketchItemComment
 from django.views import generic, View
+# .models
+from .models import ProjectItem, EpisodeItem, SceneItem
+from .models import SketchItem, SketchItemComment
+# .forms
+from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
+from .forms import CreateSketchItem, CreateSketchItemComment
+
 
 #outdated
 def render_sign_in(request):
@@ -47,28 +52,34 @@ def render_episode_view(request):
 # user enter a scene, expects to see sketches
 def render_scene_view(request):
     render_sketches = SketchItem.objects.all()
+    render_sketches_comments = SketchItemComment.objects.all()
     context = {
         'show_sketches': render_sketches,
+        'show_sketches_comments': render_sketches_comments,
     }
     return render(request, 'storyboard/sketches_view.html', context)
 
-# test
-class AnythingSketch(generic.ListView):
-    sketch_item = SketchItem
-    sketch_item_comment = SketchItemComment
-    render_sketch_item = SketchItem.sketch_upload
-    render_sketch_item_comment = SketchItemComment.body
-    template_name = "index.html"
+# appended with "Load"
+class LoadProjectItem(generic.ListView):
+    project_item = ProjectItem
+    render_project_item = ProjectItem.project_name
 
-#def render_scene_view(view):
-#    def get(self, request):
-#        sketch_item = SketchItem
-#        post = get_object_or_404(sketch_item)
-#        return render(
-#            request,
-#            "base.html",
-#            {
-#                "post": post,
-#                "sketch_item_comment": SketchItemComment()
-#            }
-#        )
+
+class LoadEpisodeItem(generic.ListView):
+    episode_item = EpisodeItem
+    render_episode_item = EpisodeItem.episode_name
+
+
+class LoadSceneItem(generic.ListView):
+    scene_item = SceneItem
+    render_scene_item = scene_item.scene_name
+
+class LoadSketchItem(generic.ListView):
+    sketch_item = SketchItem
+    render_sketch_item = SketchItem.sketch_upload
+
+
+class LoadSketchItemComment(generic.ListView):
+    sketch_item_comment = SketchItemComment
+    render_sketch_item_comment = SketchItemComment.body
+

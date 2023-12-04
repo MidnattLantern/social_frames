@@ -7,7 +7,7 @@ from cloudinary.models import CloudinaryField
 
 PIN = ((0, "not pinned"), (1, "Pinned"))
 
-
+#each are exported to forms.py and appended with "Create"
 class ProjectItem(models.Model):
     project_name = models.CharField(max_length=50, null=False, blank=False, default='')
     artist_team = models.CharField(max_length=300, null=False, blank=False)
