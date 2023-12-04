@@ -57,7 +57,7 @@ class SketchItem(models.Model):
     property_to_scene = models.CharField(max_length=50, null=False, blank=False, default='')
     creation_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
-    pin = models.IntegerField(choices=PIN, default=False)
+    pin = models.IntegerField(choices=PIN, default=0)
 
     class Meta:
         ordering = ['updated_date']
@@ -73,4 +73,3 @@ class SketchItemComment(models.Model):
         ordering = ['creation_date']
     def __str__(self):
         return f"comment: {self.body}"
-    

@@ -82,6 +82,7 @@ class LoadSketchItem(generic.ListView):
 class LoadSketchItemComment(generic.ListView):
     model = SketchItemComment
     queryset = SketchItemComment.body
+    template_name = "sketches_view.html"
 
 
 

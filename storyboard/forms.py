@@ -70,3 +70,4 @@ class CreateSketchItemComment(forms.ModelForm):
         """
         model = SketchItemComment
         fields = ('body',)
+
