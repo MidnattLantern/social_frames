@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from .models import ProjectItem, EpisodeItem, SceneItem, SketchItem
+from django.shortcuts import render, get_object_or_404
+from .models import ProjectItem, EpisodeItem
+from .models import SceneItem, SketchItem, SketchItemComment
 from .forms import SketchItemComment
-from django.views import generic, view
+from django.views import generic, View
 
 #outdated
 def render_sign_in(request):
@@ -22,7 +23,7 @@ def render_home(request):
     context = {
         'show_projects': render_project,
     }
-    return render(request, 'storyboard/home_page.html', context)
+    return render(request, 'storyboard/index.html', context)
 
 
 # user enter a project, expects to see episodes
@@ -48,9 +49,26 @@ def render_scene_view(request):
     render_sketches = SketchItem.objects.all()
     context = {
         'show_sketches': render_sketches,
-        'show_directors_sketch_comment': SketchItemComment()
     }
     return render(request, 'storyboard/sketches_view.html', context)
 
-#attempt
-class (view):
+# test
+class AnythingSketch(generic.ListView):
+    sketch_item = SketchItem
+    sketch_item_comment = SketchItemComment
+    render_sketch_item = SketchItem.sketch_upload
+    render_sketch_item_comment = SketchItemComment.body
+    template_name = "index.html"
+
+#def render_scene_view(view):
+#    def get(self, request):
+#        sketch_item = SketchItem
+#        post = get_object_or_404(sketch_item)
+#        return render(
+#            request,
+#            "base.html",
+#            {
+#                "post": post,
+#                "sketch_item_comment": SketchItemComment()
+#            }
+#        )

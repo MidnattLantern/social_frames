@@ -27,11 +27,12 @@
     </div>
     <!-- director's feedback goes here -->
     <h3>Leave a comment:</h3>
-        <form method="post">
-            {{ show_direcotrs_sketch_comment | crispy }}
-            {% csrf_token %}
-            <button type="submit" class="btn btn-signup btn-lg">Submit</button>
-        </form>
+    <form method="post">
+        {{ show_direcotrs_sketch_comment|crispy }}
+        {% csrf_token %}
+        <button type="submit" style="margin-top: 1.3em;">Submit</button>
+    </form>
+
     {% endfor %}
     {% endif %}
 
