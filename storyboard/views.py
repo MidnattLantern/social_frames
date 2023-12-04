@@ -28,7 +28,7 @@ def render_home(request):
     context = {
         'show_projects': render_project,
     }
-    return render(request, 'storyboard/index.html', context)
+    return render(request, 'index.html', context)
 
 
 # user enter a project, expects to see episodes
@@ -37,7 +37,7 @@ def render_project_view(request):
     context = {
         'show_episodes': render_episode,
     }
-    return render(request, 'storyboard/project_view.html', context)
+    return render(request, 'project_view.html', context)
 
 
 # user enter an episode, expects to see scenes
@@ -46,18 +46,17 @@ def render_episode_view(request):
     context = {
         'show_scenes': render_scene,
     }
-    return render(request, 'storyboard/episode_view.html', context)
+    return render(request, 'episode_view.html', context)
 
 
 # user enter a scene, expects to see sketches
 def render_scene_view(request):
     render_sketches = SketchItem.objects.all()
-    render_sketches_comments = SketchItemComment.objects.all()
     context = {
         'show_sketches': render_sketches,
-        'show_sketches_comments': render_sketches_comments,
     }
-    return render(request, 'storyboard/sketches_view.html', context)
+    return render(request, 'sketches_view.html', context)
+
 
 # appended with "Load"
 class LoadProjectItem(generic.ListView):
@@ -72,7 +71,8 @@ class LoadEpisodeItem(generic.ListView):
 
 class LoadSceneItem(generic.ListView):
     scene_item = SceneItem
-    render_scene_item = scene_item.scene_name
+    render_scene_item = SceneItem.scene_name
+
 
 class LoadSketchItem(generic.ListView):
     sketch_item = SketchItem
@@ -80,6 +80,22 @@ class LoadSketchItem(generic.ListView):
 
 
 class LoadSketchItemComment(generic.ListView):
-    sketch_item_comment = SketchItemComment
-    render_sketch_item_comment = SketchItemComment.body
+    model = SketchItemComment
+    queryset = SketchItemComment.body
+
+
+
+#test
+class SketchComment(View):
+    def get(self, request):
+        queryset = SketchItemComment.objects.all()
+        post = get_object_or_404(queryset)
+        return render(
+            request,
+            "sketches_view.html",
+            {
+                "post": post,
+                "sketch_item_comment": CreateSketchItemComment(),
+            },
+        )
 

@@ -72,4 +72,5 @@ class SketchItemComment(models.Model):
     class Meta:
         ordering = ['creation_date']
     def __str__(self):
-        return self.body
+        return f"comment: {self.body}"
+    
