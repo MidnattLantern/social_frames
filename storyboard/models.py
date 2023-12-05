@@ -7,7 +7,18 @@ from cloudinary.models import CloudinaryField
 
 PIN = ((0, "not pinned"), (1, "Pinned"))
 
-#each are exported to forms.py and appended with "Create"
+""" Naming conventions:
+- Each item are appended with "Create" when exported to `forms.py`.
+- Each item, such as "project" share similar model names such as `_name`,
+appended item name differenciate between exaple: `PROJECT_name` and
+`EPISODE_name`.
+- The section like folders on Finder/ File Exploer are as following:
+Project > Episode > Scene > Sketch.
+- `property_to...` reference to the item before. Example: `Episode` belongs to
+`Project`, so the name is `EPISODE_property_to_PROJECT`. Exception for Project,
+that belongs to a User.
+"""
+
 class ProjectItem(models.Model):
     project_name = models.CharField(max_length=50, null=False, blank=False, default='', unique=True)
     project_slug = models.SlugField(max_length=50, unique=True, default='')
