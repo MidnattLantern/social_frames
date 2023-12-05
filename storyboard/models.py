@@ -64,7 +64,7 @@ class SceneItem(models.Model):
     def __str__(self):
         return self.scene_name
 
-# Sketch: submission by artist
+
 class SketchItem(models.Model):
     sketch_item_upload = CloudinaryField('image', default='placeholder')
     sketch_artist = models.ForeignKey(User, on_delete=models.CASCADE, default='')
