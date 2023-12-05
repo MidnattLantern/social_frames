@@ -66,19 +66,11 @@ class SceneItem(models.Model):
 
 
 class SketchItem(models.Model):
-    sketch_item_upload = CloudinaryField('image', default='placeholder')
-    sketch_artist = models.ForeignKey(User, on_delete=models.CASCADE, default='')
-    sketch_property_to_scene = models.ForeignKey(SceneItem, on_delete=models.CASCADE, default='')
     sketch_creation_date = models.DateTimeField(auto_now_add=True)
     sketch_updated_date = models.DateTimeField(auto_now=True)
-    sketch_pin = models.IntegerField(choices=PIN, default=0)
     sketch_directors_comment = models.CharField(max_length=300, null=False, blank=False, default='')
 
     class Meta:
         ordering = ['sketch_updated_date']
     def __str__(self):
-        return self.sketch_property_to_scene
-    def image(self):
-        return self.sketch_item_upload
-    def comment(self):
         return self.sketch_directors_comment

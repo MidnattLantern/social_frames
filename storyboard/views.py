@@ -54,48 +54,30 @@ def render_scene_view(request):
     render_sketches = SketchItem.objects.all()
     context = {
         'show_sketches': render_sketches,
-        "sketch_item_comment": CreateSketchItemComment(),
     }
     return render(request, 'sketches_view.html', context)
 
 
 # appended with "Load"
 class LoadProjectItem(generic.ListView):
-    project_item = ProjectItem
+    project_model = ProjectItem
     render_project_item = ProjectItem.project_name
+    queryset = ProjectItem.project_name
 
 
 class LoadEpisodeItem(generic.ListView):
-    episode_item = EpisodeItem
+    episode_model = EpisodeItem
     render_episode_item = EpisodeItem.episode_name
+    queryset = EpisodeItem.episode_name
 
 
 class LoadSceneItem(generic.ListView):
-    scene_item = SceneItem
+    scene_model = SceneItem
     render_scene_item = SceneItem.scene_name
+    queryset = SceneItem.scene_name
 
 
 class LoadSketchItem(generic.ListView):
-    sketch_item = SketchItem
-    render_sketch_item = SketchItem.sketch_item_upload
-
-
-class LoadSketchItemComment(generic.ListView):
-    model = SketchItem
-    queryset = SketchItem.sketch_directors_comment
-    template_name = "sketches_view.html"
-
-
-
-#test
-class SketchComment(View):
-    def get(self, request):
-#        queryset = SketchItemComment.objects.all()
-#        post = get_object_or_404(queryset)
-        render_sketches = SketchItem.objects.all()
-        context = {
-        'show_sketches': render_sketches,
-        "sketch_item_comment": CreateSketchItemComment(),
-        }
-        return render(request, 'sketches_view.html', context)
-
+    sketch_model = SketchItem
+    render_sketch_item = SketchItem.sketch_directors_comment
+    template_name = 'sketches_view.html'

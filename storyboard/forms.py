@@ -57,7 +57,7 @@ class CreateSketchItem(forms.ModelForm):
         docstring
         """
         model: SketchItem
-        fields = ('sketch_item_upload',)
+        fields = ('sketch_upload',)
 
 
 class CreateSketchItemComment(forms.ModelForm):
