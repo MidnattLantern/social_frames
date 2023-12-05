@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 # .models
 from .models import ProjectItem, EpisodeItem, SceneItem
-from .models import SketchItem, SketchItemComment
+from .models import SketchItem
 # .forms
 from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
 from .forms import CreateSketchItem, CreateSketchItemComment
@@ -54,6 +54,7 @@ def render_scene_view(request):
     render_sketches = SketchItem.objects.all()
     context = {
         'show_sketches': render_sketches,
+        "sketch_item_comment": CreateSketchItemComment(),
     }
     return render(request, 'sketches_view.html', context)
 
@@ -76,12 +77,12 @@ class LoadSceneItem(generic.ListView):
 
 class LoadSketchItem(generic.ListView):
     sketch_item = SketchItem
-    render_sketch_item = SketchItem.sketch_upload
+    render_sketch_item = SketchItem.sketch_item_upload
 
 
 class LoadSketchItemComment(generic.ListView):
-    model = SketchItemComment
-    queryset = SketchItemComment.body
+    model = SketchItem
+    queryset = SketchItem.sketch_directors_comment
     template_name = "sketches_view.html"
 
 
@@ -89,14 +90,12 @@ class LoadSketchItemComment(generic.ListView):
 #test
 class SketchComment(View):
     def get(self, request):
-        queryset = SketchItemComment.objects.all()
-        post = get_object_or_404(queryset)
-        return render(
-            request,
-            "sketches_view.html",
-            {
-                "post": post,
-                "sketch_item_comment": CreateSketchItemComment(),
-            },
-        )
+#        queryset = SketchItemComment.objects.all()
+#        post = get_object_or_404(queryset)
+        render_sketches = SketchItem.objects.all()
+        context = {
+        'show_sketches': render_sketches,
+        "sketch_item_comment": CreateSketchItemComment(),
+        }
+        return render(request, 'sketches_view.html', context)
 

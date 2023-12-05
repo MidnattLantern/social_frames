@@ -7,8 +7,8 @@ from django.urls import path, include
 from storyboard.views import render_home, render_project_view
 from storyboard.views import render_episode_view, render_scene_view
 
-#everything regarding account:
-from storyboard.views import render_sign_in, render_sign_out, render_sign_up
+#outdated:
+# from storyboard.views import render_sign_in, render_sign_out, render_sign_up
 
 
 """
@@ -25,7 +25,7 @@ empty string '' is the Django equivalent to index.html
 """
 
 urlpatterns = [
-    path('django_admin/', admin.site.urls),
+    path('backrooms_staff_only/', admin.site.urls),
 
     # account:
     path('accounts/', include('allauth.urls')),

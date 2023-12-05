@@ -1,7 +1,7 @@
 """ docstring """
 from django import forms
 from .models import ProjectItem, EpisodeItem, SceneItem
-from .models import SketchItem, SketchItemComment
+from .models import SketchItem
 
 
 """ DRY template:
@@ -57,7 +57,7 @@ class CreateSketchItem(forms.ModelForm):
         docstring
         """
         model: SketchItem
-        fields = ('sketch_upload',)
+        fields = ('sketch_item_upload',)
 
 
 class CreateSketchItemComment(forms.ModelForm):
@@ -68,6 +68,6 @@ class CreateSketchItemComment(forms.ModelForm):
         """
         docstring
         """
-        model = SketchItemComment
-        fields = ('body',)
+        model = SketchItem
+        fields = ('sketch_directors_comment',)
 

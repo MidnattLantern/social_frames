@@ -9,67 +9,65 @@ PIN = ((0, "not pinned"), (1, "Pinned"))
 
 #each are exported to forms.py and appended with "Create"
 class ProjectItem(models.Model):
-    project_name = models.CharField(max_length=50, null=False, blank=False, default='')
-    artist_team = models.CharField(max_length=300, null=False, blank=False)
-    creation_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
-    property_to_director = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    project_name = models.CharField(max_length=50, null=False, blank=False, default='', unique=True)
+    project_slug = models.SlugField(max_length=50, unique=True, default='')
+    project_poster = CloudinaryField('image', default='placeholder')
+    project_artist_team = models.CharField(max_length=300, null=False, blank=False)
+    project_creation_date = models.DateTimeField(auto_now_add=True)
+    project_updated_date = models.DateTimeField(auto_now=True)
+    project_property_to_director = models.ForeignKey(User, on_delete=models.CASCADE, default='')
 
     class Meta:
-        ordering = ['updated_date']
+        ordering = ['project_updated_date']
     def __str__(self):
         return self.project_name
 
 
 class EpisodeItem(models.Model):
-    chronology = models.IntegerField(null=False, blank=False)
+    episode_chronology = models.IntegerField(null=False, blank=False)
     episode_name = models.CharField(max_length=50, null=False, blank=False, default='')
-    property_to_project = models.CharField(max_length=50, null=False, blank=False, default='')
-    creation_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
+    episode_slug = models.SlugField(max_length=50, unique=True, default='')
+    episode_property_to_project = models.ForeignKey(ProjectItem, on_delete=models.CASCADE, default='')
+    episode_creation_date = models.DateTimeField(auto_now_add=True)
+    episode_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['chronology']
+        ordering = ['episode_chronology']
     def __str__(self):
         return self.episode_name
 
 
 class SceneItem(models.Model):
-    chronology = models.IntegerField(null=False, blank=False)
+    scene_chronology = models.IntegerField(null=False, blank=False)
     scene_name = models.CharField(max_length=50, null=False, blank=False, default='')
-    property_to_episode = models.CharField(max_length=50, null=False, blank=False, default='')
-    creation_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
+    scene_slug = models.SlugField(max_length=50, unique=True, default='')
+    scene_property_to_episode = models.ForeignKey(EpisodeItem, on_delete=models.CASCADE, default='')
+    scene_creation_date = models.DateTimeField(auto_now_add=True)
+    scene_updated_date = models.DateTimeField(auto_now=True)
     scene_event_notes = models.TextField(max_length=300, null=True, blank=True)
-    artist_assignment = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    scene_artist_assignment = models.ForeignKey(User, on_delete=models.CASCADE, default='')
 
 
     class Meta:
-        ordering = ['chronology']
+        ordering = ['scene_chronology']
     def __str__(self):
         return self.scene_name
 
 # Sketch: submission by artist
 class SketchItem(models.Model):
-    sketch_upload = CloudinaryField('image', default='placeholder')
-#    artist = models.CharField(max_length=50, null=False, blank=False, default='')
-    artist = models.ForeignKey(User, on_delete=models.CASCADE, default='')
-    property_to_scene = models.CharField(max_length=50, null=False, blank=False, default='')
-    creation_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
-    pin = models.IntegerField(choices=PIN, default=0)
+    sketch_item_upload = CloudinaryField('image', default='placeholder')
+    sketch_artist = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    sketch_property_to_scene = models.ForeignKey(SceneItem, on_delete=models.CASCADE, default='')
+    sketch_creation_date = models.DateTimeField(auto_now_add=True)
+    sketch_updated_date = models.DateTimeField(auto_now=True)
+    sketch_pin = models.IntegerField(choices=PIN, default=0)
+    sketch_directors_comment = models.CharField(max_length=300, null=False, blank=False, default='')
 
     class Meta:
-        ordering = ['updated_date']
+        ordering = ['sketch_updated_date']
     def __str__(self):
-        return self.property_to_scene
-
-#Sketch: submission by director
-class SketchItemComment(models.Model):
-    body = models.TextField(default='')
-    creation_date = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ['creation_date']
-    def __str__(self):
-        return f"comment: {self.body}"
+        return self.sketch_property_to_scene
+    def image(self):
+        return self.sketch_item_upload
+    def comment(self):
+        return self.sketch_directors_comment
