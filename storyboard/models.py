@@ -68,6 +68,8 @@ class SceneItem(models.Model):
     scene_event_notes = models.TextField(max_length=300, null=True, blank=True)
     scene_artist_assignment = models.ForeignKey(
         User, on_delete=models.CASCADE, default='')
+    scene_test = models.CharField(
+        max_length=50, null=False, blank=False, default='')
 
     class Meta:
         ordering = ['scene_chronology']
@@ -81,8 +83,10 @@ class SketchItem(models.Model):
     sketch_updated_date = models.DateTimeField(auto_now=True)
     sketch_directors_comment = models.CharField(
         max_length=300, null=False, blank=False, default='')
-    sketch_pin = models.ForeignKey(
+    sketch_artist = models.ForeignKey(
         User, on_delete=models.CASCADE, default='')
+    sketch_pin = models.BooleanField(default=False)
+    sketch_image = CloudinaryField('image', default='placeholder')
 
     class Meta:
         ordering = ['sketch_updated_date']
