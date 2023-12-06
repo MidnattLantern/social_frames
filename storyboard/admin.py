@@ -19,3 +19,5 @@ class RegisterScene(admin.ModelAdmin):
 
 
 admin.site.register(SketchItem)
+class RegisterSketch(admin.ModelAdmin):
+    prepopulated_fields = {'sketch_slug': ('sketch_name')}

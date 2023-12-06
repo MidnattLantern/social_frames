@@ -24,9 +24,7 @@ class ProjectItem(models.Model):
     project_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=True)
     project_slug = models.SlugField(max_length=50, unique=True, default='')
-    project_poster = CloudinaryField('image', default='placeholder')
-    project_artist_team = models.CharField(
-        max_length=300, null=False, blank=False)
+    project_poster = CloudinaryField('image', default='', blank=True, null=True)
     project_creation_date = models.DateTimeField(auto_now_add=True)
     project_updated_date = models.DateTimeField(auto_now=True)
     project_property_to_director = models.ForeignKey(
@@ -68,8 +66,6 @@ class SceneItem(models.Model):
     scene_event_notes = models.TextField(max_length=300, null=True, blank=True)
     scene_artist_assignment = models.ForeignKey(
         User, on_delete=models.CASCADE, default='')
-    scene_test = models.CharField(
-        max_length=50, null=False, blank=False, default='')
 
     class Meta:
         ordering = ['scene_chronology']
@@ -79,17 +75,20 @@ class SceneItem(models.Model):
 
 
 class SketchItem(models.Model):
+    sketch_name = models.CharField(
+        max_length=50, null=False, blank=False, default='')
+    sketch_slug = models.SlugField(max_length=50, unique=True, default='')
     sketch_creation_date = models.DateTimeField(auto_now_add=True)
     sketch_updated_date = models.DateTimeField(auto_now=True)
     sketch_directors_comment = models.CharField(
-        max_length=300, null=False, blank=False, default='')
+        max_length=300, null=True, blank=True, default='')
     sketch_artist = models.ForeignKey(
         User, on_delete=models.CASCADE, default='')
     sketch_pin = models.BooleanField(default=False)
-    sketch_image = CloudinaryField('image', default='placeholder')
+    sketch_image = CloudinaryField('image', default='')
 
     class Meta:
         ordering = ['sketch_updated_date']
 
     def __str__(self):
-        return self.sketch_directors_comment
+        return self.sketch_name
