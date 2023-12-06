@@ -34,7 +34,7 @@ DEBUG = True
 
 # Add host before deployment for accessibility
 # Delete personal IP address before release!
-ALLOWED_HOSTS = ['social-frames.herokuapp.com', 'localhost', '127.0.0.1', 'social-frames-ecd39961bdfa.herokuapp.com']
+ALLOWED_HOSTS = ['8002-midnattlantern-social-fr-o8s4o65jox.us2.codeanyapp.com',"8000-midnattlantern-social-fr-o8s4o65jox.us2.codeanyapp.com", 'social-frames.herokuapp.com', 'localhost', '127.0.0.1', 'social-frames-ecd39961bdfa.herokuapp.com', '8002-midnattlantern-social-fr-o8s4o65jox.us2.codeanyapp.com']
 
 """
 Additional: storyboard, cloudinary, cloudinary_storage, django.contrib.sites,

@@ -1,5 +1,5 @@
 from django.db import models
-#additional
+# additional
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
@@ -19,48 +19,59 @@ Project > Episode > Scene > Sketch.
 that belongs to a User.
 """
 
+
 class ProjectItem(models.Model):
-    project_name = models.CharField(max_length=50, null=False, blank=False, default='', unique=True)
+    project_name = models.CharField(
+        max_length=50, null=False, blank=False, default='', unique=True)
     project_slug = models.SlugField(max_length=50, unique=True, default='')
     project_poster = CloudinaryField('image', default='placeholder')
-    project_artist_team = models.CharField(max_length=300, null=False, blank=False)
+    project_artist_team = models.CharField(
+        max_length=300, null=False, blank=False)
     project_creation_date = models.DateTimeField(auto_now_add=True)
     project_updated_date = models.DateTimeField(auto_now=True)
-    project_property_to_director = models.ForeignKey(User, on_delete=models.CASCADE, default='')
+    project_property_to_director = models.ForeignKey(
+        User, on_delete=models.CASCADE, default='')
 
     class Meta:
         ordering = ['project_updated_date']
+
     def __str__(self):
         return self.project_name
 
 
 class EpisodeItem(models.Model):
     episode_chronology = models.IntegerField(null=False, blank=False)
-    episode_name = models.CharField(max_length=50, null=False, blank=False, default='')
+    episode_name = models.CharField(
+        max_length=50, null=False, blank=False, default='')
     episode_slug = models.SlugField(max_length=50, unique=True, default='')
-    episode_property_to_project = models.ForeignKey(ProjectItem, on_delete=models.CASCADE, default='')
+    episode_property_to_project = models.ForeignKey(
+        ProjectItem, on_delete=models.CASCADE, default='')
     episode_creation_date = models.DateTimeField(auto_now_add=True)
     episode_updated_date = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['episode_chronology']
+
     def __str__(self):
         return self.episode_name
 
 
 class SceneItem(models.Model):
     scene_chronology = models.IntegerField(null=False, blank=False)
-    scene_name = models.CharField(max_length=50, null=False, blank=False, default='')
+    scene_name = models.CharField(
+        max_length=50, null=False, blank=False, default='')
     scene_slug = models.SlugField(max_length=50, unique=True, default='')
-    scene_property_to_episode = models.ForeignKey(EpisodeItem, on_delete=models.CASCADE, default='')
+    scene_property_to_episode = models.ForeignKey(
+        EpisodeItem, on_delete=models.CASCADE, default='')
     scene_creation_date = models.DateTimeField(auto_now_add=True)
     scene_updated_date = models.DateTimeField(auto_now=True)
     scene_event_notes = models.TextField(max_length=300, null=True, blank=True)
-    scene_artist_assignment = models.ForeignKey(User, on_delete=models.CASCADE, default='')
-
+    scene_artist_assignment = models.ForeignKey(
+        User, on_delete=models.CASCADE, default='')
 
     class Meta:
         ordering = ['scene_chronology']
+
     def __str__(self):
         return self.scene_name
 
@@ -68,9 +79,13 @@ class SceneItem(models.Model):
 class SketchItem(models.Model):
     sketch_creation_date = models.DateTimeField(auto_now_add=True)
     sketch_updated_date = models.DateTimeField(auto_now=True)
-    sketch_directors_comment = models.CharField(max_length=300, null=False, blank=False, default='')
+    sketch_directors_comment = models.CharField(
+        max_length=300, null=False, blank=False, default='')
+    sketch_pin = models.ForeignKey(
+        User, on_delete=models.CASCADE, default='')
 
     class Meta:
         ordering = ['sketch_updated_date']
+
     def __str__(self):
         return self.sketch_directors_comment
