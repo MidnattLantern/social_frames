@@ -18,6 +18,6 @@ class RegisterScene(admin.ModelAdmin):
     prepopulated_fields = {'scene_slug': ('scene_name',)}
 
 
-admin.site.register(SketchItem)
+@admin.register(SketchItem)
 class RegisterSketch(admin.ModelAdmin):
-    prepopulated_fields = {'sketch_slug': ('sketch_name')}
+    prepopulated_fields = {'sketch_slug': ('sketch_name',)}

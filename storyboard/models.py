@@ -78,6 +78,8 @@ class SketchItem(models.Model):
     sketch_name = models.CharField(
         max_length=50, null=False, blank=False, default='')
     sketch_slug = models.SlugField(max_length=50, unique=True, default='')
+    sketch_property_to_scene = models.ForeignKey(
+        SceneItem, on_delete=models.CASCADE, default='')
     sketch_creation_date = models.DateTimeField(auto_now_add=True)
     sketch_updated_date = models.DateTimeField(auto_now=True)
     sketch_directors_comment = models.CharField(
