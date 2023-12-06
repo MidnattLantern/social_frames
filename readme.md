@@ -79,3 +79,5 @@ there's a csrf token for each for security {% csrf_token %}
 During earlt staes, there's no styling. This was because functionality had to take more priority than form.
 
 During early stages, there were no director and artist and spectator's role. This was because at that stage, it's only relevant to make sure every content is able to be rendered.
+
+Making changes to models, specifically if outdated items need to be removed, it may be neccessary to delete every migration and to reset the datbase at ElephantSQL. Although it's highly recomended to make one before writing the code, Social Frames didn't have any predetermined model for items beforehand. This deletion and reset process was discovered the hard way.
