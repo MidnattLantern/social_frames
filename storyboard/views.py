@@ -55,7 +55,7 @@ def render_scene_view(request):
     context = {
         'show_sketches': render_sketches,
     }
-    return render(request, 'sketches_view.html', context)
+    return render(request, 'scene_view.html', context)
 
 
 # appended with "Load"
@@ -80,4 +80,9 @@ class LoadSceneItem(generic.ListView):
 class LoadSketchItem(generic.ListView):
     sketch_model = SketchItem
     render_sketch_item = SketchItem.sketch_directors_comment
-    template_name = 'sketches_view.html'
+    template_name = 'scene_view.html'
+
+#test
+#class RenderSceneView(generic.ListView):
+#    render_sketches = SketchItem.objects.all()
+#    template_name = 'scene_view.html'
