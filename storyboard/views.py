@@ -60,27 +60,20 @@ from .models import SketchItem
 
 # first thing user sees when they enter Social Frames, expects to see projects
 class RenderHomeView(generic.ListView):
-    project_model = ProjectItem
-    render_project_item = ProjectItem.project_name
-    queryset = ProjectItem.project_name
+    model = ProjectItem
     template_name = 'index.html'
 
 # user enter a project, expects to see episodes
 class RenderProjectView(generic.ListView):
-    episode_model = EpisodeItem
-    render_episode_item = EpisodeItem.episode_name
-    queryset = EpisodeItem.episode_name
+    model = EpisodeItem
     template_name = 'project.html'
 
 # user enter an episode, expects to see scenes
 class RenderEpisodeView(generic.ListView):
-    scene_model = SceneItem
-    render_scene_item = SceneItem.scene_name
-    queryset = SceneItem.scene_name
+    model = SceneItem
     template_name = 'episode.html'
 
 # user enter a scene, expects to see sketches
 class RenderSceneView(generic.ListView):
-    sketch_model = SketchItem
-    render_sketch_item = SketchItem.sketch_directors_comment
+    model = SketchItem
     template_name = 'scene_view.html'
