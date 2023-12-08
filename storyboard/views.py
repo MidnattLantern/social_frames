@@ -23,39 +23,39 @@ from .models import SketchItem
 
 
 # first thing user sees when they enter Social Frames, expects to see projects
-def render_home_view(request):
-    render_project = ProjectItem.objects.all()
-    context = {
-        'show_projects': render_project,
-    }
-    return render(request, 'index.html', context)
+#def render_home_view(request):
+#    render_project = ProjectItem.objects.all()
+#    context = {
+#        'show_projects': render_project,
+#    }
+#    return render(request, 'index.html', context)
 
 
 # user enter a project, expects to see episodes
-def render_project_view(request):
-    render_episode = EpisodeItem.objects.all()
-    context = {
-        'show_episodes': render_episode,
-    }
-    return render(request, 'project_view.html', context)
+#def render_project_view(request):
+#    render_episode = EpisodeItem.objects.all()
+#    context = {
+#        'show_episodes': render_episode,
+#    }
+#    return render(request, 'project_view.html', context)
 
 
 # user enter an episode, expects to see scenes
-def render_episode_view(request):
-    render_scene = SceneItem.objects.all()
-    context = {
-        'show_scenes': render_scene,
-    }
-    return render(request, 'episode_view.html', context)
+#def render_episode_view(request):
+#    render_scene = SceneItem.objects.all()
+#    context = {
+#        'show_scenes': render_scene,
+#    }
+#    return render(request, 'episode_view.html', context)
 
 
 # user enter a scene, expects to see sketches
-def render_scene_view(request):
-    render_sketches = SketchItem.objects.all()
-    context = {
-        'show_sketches': render_sketches,
-    }
-    return render(request, 'scene_view.html', context)
+#def render_scene_view(request):
+#    render_sketches = SketchItem.objects.all()
+#    context = {
+#        'show_sketches': render_sketches,
+#    }
+#    return render(request, 'scene_view.html', context)
 
 
 # first thing user sees when they enter Social Frames, expects to see projects
