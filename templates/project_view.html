@@ -1,0 +1,27 @@
+<!-- /project -->
+{% extends "base.html" %}
+{% block content %}
+    <h1>Project view</h1>
+
+    <!-- see models.py EpisodeItem() -->
+    {% if user.is_authenticated %}
+    {% for i in show_episodes%}
+    <div>
+        <p>
+            Chronology: {{ i.chronology}}
+        </p>
+        <a href="#">
+            Episode name: {{ i.episode_name }}
+        </a>
+        <p>
+            Most recent update: {{ i.updated_date }}
+        </p>
+    </div>
+    {% endfor %}
+    <div>
+        <p>
+            + Create new episode
+        </p>
+    </div>
+    {% endif %}
+{% endblock %}

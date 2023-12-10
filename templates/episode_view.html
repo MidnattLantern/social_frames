@@ -1,0 +1,33 @@
+<!-- /project/episode -->
+{% extends "base.html" %}
+{% block content %}
+    <h1>episode view</h1>
+
+    <!-- see models.py SceneItem() -->
+    {% if user.is_authenticated %}
+    {% for i in show_scenes %}
+    <div>
+        <p>
+            chronology: {{ i.chronology}}
+        </p>
+        <a href="{% url 'scene' %}">
+            Scene name: {{ i.scene_name }}
+        </a>
+        <div>
+            <p>(pin image goes here)</p>
+        </div>
+        <p>
+            Notes: {{ i.scene_event_notes }}
+        </p>
+        <p>
+            Most recent update: {{ i.updated_date }}
+        </p>
+    </div>
+    {% endfor %}
+    <div>
+        <p>
+            + Create new scene
+        </p>
+    </div>
+    {% endif %}
+{% endblock %}
