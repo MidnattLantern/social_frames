@@ -85,7 +85,6 @@ class RenderSceneView(generic.ListView):
 """
 
 # first thing user sees when they enter Social Frames, expects to see projects
-
 class RenderHomeView(generic.ListView):
     model = ProjectItem
     queryset = ProjectItem.objects.all()
@@ -93,6 +92,7 @@ class RenderHomeView(generic.ListView):
     template_name = 'index.html'
 
 # user enter a project, expects to see episodes
+""" hepl me with this !!!
 class RenderProjectView(View):
     def get (self, request, slug, *args, **kwargs):
         queryset = EpisodeItem.objects.all()
@@ -104,6 +104,14 @@ class RenderProjectView(View):
                 'post': post,
             },
         )
+"""
+
+# test that actually work
+class RenderProjectView(generic.ListView):
+    model = ProjectItem
+    queryset = ProjectItem.objects.all()
+    context_object_name = 'show_projects'
+    template_name = 'project_view.html'
 
 # user enter an episode, expects to see scenes
 class RenderEpisodeView(View):

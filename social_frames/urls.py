@@ -34,5 +34,5 @@ urlpatterns = [
 #    path('project/episode/scene', render_scene_view, name='scene'),
 
     # pythonic object oriented (attempting to make functional)
-    path('', include('storyboard.urls'), name='storyboard-urls'),
+    path('', include('storyboard.urls'), name='storyboard_urls'),
 ]
