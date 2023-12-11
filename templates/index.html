@@ -1,38 +1,32 @@
-{% extends "base.html" %}
-{% block content %}
-    <h1>This is the home banner</h1>
-    <!-- Note for all views: any content is only accessible when signed in -->
-    {% if user.is_authenticated %}
-    <a>{{ user.username }}</a>
-    <br>
-    <a href="{% url 'account_logout' %}">sign_out</a>
-    <!-- Display if not signed in -->
-    {% else %}
-    <a href="{% url 'account_login' %}">sign_in</a>
-    <br>
-    <a href="{% url 'account_signup' %}">sign_up</a>
-    {% endif %}
-    <div>
-        <p>user goes here</p>
-    </div>
+{% extends "base.html" %} {% block content %}
+<h1>This is the home banner</h1>
+<!-- Note for all views: any content is only accessible when signed in -->
+{% if user.is_authenticated %}
+<a>{{ user.username }}</a>
+<br />
+<a href="{% url 'account_logout' %}">sign_out</a>
+<!-- Display if not signed in -->
+{% else %}
+<a href="{% url 'account_login' %}">sign_in</a>
+<br />
+<a href="{% url 'account_signup' %}">sign_up</a>
+{% endif %}
+<div>
+  <p>user goes here</p>
+</div>
 
-    <table>
-    <!-- see models.py ProjectItem() -->
-    {% if user.is_authenticated %}
-    {% for i in show_projects %}
-        <a href="{% url 'project_url_path' i.project_slug %}">
-            Project name: {{ i.project_name }}
-        </a>
-        <p>
-            Most recent update: {{ i.updated_date }}
-        </p>
-    </table>
-    {% endfor %}
-    
-    <div>
-        <p>
-            + Create new project
-        </p>
-    </div>
-    {% endif %}
-{% endblock %}
+<table>
+  <!-- see models.py ProjectItem() -->
+  <!-- 404 error. Refering to EpisodeItem at models.py -->
+  {% if user.is_authenticated %} {% for i in show_projects %}
+  <a href="{% url 'project_url_path' i.project_slug %}">
+    Project name: {{ i.project_name }}
+  </a>
+  <p>Most recent update: {{ i.updated_date }}</p>
+</table>
+{% endfor %}
+
+<div>
+  <p>+ Create new project</p>
+</div>
+{% endif %} {% endblock %}
