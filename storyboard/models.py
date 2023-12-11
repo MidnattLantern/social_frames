@@ -23,10 +23,14 @@ that belongs to a User.
 class ProjectItem(models.Model):
     project_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=True)
-    project_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
-    project_poster = CloudinaryField('image', default='', blank=True, null=True)
-    project_creation_date = models.DateTimeField(auto_now_add=True)
-    project_updated_date = models.DateTimeField(auto_now=True)
+    project_slug = models.SlugField(
+        max_length=50, unique=True, default='', null=False)
+    project_poster = CloudinaryField(
+        'image', default='', blank=True, null=True)
+    project_creation_date = models.DateTimeField(
+        auto_now_add=True)
+    project_updated_date = models.DateTimeField(
+        auto_now=True)
     project_property_to_director = models.ForeignKey(
         User, on_delete=models.CASCADE, default='')
 

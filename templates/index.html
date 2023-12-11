@@ -18,11 +18,11 @@
 <table>
   <!-- see models.py ProjectItem() -->
   <!-- 404 error. Refering to EpisodeItem at models.py -->
-  {% if user.is_authenticated %} {% for i in show_projects %}
-  <a href="{% url 'project_url_path' i.project_slug %}">
-    Project name: {{ i.project_name }}
+  {% if user.is_authenticated %} {% for for_project in show_projects %}
+  <a href="{% url 'project_url_path' for_project.project_slug %}">
+    Project name: {{ for_project.project_name }}
   </a>
-  <p>Most recent update: {{ i.updated_date }}</p>
+  <p>Most recent update: {{ for_project.updated_date }}</p>
 </table>
 {% endfor %}
 

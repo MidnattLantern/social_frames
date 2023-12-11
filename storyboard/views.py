@@ -21,6 +21,7 @@ from .models import SketchItem
 #def render_sign_up(request):
 #    return render(request, 'storyboard/sign_up.html')
 
+
 """ function based (attempt to transfer to class based)
 # first thing user sees when they enter Social Frames, expects to see projects
 def render_home_view(request):
@@ -58,10 +59,13 @@ def render_scene_view(request):
     return render(request, 'scene_view.html', context)
 """
 
-""" class based as generic view
+
+""" class based as generic view 
 # first thing user sees when they enter Social Frames, expects to see projects
 class RenderHomeView(generic.ListView):
     model = ProjectItem
+    queryset = ProjectItem.objects.all()
+    context_object_name = 'show_projects'
     template_name = 'index.html'
 
 # user enter a project, expects to see episodes
@@ -81,6 +85,7 @@ class RenderSceneView(generic.ListView):
 """
 
 # first thing user sees when they enter Social Frames, expects to see projects
+
 class RenderHomeView(generic.ListView):
     model = ProjectItem
     queryset = ProjectItem.objects.all()
