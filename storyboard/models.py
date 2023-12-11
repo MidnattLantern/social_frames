@@ -23,7 +23,7 @@ that belongs to a User.
 class ProjectItem(models.Model):
     project_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=True)
-    project_slug = models.SlugField(max_length=50, unique=True, default='')
+    project_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
     project_poster = CloudinaryField('image', default='', blank=True, null=True)
     project_creation_date = models.DateTimeField(auto_now_add=True)
     project_updated_date = models.DateTimeField(auto_now=True)
@@ -41,9 +41,10 @@ class EpisodeItem(models.Model):
     episode_chronology = models.IntegerField(null=False, blank=False)
     episode_name = models.CharField(
         max_length=50, null=False, blank=False, default='')
-    episode_slug = models.SlugField(max_length=50, unique=True, default='')
+    episode_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
     episode_property_to_project = models.ForeignKey(
-        ProjectItem, on_delete=models.CASCADE, default='')
+        ProjectItem, on_delete=models.CASCADE, default='', null=True,
+        blank=True)
     episode_creation_date = models.DateTimeField(auto_now_add=True)
     episode_updated_date = models.DateTimeField(auto_now=True)
 
@@ -58,7 +59,7 @@ class SceneItem(models.Model):
     scene_chronology = models.IntegerField(null=False, blank=False)
     scene_name = models.CharField(
         max_length=50, null=False, blank=False, default='')
-    scene_slug = models.SlugField(max_length=50, unique=True, default='')
+    scene_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
     scene_property_to_episode = models.ForeignKey(
         EpisodeItem, on_delete=models.CASCADE, default='')
     scene_creation_date = models.DateTimeField(auto_now_add=True)
@@ -77,7 +78,7 @@ class SceneItem(models.Model):
 class SketchItem(models.Model):
     sketch_name = models.CharField(
         max_length=50, null=False, blank=False, default='')
-    sketch_slug = models.SlugField(max_length=50, unique=True, default='')
+    sketch_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
     sketch_property_to_scene = models.ForeignKey(
         SceneItem, on_delete=models.CASCADE, default='')
     sketch_creation_date = models.DateTimeField(auto_now_add=True)

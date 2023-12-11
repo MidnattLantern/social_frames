@@ -20,7 +20,7 @@
     <!-- see models.py ProjectItem() -->
     {% if user.is_authenticated %}
     {% for i in show_projects %}
-        <a href="{% url 'project_url_path' i.slug %}">
+        <a href="{% url 'project_url_path' i.project_slug %}">
             Project name: {{ i.project_name }}
         </a>
         <p>

@@ -10,7 +10,7 @@
         <p>
             Chronology: {{ i.chronology}}
         </p>
-        <a href="#">
+        <a href="{% url 'episode_url_path' i.episode_slug %}">
             Episode name: {{ i.episode_name }}
         </a>
         <p>

@@ -89,13 +89,9 @@ class RenderHomeView(generic.ListView):
 
 # user enter a project, expects to see episodes
 class RenderProjectView(View):
-    def get (request, slug, *args, **kwargs):
-
-        #model = EpisodeItem
+    def get (self, request, slug, *args, **kwargs):
         queryset = EpisodeItem.objects.all()
-        post = get_object_or_404(queryset, slug=slug)
-        #context_object_name = 'show_episodes'
-        #template_name = 'project_view.html'
+        post = get_object_or_404(queryset, episode_slug=slug)
         return render(
              request,
              'project_view.html',
@@ -105,15 +101,28 @@ class RenderProjectView(View):
         )
 
 # user enter an episode, expects to see scenes
-class RenderEpisodeView(generic.ListView):
-    model = SceneItem
-    queryset = SceneItem.objects.all()
-    context_object_name = 'show_scenes'
-    template_name = 'episode_view.html'
+class RenderEpisodeView(View):
+    def get (self, request, slug, *args, **kwargs):
+        queryset = SceneItem.objects.all()
+        post = get_object_or_404(queryset, scene_slug=slug)
+        return render(
+            request,
+            'episode_view.html',
+            {
+                'post': post,
+            },
+        )
 
 # user enter a scene, expects to see sketches
-class RenderSceneView(generic.ListView):
-    model = SketchItem
-    queryset = SketchItem.objects.all()
-    context_object_name = 'show_sketches'
-    template_name = 'scene_view.html'
+class RenderSceneView(View):
+    def get (self, request, slug, *args, **kwargs):
+        queryset = SketchItem.objects.all()
+        post = get_object_or_404(queryset, sketch_slug=slug)
+        return render(
+            request,
+            'scene_view.html',
+            {
+                'post': post,
+            },
+        )
+
