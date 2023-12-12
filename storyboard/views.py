@@ -84,15 +84,32 @@ class RenderSceneView(generic.ListView):
     template_name = 'scene_view.html'
 """
 
+# new model
+# user enter a project, expects to see episodes
+class RenderHomeView(View):
+    def get (self, request, *args, **kwargs):
+        queryset = ProjectItem.objects.all()
+        post = get_object_or_404(queryset)
+        return render(
+            request,
+            'index.html',
+            {
+                'project_views': post,
+#                'create_project_item': CreateProjectItem(),
+            },
+        )
+    
+# old model
 # first thing user sees when they enter Social Frames, expects to see projects
+"""
 class RenderHomeView(generic.ListView):
     model = ProjectItem
     queryset = ProjectItem.objects.all()
     template_name = 'index.html'
+"""
 
 # new model
 # user enter a project, expects to see episodes
-
 class RenderProjectView(View):
     def get (self, request, project_slug, *args, **kwargs):
         queryset = EpisodeItem.objects.all()
@@ -105,7 +122,6 @@ class RenderProjectView(View):
                 'create_episode_item': CreateEpisodeItem()
             },
         )
-
 
 
 # old model
