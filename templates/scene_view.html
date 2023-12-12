@@ -39,4 +39,15 @@
     {% endfor %}
     {% endif %}
 
+    <!-- test -->
+<table>
+    <!-- see models.py EpisodeItem() -->
+    {% if user.is_authenticated %} {% for for_sketch in sketchitem_list %}
+    <div>
+      sketch name: {{ for_sketch.sketch_name }}
+    </div>
+</table>
+  {% endfor %} {% endif %}
+  <!-- end test -->
+
 {% endblock %}
