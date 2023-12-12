@@ -1,4 +1,3 @@
-<!-- /project -->
 {% extends "base.html" %} {% block content %}
 {% load crispy_forms_tags %}
 
@@ -26,13 +25,15 @@
 
 {% endif %}
 
+<!-- test -->
 <table>
   <!-- see models.py EpisodeItem() -->
   {% if user.is_authenticated %} {% for for_episode in episodeitem_list %}
-  <a href="#">
+  <a href="{% url 'episode_url_path' for_episode.episode_slug %}">
     episode name: {{ for_episode.episode_name }}
   </a>
 </table>
 {% endfor %}
+<!-- end test -->
 
 {% endif %} {% endblock %}

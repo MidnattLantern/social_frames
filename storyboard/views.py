@@ -131,18 +131,16 @@ class RenderProjectView(View):
 # user enter a project, expects to see episodes
 
 class RenderProjectView(generic.ListView):
-    model = ProjectItem
+    model = EpisodeItem
     queryset = EpisodeItem.objects.all()
     template_name = 'project_view.html'
 
  
 # user enter an episode, expects to see scenes
-class RenderEpisodeView(View):
-    def get (self, request, episode_slug, *args, **kwargs):
-        return render(
-            request,
-            'episode_view.html',
-        )
+class RenderEpisodeView(generic.ListView):
+    model = SceneItem
+    queryset = SceneItem.objects.all()
+    template_name = 'episode_view.html'
 
 # user enter a scene, expects to see sketches
 class RenderSceneView(View):
