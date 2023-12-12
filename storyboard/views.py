@@ -143,10 +143,7 @@ class RenderEpisodeView(generic.ListView):
     template_name = 'episode_view.html'
 
 # user enter a scene, expects to see sketches
-class RenderSceneView(View):
-    def get (self, request, scene_slug, *args, **kwargs):
-        return render(
-            request,
-            'scene_view.html',
-        )
-
+class RenderSceneView(generic.ListView):
+    model = SketchItem
+    queryset = SketchItem.objects.all()
+    template_name = 'scene_view.html'
