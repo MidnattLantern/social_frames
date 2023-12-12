@@ -3,13 +3,13 @@
 <h1>Project view</h1>
 
 <!-- see models.py EpisodeItem() -->
-{% if user.is_authenticated %} {% for i in show_episodes%}
+{% if user.is_authenticated %} {% for for_episode in show_episodes %}
 <div>
-  <p>Chronology: {{ i.chronology}}</p>
+  <p>Chronology: {{ for_episode.chronology}}</p>
   <a href="#">
-    Episode name: {{ i.episode_name }}
+    Episode name: {{ for_episode.episode_name }}
   </a>
-  <p>Most recent update: {{ i.updated_date }}</p>
+  <p>Most recent update: {{ for_episode.updated_date }}</p>
 </div>
 {% endfor %}
 <div>

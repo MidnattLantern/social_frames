@@ -88,20 +88,24 @@ class RenderSceneView(generic.ListView):
 class RenderHomeView(generic.ListView):
     model = ProjectItem
     queryset = ProjectItem.objects.all()
-    context_object_name = 'show_projects'
     template_name = 'index.html'
 
 # new model
 # user enter a project, expects to see episodes
 class RenderProjectView(View):
     def get (self, request, project_slug, *args, **kwargs):
+        queryset = EpisodeItem.objects.all()
+        post = get_object_or_404(queryset)
         return render(
             request,
             'project_view.html',
+            {
+                'post': post,
+            },
         )
 
 
-# model that work
+# old model
 # user enter a project, expects to see episodes
 """
 class RenderProjectView(generic.ListView):

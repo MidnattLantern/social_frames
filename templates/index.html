@@ -18,7 +18,7 @@
 <table>
   <!-- see models.py ProjectItem() -->
   <!-- 404 error. Refering to EpisodeItem at models.py -->
-  {% if user.is_authenticated %} {% for for_project in show_projects %}
+  {% if user.is_authenticated %} {% for for_project in projectitem_list %}
   <a href="{% url 'project_url_path' for_project.project_slug %}">
     Project name: {{ for_project.project_name }}
   </a>
