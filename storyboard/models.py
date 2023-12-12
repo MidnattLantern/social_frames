@@ -40,7 +40,6 @@ class ProjectItem(models.Model):
     def __str__(self):
         return self.project_name
 
-# 404 error. episode_slug follow the model from the codestar tutorial
 # other related files: views.py urls.py forms.py admin.py
 class EpisodeItem(models.Model):
     episode_chronology = models.IntegerField(null=False, blank=False)

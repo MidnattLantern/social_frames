@@ -3,17 +3,16 @@
 <!-- Note for all views: any content is only accessible when signed in -->
 {% if user.is_authenticated %}
 <a>{{ user.username }}</a>
-<br />
+<br>
 <a href="{% url 'account_logout' %}">sign_out</a>
+<br>
 <!-- Display if not signed in -->
 {% else %}
 <a href="{% url 'account_login' %}">sign_in</a>
-<br />
+<br>
 <a href="{% url 'account_signup' %}">sign_up</a>
+<br>
 {% endif %}
-<div>
-  <p>user goes here</p>
-</div>
 
 <table>
   <!-- see models.py ProjectItem() -->
@@ -22,7 +21,6 @@
   <a href="{% url 'project_url_path' for_project.project_slug %}">
     Project name: {{ for_project.project_name }}
   </a>
-  <p>Most recent update: {{ for_project.updated_date }}</p>
 </table>
 {% endfor %}
 

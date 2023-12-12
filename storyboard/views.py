@@ -5,8 +5,8 @@ from django.views import generic, View
 from .models import ProjectItem, EpisodeItem, SceneItem
 from .models import SketchItem
 # .forms (for later use)
-#from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
-#from .forms import CreateSketchItem, CreateSketchItemComment
+from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
+from .forms import CreateSketchItem, CreateSketchItemComment
 
 
 #outdated
@@ -92,6 +92,7 @@ class RenderHomeView(generic.ListView):
 
 # new model
 # user enter a project, expects to see episodes
+
 class RenderProjectView(View):
     def get (self, request, project_slug, *args, **kwargs):
         queryset = EpisodeItem.objects.all()
@@ -100,9 +101,11 @@ class RenderProjectView(View):
             request,
             'project_view.html',
             {
-                'post': post,
+                'project_views': post,
+                'create_episode_item': CreateEpisodeItem()
             },
         )
+
 
 
 # old model
@@ -111,7 +114,6 @@ class RenderProjectView(View):
 class RenderProjectView(generic.ListView):
     model = ProjectItem
     queryset = EpisodeItem.objects.all()
-    context_object_name = 'show_episodes'
     template_name = 'project_view.html'
 """
  
