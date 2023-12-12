@@ -33,7 +33,7 @@
 <table>
     <!-- see models.py EpisodeItem() -->
     {% if user.is_authenticated %} {% for for_scene in sceneitem_list %}
-    <a href="#">
+    <a href="{% url 'scene_url_path' for_scene.scene_slug %}">
       scene name: {{ for_scene.scene_name }}
     </a>
 </table>
