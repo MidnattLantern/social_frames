@@ -4,7 +4,7 @@ from django.views import generic, View
 # .models
 from .models import ProjectItem, EpisodeItem, SceneItem
 from .models import SketchItem
-# .forms (for later use)
+# .forms
 from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
 from .forms import CreateSketchItem, CreateSketchItemComment
 
@@ -86,6 +86,7 @@ class RenderSceneView(generic.ListView):
 
 # new model
 # user enter a project, expects to see episodes
+"""
 class RenderHomeView(View):
     def get (self, request, *args, **kwargs):
         queryset = ProjectItem.objects.all()
@@ -98,18 +99,20 @@ class RenderHomeView(View):
 #                'create_project_item': CreateProjectItem(),
             },
         )
+"""
     
 # old model
 # first thing user sees when they enter Social Frames, expects to see projects
-"""
+
 class RenderHomeView(generic.ListView):
     model = ProjectItem
     queryset = ProjectItem.objects.all()
     template_name = 'index.html'
-"""
+
 
 # new model
 # user enter a project, expects to see episodes
+"""
 class RenderProjectView(View):
     def get (self, request, project_slug, *args, **kwargs):
         queryset = EpisodeItem.objects.all()
@@ -122,16 +125,16 @@ class RenderProjectView(View):
                 'create_episode_item': CreateEpisodeItem()
             },
         )
-
+"""
 
 # old model
 # user enter a project, expects to see episodes
-"""
+
 class RenderProjectView(generic.ListView):
     model = ProjectItem
     queryset = EpisodeItem.objects.all()
     template_name = 'project_view.html'
-"""
+
  
 # user enter an episode, expects to see scenes
 class RenderEpisodeView(View):

@@ -13,6 +13,8 @@
   </a>
 </div>
 
+
+
 <div>
   <p>+ Create new episode</p>
   <form method="post">
@@ -21,5 +23,16 @@
     <button type="submit"> Create </button>
   </form>
 </div>
+
+{% endif %}
+
+<table>
+  <!-- see models.py EpisodeItem() -->
+  {% if user.is_authenticated %} {% for for_episode in episodeitem_list %}
+  <a href="#">
+    episode name: {{ for_episode.episode_name }}
+  </a>
+</table>
+{% endfor %}
 
 {% endif %} {% endblock %}
