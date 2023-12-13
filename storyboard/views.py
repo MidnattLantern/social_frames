@@ -89,28 +89,29 @@ class RenderProjectView(generic.ListView):
 #    """RenderEpisodeView"""
 # new model
 # user enter a episode, expects to see sketches
-"""
+
 class RenderEpisodeView(View):
     def get (self, request, episode_slug, *args, **kwargs):
-        queryset = SketchItem.objects.all()
-        post = get_object_or_404(queryset)
+        episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
+        scene_item = SceneItem.objects.all()
         return render(
             request,
             'episode_view.html',
             {
-                'episode_views': post,
-#                'create_scene_item': CreateSceneItem()
+                'episode_item': episode_item,
+                'scene_item': scene_item,
+                
             },
         )
-"""
+
 # old model
 # user enter an episode, expects to see scenes
-
+"""
 class RenderEpisodeView(generic.ListView):
     model = SceneItem
     queryset = SceneItem.objects.all()
     template_name = 'episode_view.html'
-
+"""
 
 #    """RenderSceneView"""
 # new model (delete sketch_item)
