@@ -50,4 +50,14 @@
   {% endfor %} {% endif %}
   <!-- end test -->
 
+  <table>
+    <!-- see models.py EpisodeItem() -->
+    {% if user.is_authenticated %} {% for for_scene in sceneitem_list %}
+    <a href="#">
+      scene name: {{ for_scene.scene_name }}
+    </a>
+</table>
+  {% endfor %} {% endif %}
+  <!-- end test -->
+
 {% endblock %}
