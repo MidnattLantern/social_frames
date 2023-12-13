@@ -1,43 +1,27 @@
-<!-- /project/episode/scene -->
 {% extends "base.html" %} {% block content %} {% load crispy_forms_tags %}
 
 <h1>all submitted sketches</h1>
+<p>Pinned sketch goes here</p>
 
-<!-- 
-    see models.py SketchItem() -->
-{% if user.is_authenticated %} {% if sketch_item %} {% for i in sketch_item %}
+<!-- see models.py SketchItem() -->
+{% if user.is_authenticated %}  {% for i in sketch_item %}
 <div>
-  <p>(pin sketch goes here)</p>
-  <div>Sketch upload: {{ i.sketch_image }}</div>
-  <p>Pinned: {{ i.sketch_pin }}</p>
-  <p>Artist: {{ i.sketch_artist }}</p>
-  <p>Most recent update: {{ i.sketch_updated_date }}</p>
-  <p>Director's comment: {{ i.sketch_directors_comment }}</p>
+    <div>
+        <p>
+            Sketch upload:
+        </p>
+        <img src="{{ i.sketch_image.url }}" style="max-width: 100px; max-width: auto;">
+    </div>
+    <p>Artist: {{ i.sketch_artist }}</p>
 </div>
 <!-- director's feedback goes here -->
-<h3>Leave a comment:</h3>
-<form method="post" style="margin-top: 1.3em">
-  {{ sketch_item_comment | crispy }} {% csrf_token %}
-  <button type="submit" class="btn btn-signup btn-lg">Submit</button>
-</form>
+<hr>
+<br>
 
-{% endfor %} {% endif %} {% endif %}
+{% endfor %}  {% endif %}
 
-<!-- test -->
-<table>
-  <!-- see models.py EpisodeItem() -->
-  {% if user.is_authenticated %} {% for for_sketch in sketchitem_list %}
-  <div>sketch name: {{ for_sketch.sketch_name }}</div>
-</table>
-{% endfor %} {% endif %}
-<!-- end test -->
 
-<table>
-  <!-- see models.py EpisodeItem() -->
-  {% if user.is_authenticated %} {% for for_scene in sceneitem_list %}
-  <a href="#"> scene name: {{ for_scene.scene_name }} </a>
-</table>
-{% endfor %} {% endif %}
-<!-- end test -->
+
+
 
 {% endblock %}

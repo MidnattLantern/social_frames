@@ -128,17 +128,7 @@ class RenderSceneView(View):
                 'sketch_item': sketch_item,
             },
         )
-    def post (self, request, sketch_slug, *args, **kwargs):
-        scene_item = get_object_or_404(SketchItem, sketch_slug=sketch_slug)
-        sketch_item = SketchItem.objects.all()
-        return render(
-            request,
-            'scene_view.html',
-            {
-                'scene_item': scene_item,
-                'sketch_item': sketch_item,
-            },
-        )
+
 
 # old model
 # user enter a scene, expects to see sketches
