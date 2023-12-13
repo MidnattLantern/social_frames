@@ -29,16 +29,17 @@
         </p>
     </div>
 
-<!-- test -->
 <table>
-    <!-- see models.py EpisodeItem() -->
-    {% if user.is_authenticated %} {% for for_scene in sceneitem_list %}
-    <a href="{% url 'scene_url_path' for_scene.scene_slug %}">
-      scene name: {{ for_scene.scene_name }}
+<!-- see models.py EpisodeItem() -->
+{% if user.is_authenticated %} {% for i in scene_item %}
+    <a href="{% url 'scene_url_path' i.scene_slug %}">
+      scene name: {{ i.scene_name }}
     </a>
 </table>
+<hr>
+<br>
   {% endfor %} {% endif %}
-  <!-- end test -->
+
 
     {% endif %}
 {% endblock %}
