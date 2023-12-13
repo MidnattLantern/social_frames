@@ -14,16 +14,13 @@
 <br>
 {% endif %}
 
-<table>
-  <!-- see models.py ProjectItem() -->
-  {% if user.is_authenticated %} {% for for_project in projectitem_list %}
-  <a href="{% url 'project_url_path' for_project.project_slug %}">
-    Project name: {{ for_project.project_name }}
-  </a>
-</table>
-{% endfor %}
+{% if user.is_authenticated %}  {% for i in project_item %}
+<a href="{% url 'project_url_path' i.project_slug %}">
+  scene name: {{ i.project_name }}
+</a>
+<hr>
+<br>
 
-<div>
-  <p>+ Create new project</p>
-</div>
-{% endif %} {% endblock %}
+{% endfor %}  {% endif %}
+
+{% endblock %}
