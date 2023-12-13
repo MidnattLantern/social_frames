@@ -115,23 +115,23 @@ class RenderEpisodeView(generic.ListView):
 #    """RenderSceneView"""
 # new model
 # user enter a scene, expects to see sketches
-"""
+
 class RenderSceneView(View):
     def get (self, request, scene_slug, *args, **kwargs):
-        queryset = SceneItem.objects.all()
-        post = get_object_or_404(queryset, scene_slug=scene_slug)
+        scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
         return render(
             request,
             'scene_view.html',
             {
-                'post': post,
+                'scene_item': scene_item,
             },
         )
-"""
+
 # old model
 # user enter a scene, expects to see sketches
-
+"""
 class RenderSceneView(generic.ListView):
     model = SketchItem
     queryset = SketchItem.objects.all()
     template_name = 'scene_view.html'
+"""
