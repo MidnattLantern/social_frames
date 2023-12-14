@@ -125,7 +125,7 @@ class RenderProjectView(View):
 @method_decorator(login_required, name='dispatch')
 class RenderProjectView(View):
     def get (self, request, project_slug, *args, **kwargs):
-        project_item = get_object_or_404(ProjectItem, project_slug=project_slug, project_property_to_director=request.user)
+        project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
         episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item)
         return render(
             request,
@@ -139,11 +139,29 @@ class RenderProjectView(View):
 
 #   """ Episode view """
 # non-filter
-# user enter a episode, expects to see sketches
+# user enter a episode, expects to see scenes
+"""
 class RenderEpisodeView(View):
     def get (self, request, episode_slug, *args, **kwargs):
         episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
         scene_item = SceneItem.objects.all()
+        return render(
+            request,
+            'episode_view.html',
+            {
+                'episode_item': episode_item,
+                'scene_item': scene_item,
+                
+            },
+        )
+"""
+# filtered
+# user enter a episode, expects to see scenes
+@method_decorator(login_required, name='dispatch')
+class RenderEpisodeView(View):
+    def get (self, request, episode_slug, *args, **kwargs):
+        episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
+        scene_item = SceneItem.objects.filter(scene_property_to_episode=episode_item)
         return render(
             request,
             'episode_view.html',
@@ -161,7 +179,7 @@ class RenderEpisodeView(View):
 class RenderSceneView(View):
     def get (self, request, scene_slug, *args, **kwargs):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
-        sketch_item = SketchItem.objects.all()
+        sketch_item = SketchItem.objects.filter(sketch_property_to_scene=scene_item)
         return render(
             request,
             'scene_view.html',

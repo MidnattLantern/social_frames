@@ -16,8 +16,9 @@
 
 {% if user.is_authenticated %}  {% for i in project_item %}
 <a href="{% url 'project_url_path' i.project_slug %}">
-  scene name: {{ i.project_name }}
+  project name: {{ i.project_name }}
 </a>
+<p> {{ i.project_property_to_director }} </p>
 <hr>
 <br>
 
