@@ -7,6 +7,9 @@ from .models import SketchItem
 # .forms
 from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
 from .forms import CreateSketchItem, CreateSketchItemComment
+# authentication to lock out wrong users
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 """ class based as generic view 
@@ -33,11 +36,46 @@ class RenderSceneView(generic.ListView):
     template_name = 'scene_view.html'
 """
 
+# generic model
+# first thing user sees when they enter Social Frames, expects to see projects
+"""
+class RenderHomeView(generic.ListView):
+    model = ProjectItem
+    queryset = ProjectItem.objects.all()
+    template_name = 'index.html'
+"""
 
-#    """RenderHomeView"""
-# new model
+# generic model
 # user enter a project, expects to see episodes
+"""
+class RenderProjectView(generic.ListView):
+    model = EpisodeItem
+    queryset = EpisodeItem.objects.all()
+    template_name = 'project_view.html'
+"""
 
+# generic model
+# user enter an episode, expects to see scenes
+"""
+class RenderEpisodeView(generic.ListView):
+    model = SceneItem
+    queryset = SceneItem.objects.all()
+    template_name = 'episode_view.html'
+"""
+
+# generic model
+# user enter a scene, expects to see sketches
+"""
+class RenderSceneView(generic.ListView):
+    model = SketchItem
+    queryset = SketchItem.objects.all()
+    template_name = 'scene_view.html'
+"""
+
+#   """ Home view """
+# non-filter
+# user enter a project, expects to see episodes
+"""
 class RenderHomeView(View):
     def get (self, request, *args, **kwargs):
         project_item = ProjectItem.objects.all()
@@ -48,20 +86,25 @@ class RenderHomeView(View):
                 'project_item': project_item,
             },
         )
-
-# old model
-# first thing user sees when they enter Social Frames, expects to see projects
 """
-class RenderHomeView(generic.ListView):
-    model = ProjectItem
-    queryset = ProjectItem.objects.all()
-    template_name = 'index.html'
-"""
+# filtered
+@method_decorator(login_required, name='dispatch')
+class RenderHomeView(View):
+    def get (self, request, *args, **kwargs):
+        project_item = ProjectItem.objects.filter(project_property_to_director=request.user)
+        return render(
+            request,
+            'index.html',
+            {
+                'project_item': project_item,
+            },
+        )
 
-#    """RenderProjectView"""
-# new model
+
+
+#   """ Project view """
+# non-filter
 # user enter a project, expects to see episodes
-
 class RenderProjectView(View):
     def get (self, request, project_slug, *args, **kwargs):
         project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
@@ -75,19 +118,10 @@ class RenderProjectView(View):
             },
         )
 
-# old model
-# user enter a project, expects to see episodes
-"""
-class RenderProjectView(generic.ListView):
-    model = EpisodeItem
-    queryset = EpisodeItem.objects.all()
-    template_name = 'project_view.html'
-"""
 
-#    """RenderEpisodeView"""
-# new model
+#   """ Episode view """
+# non-filter
 # user enter a episode, expects to see sketches
-
 class RenderEpisodeView(View):
     def get (self, request, episode_slug, *args, **kwargs):
         episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
@@ -102,20 +136,10 @@ class RenderEpisodeView(View):
             },
         )
 
-        
-# old model
-# user enter an episode, expects to see scenes
-"""
-class RenderEpisodeView(generic.ListView):
-    model = SceneItem
-    queryset = SceneItem.objects.all()
-    template_name = 'episode_view.html'
-"""
 
-#    """RenderSceneView"""
-# new model (delete sketch_item)
+#   """ Scene view """
+# non-filter
 # user enter a scene, expects to see sketches
-
 class RenderSceneView(View):
     def get (self, request, scene_slug, *args, **kwargs):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
@@ -130,11 +154,3 @@ class RenderSceneView(View):
         )
 
 
-# old model
-# user enter a scene, expects to see sketches
-"""
-class RenderSceneView(generic.ListView):
-    model = SketchItem
-    queryset = SketchItem.objects.all()
-    template_name = 'scene_view.html'
-"""
