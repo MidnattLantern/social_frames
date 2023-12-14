@@ -88,6 +88,7 @@ class RenderHomeView(View):
         )
 """
 # filtered
+# user enter a project, expects to see episodes
 @method_decorator(login_required, name='dispatch')
 class RenderHomeView(View):
     def get (self, request, *args, **kwargs):
@@ -105,10 +106,27 @@ class RenderHomeView(View):
 #   """ Project view """
 # non-filter
 # user enter a project, expects to see episodes
+"""
 class RenderProjectView(View):
     def get (self, request, project_slug, *args, **kwargs):
         project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
         episode_item = EpisodeItem.objects.all()
+        return render(
+            request,
+            'project_view.html',
+            {
+                'project_item': project_item,
+                'episode_item': episode_item,
+            },
+        )
+"""
+# filtered
+# user enter a project, expects to see episodes
+@method_decorator(login_required, name='dispatch')
+class RenderProjectView(View):
+    def get (self, request, project_slug, *args, **kwargs):
+        project_item = get_object_or_404(ProjectItem, project_slug=project_slug, project_property_to_director=request.user)
+        episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item)
         return render(
             request,
             'project_view.html',
