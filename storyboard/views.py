@@ -98,6 +98,7 @@ class RenderHomeView(View):
             'index.html',
             {
                 'project_item': project_item,
+                'create_project_item': CreateProjectItem(),
             },
         )
 
@@ -133,6 +134,7 @@ class RenderProjectView(View):
             {
                 'project_item': project_item,
                 'episode_item': episode_item,
+                'create_episode_item': CreateEpisodeItem(),
             },
         )
 
@@ -168,14 +170,14 @@ class RenderEpisodeView(View):
             {
                 'episode_item': episode_item,
                 'scene_item': scene_item,
-                
+                'create_scene_item': CreateSceneItem(),
             },
         )
 
 
-#   """ Scene view """
 # non-filter
 # user enter a scene, expects to see sketches
+
 class RenderSceneView(View):
     def get (self, request, scene_slug, *args, **kwargs):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
@@ -186,7 +188,6 @@ class RenderSceneView(View):
             {
                 'scene_item': scene_item,
                 'sketch_item': sketch_item,
+                'create_sketch_item': CreateSketchItem(),
             },
         )
-
-

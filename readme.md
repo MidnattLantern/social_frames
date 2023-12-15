@@ -83,3 +83,5 @@ During early stages, there were no director and artist and spectator's role. Thi
 Making changes to models, specifically if outdated items need to be removed, it may be neccessary to delete every migration and to reset the datbase at ElephantSQL. Although it's highly recomended to make one before writing the code, Social Frames didn't have any predetermined model for items beforehand. This deletion and reset process was discovered the hard way.
 
 The sites initially rendered as functions, but was replaced with classes
+
+Inputs for adding and editing items are handled with crispy forms

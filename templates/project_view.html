@@ -6,12 +6,20 @@
 
 {% if user.is_authenticated %}  {% for i in episode_item %}
 <a href="{% url 'episode_url_path' i.episode_slug %}">
-  scene name: {{ i.episode_name }}
+  episode name: {{ i.episode_name }}
 </a>
 <p> {{ i.episode_property_to_project }} </p>
 <hr>
 <br>
 
-{% endfor %}  {% endif %}
+{% endfor %}
+
+<form method="post" style="margin-top: 1.3em;">
+  {{ create_episode_item }}
+  {% csrf_token %}
+  <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+</form>
+
+{% endif %}
 
 {% endblock %}

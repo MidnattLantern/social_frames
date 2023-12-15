@@ -13,61 +13,31 @@ class Create<name>(forms.ModelForm):
 
 
 class CreateProjectItem(forms.ModelForm):
-    """
-    docstring
-    """
     class Meta:
-        """
-        docstring
-        """
-        model: ProjectItem
+        model = ProjectItem
         fields = ('project_name',)
 
 
 class CreateEpisodeItem(forms.ModelForm):
-    """
-    docstring
-    """
     class Meta:
-        """
-        docstring
-        """
         model = EpisodeItem
         fields = ('episode_name',)
 
 
 class CreateSceneItem(forms.ModelForm):
-    """
-    docstring
-    """
     class Meta:
-        """
-        docstring
-        """
-        model: SceneItem
+        model = SceneItem
         fields = ('scene_name',)
 
 
 class CreateSketchItem(forms.ModelForm):
-    """
-    docstring
-    """
     class Meta:
-        """
-        docstring
-        """
-        model: SketchItem
-        fields = ('sketch_upload',)
+        model = SketchItem
+        fields = ('sketch_name',)
 
 
 class CreateSketchItemComment(forms.ModelForm):
-    """
-    docstring
-    """
     class Meta:
-        """
-        docstring
-        """
         model = SketchItem
         fields = ('sketch_directors_comment',)
 

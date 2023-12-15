@@ -31,7 +31,7 @@
 
 <table>
 <!-- see models.py EpisodeItem() -->
-{% if user.is_authenticated %} {% for i in scene_item %}
+{% for i in scene_item %}
     <a href="{% url 'scene_url_path' i.scene_slug %}">
       scene name: {{ i.scene_name }}
     </a>
@@ -39,8 +39,13 @@
 <p> {{ i.scene_property_to_episode }} </p>
 <hr>
 <br>
-  {% endfor %} {% endif %}
+    {% endfor %}
 
+    <form method="post" style="margin-top: 1.3em;">
+        {{ create_scene_item }}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+      </form>
 
     {% endif %}
 {% endblock %}
