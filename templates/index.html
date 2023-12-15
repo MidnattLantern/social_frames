@@ -1,10 +1,11 @@
 {% extends "base.html" %} {% block content %}
+{% load crispy_forms_tags %}
 <h1>This is the home banner</h1>
 <!-- Note for all views: any content is only accessible when signed in -->
 {% if user.is_authenticated %}
-<a>{{ user.username }}</a>
-<br>
+<p>Signed in as {{ user.username }}</p>
 <a href="{% url 'account_logout' %}">sign_out</a>
+<hr>
 <br>
 <!-- Display if not signed in -->
 {% else %}
@@ -18,7 +19,7 @@
 <a href="{% url 'project_url_path' i.project_slug %}">
   project name: {{ i.project_name }}
 </a>
-<p> {{ i.project_property_to_director }} </p>
+<p> belongs to {{ i.project_property_to_director }} </p>
 <hr>
 <br>
 
@@ -26,7 +27,7 @@
 <p>Create new project</p>
 
 <form method="post" style="margin-top: 1.3em;">
-  {{ create_project_item }}
+  {{ create_project_item | crispy }}
   {% csrf_token %}
   <button type="submit" class="btn btn-signup btn-lg">Submit</button>
 </form>

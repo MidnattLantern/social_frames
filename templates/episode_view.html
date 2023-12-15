@@ -1,5 +1,5 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
+{% load crispy_forms_tags %}
     <h1>episode view</h1>
 
     <!-- see models.py SceneItem() -->
@@ -37,7 +37,7 @@
     {% endfor %}
     <p>Create new scene</p>
     <form method="post" style="margin-top: 1.3em;">
-        {{ create_scene_item }}
+        {{ create_scene_item | crispy}}
         {% csrf_token %}
         <button type="submit" class="btn btn-signup btn-lg">Submit</button>
       </form>

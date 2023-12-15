@@ -15,29 +15,29 @@ class Create<name>(forms.ModelForm):
 class CreateProjectItem(forms.ModelForm):
     class Meta:
         model = ProjectItem
-        fields = ('project_name',)
+        fields = ['project_name', 'project_slug', 'project_property_to_director',]
 
 
 class CreateEpisodeItem(forms.ModelForm):
     class Meta:
         model = EpisodeItem
-        fields = ('episode_name',)
+        fields = ['episode_name',]
 
 
 class CreateSceneItem(forms.ModelForm):
     class Meta:
         model = SceneItem
-        fields = ('scene_name',)
+        fields = ['scene_name',]
 
 
 class CreateSketchItem(forms.ModelForm):
     class Meta:
         model = SketchItem
-        fields = ('sketch_name',)
+        fields = ['sketch_name',]
 
 
 class CreateSketchItemComment(forms.ModelForm):
     class Meta:
         model = SketchItem
-        fields = ('sketch_directors_comment',)
+        fields = ['sketch_directors_comment',]
 

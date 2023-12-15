@@ -16,7 +16,7 @@
 <p>Create new episode</p>
 
 <form method="post" style="margin-top: 1.3em;">
-  {{ create_episode_item }}
+  {{ create_episode_item | crispy}}
   {% csrf_token %}
   <button type="submit" class="btn btn-signup btn-lg">Submit</button>
 </form>

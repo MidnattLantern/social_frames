@@ -100,7 +100,7 @@ class RenderHomeView(View):
                 'project_item': project_item,
                 'create_project_item': CreateProjectItem(),
             },
-        )
+        )        
 
 
 
@@ -128,6 +128,28 @@ class RenderProjectView(View):
     def get (self, request, project_slug, *args, **kwargs):
         project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
         episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item)
+        return render(
+            request,
+            'project_view.html',
+            {
+                'project_item': project_item,
+                'episode_item': episode_item,
+                'create_episode_item': CreateEpisodeItem(),
+            },
+        )
+    # tutor this code. Class: Django Blog 011b: Commenting - part 2
+    def post (self, request, project_slug, *args, **kwargs):
+        project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
+        episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item)
+
+        episode_item_form = CreateEpisodeItem(data=request.POST)
+        if episode_item_form.is_valid():
+            episode = episode_item_form.save(commit=False)
+            episode.post = post
+            episode.save()
+        else:
+            episode_item_form = CreateEpisodeItem()
+
         return render(
             request,
             'project_view.html',
