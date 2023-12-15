@@ -23,11 +23,6 @@
         </p>
     </div>
     {% endfor %}
-    <div>
-        <p>
-            + Create new scene
-        </p>
-    </div>
 
 <table>
 <!-- see models.py EpisodeItem() -->
@@ -40,7 +35,7 @@
 <hr>
 <br>
     {% endfor %}
-
+    <p>Create new scene</p>
     <form method="post" style="margin-top: 1.3em;">
         {{ create_scene_item }}
         {% csrf_token %}

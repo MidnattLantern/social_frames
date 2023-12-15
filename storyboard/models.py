@@ -22,7 +22,7 @@ that belongs to a User.
 
 class ProjectItem(models.Model):
     project_name = models.CharField(
-        max_length=50, null=False, blank=False, default='', unique=True)
+        max_length=50, null=False, blank=False, default='', unique=False)
     project_slug = models.SlugField(
         max_length=50, unique=True, default='', null=False)
     project_poster = CloudinaryField(
@@ -40,11 +40,11 @@ class ProjectItem(models.Model):
     def __str__(self):
         return self.project_name
 
-# other related files: views.py urls.py forms.py admin.py
+
 class EpisodeItem(models.Model):
     episode_chronology = models.IntegerField(null=False, blank=False)
     episode_name = models.CharField(
-        max_length=50, null=False, blank=False, default='')
+        max_length=50, null=False, blank=False, default='', unique=False)
     episode_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
     episode_property_to_project = models.ForeignKey(
         ProjectItem, on_delete=models.CASCADE, default='', null=True,
@@ -62,7 +62,7 @@ class EpisodeItem(models.Model):
 class SceneItem(models.Model):
     scene_chronology = models.IntegerField(null=False, blank=False)
     scene_name = models.CharField(
-        max_length=50, null=False, blank=False, default='')
+        max_length=50, null=False, blank=False, default='', unique=False)
     scene_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
     scene_property_to_episode = models.ForeignKey(
         EpisodeItem, on_delete=models.CASCADE, default='')
@@ -81,7 +81,7 @@ class SceneItem(models.Model):
 
 class SketchItem(models.Model):
     sketch_name = models.CharField(
-        max_length=50, null=False, blank=False, default='')
+        max_length=50, null=False, blank=False, default='', unique=False)
     sketch_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
     sketch_property_to_scene = models.ForeignKey(
         SceneItem, on_delete=models.CASCADE, default='')

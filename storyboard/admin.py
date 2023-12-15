@@ -9,7 +9,7 @@ Each item related to a function are appended with "admin"
 
 @admin.register(ProjectItem)
 class RegisterProject(admin.ModelAdmin):
-    prepopulated_fields = {'project_slug': ('project_name',)}
+    prepopulated_fields = {'project_slug': ('project_property_to_director', 'project_name',)}
 
 
 @admin.register(EpisodeItem)
