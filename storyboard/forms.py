@@ -27,7 +27,7 @@ class CreateEpisodeItem(forms.ModelForm):
 class CreateSceneItem(forms.ModelForm):
     class Meta:
         model = SceneItem
-        fields = ['scene_name',]
+        fields = ['scene_name', 'scene_slug', 'scene_property_to_episode', 'scene_chronology', 'scene_artist_assignment',]
 
 
 class CreateSketchItem(forms.ModelForm):

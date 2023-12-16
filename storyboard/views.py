@@ -219,6 +219,25 @@ class RenderEpisodeView(View):
                 'create_scene_item': CreateSceneItem(),
             },
         )
+    def post (self, request, episode_slug, *args, **kwargs):
+        episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
+        scene_item = SceneItem.objects.filter(scene_property_to_episode=episode_item)
+        scene_item_form = CreateSceneItem(data=request.POST)
+        if scene_item_form.is_valid():
+            scene = scene_item_form.save(commit=False)
+            scene.post = scene_item
+            scene.save()
+        else:
+            scene_item_form = CreateSceneItem()
+        return render(
+            request,
+            'episode_view.html',
+            {
+                'episode_item': episode_item,
+                'scene_item': scene_item,
+                'create_scene_item': CreateSceneItem(),
+            },
+        )
 
 
 # non-filter
