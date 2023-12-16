@@ -21,7 +21,7 @@ class CreateProjectItem(forms.ModelForm):
 class CreateEpisodeItem(forms.ModelForm):
     class Meta:
         model = EpisodeItem
-        fields = ['episode_name',]
+        fields = ['episode_name', 'episode_slug', 'episode_property_to_project', 'episode_chronology',]
 
 
 class CreateSceneItem(forms.ModelForm):

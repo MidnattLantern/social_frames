@@ -72,6 +72,7 @@ class RenderSceneView(generic.ListView):
     template_name = 'scene_view.html'
 """
 
+
 #   """ Home view """
 # non-filter
 # user enter a project, expects to see episodes
@@ -87,6 +88,45 @@ class RenderHomeView(View):
             },
         )
 """
+
+#   """ Project view """
+# non-filter
+# user enter a project, expects to see episodes
+"""
+class RenderProjectView(View):
+    def get (self, request, project_slug, *args, **kwargs):
+        project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
+        episode_item = EpisodeItem.objects.all()
+        return render(
+            request,
+            'project_view.html',
+            {
+                'project_item': project_item,
+                'episode_item': episode_item,
+            },
+        )
+"""
+
+#   """ Episode view """
+# non-filter
+# user enter a episode, expects to see scenes
+"""
+class RenderEpisodeView(View):
+    def get (self, request, episode_slug, *args, **kwargs):
+        episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
+        scene_item = SceneItem.objects.all()
+        return render(
+            request,
+            'episode_view.html',
+            {
+                'episode_item': episode_item,
+                'scene_item': scene_item,
+                
+            },
+        )
+"""
+
+
 # filtered
 # user enter a project, expects to see episodes
 @method_decorator(login_required, name='dispatch')
@@ -122,23 +162,7 @@ class RenderHomeView(View):
 
 
 
-#   """ Project view """
-# non-filter
-# user enter a project, expects to see episodes
-"""
-class RenderProjectView(View):
-    def get (self, request, project_slug, *args, **kwargs):
-        project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
-        episode_item = EpisodeItem.objects.all()
-        return render(
-            request,
-            'project_view.html',
-            {
-                'project_item': project_item,
-                'episode_item': episode_item,
-            },
-        )
-"""
+
 # filtered
 # user enter a project, expects to see episodes
 @method_decorator(login_required, name='dispatch')
@@ -179,24 +203,6 @@ class RenderProjectView(View):
         )
 
 
-#   """ Episode view """
-# non-filter
-# user enter a episode, expects to see scenes
-"""
-class RenderEpisodeView(View):
-    def get (self, request, episode_slug, *args, **kwargs):
-        episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
-        scene_item = SceneItem.objects.all()
-        return render(
-            request,
-            'episode_view.html',
-            {
-                'episode_item': episode_item,
-                'scene_item': scene_item,
-                
-            },
-        )
-"""
 # filtered
 # user enter a episode, expects to see scenes
 @method_decorator(login_required, name='dispatch')
@@ -217,7 +223,6 @@ class RenderEpisodeView(View):
 
 # non-filter
 # user enter a scene, expects to see sketches
-
 class RenderSceneView(View):
     def get (self, request, scene_slug, *args, **kwargs):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
