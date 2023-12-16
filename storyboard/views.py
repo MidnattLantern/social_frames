@@ -100,7 +100,25 @@ class RenderHomeView(View):
                 'project_item': project_item,
                 'create_project_item': CreateProjectItem(),
             },
-        )        
+        )
+    # tutor this code. Class: Django Blog 011b: Commenting - part 2
+    def post (self, request, *args, **kwargs):
+        project_item = ProjectItem.objects.filter(project_property_to_director=request.user)
+        project_item_form = CreateProjectItem(data=request.POST)
+        if project_item_form.is_valid():
+            project = project_item_form.save(commit=False)
+            project.post = project_item
+            project.save()
+        else:
+            project_item_form = CreateProjectItem()
+        return render(
+            request,
+            'index.html',
+            {
+                'project_item': project_item,
+                'create_project_item': CreateProjectItem(),
+            },
+        )         
 
 
 
@@ -145,7 +163,7 @@ class RenderProjectView(View):
         episode_item_form = CreateEpisodeItem(data=request.POST)
         if episode_item_form.is_valid():
             episode = episode_item_form.save(commit=False)
-            episode.post = post
+            episode.post = episode_item
             episode.save()
         else:
             episode_item_form = CreateEpisodeItem()
