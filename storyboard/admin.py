@@ -34,6 +34,6 @@ class RegisterSketch(admin.ModelAdmin):
     prepopulated_fields = {'sketch_slug': ('sketch_name',)}
     actions = ['sketch_pin']
 
-    # followed the tutorial, not sure if this is right
+    # not sure if this is right
     def pin(self, request, queryset):
         queryset.update(sketch_pin=True)

@@ -92,7 +92,8 @@ class SketchItem(models.Model):
     sketch_artist = models.ForeignKey(
         User, on_delete=models.CASCADE, default='')
     sketch_pin = models.BooleanField(default=False)
-    sketch_image = CloudinaryField('image', default='')
+#    sketch_image = CloudinaryField('image', default='')
+    sketch_image = models.ImageField(null=False, blank=False, upload_to='images/')
 
     class Meta:
         ordering = ['sketch_updated_date']

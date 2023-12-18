@@ -2,6 +2,9 @@
 
 from django.contrib import admin
 from django.urls import path, include
+# from 18 dec guide
+from django.conf import settings
+from django.conf.urls.static import static
 
 #everything productivity:
 #from storyboard.views import render_home_view, render_project_view
@@ -23,16 +26,7 @@ empty string '' is the Django equivalent to index.html
 
 urlpatterns = [
     path('staff_only/', admin.site.urls),
-
-    # account:
     path('accounts/', include('allauth.urls')),
-
-    # non pythonic (attempting to remove)
-#    path('', render_home_view, name='home'),
-#    path('project', render_project_view, name='project'),
-#    path('project/episode', render_episode_view, name='episode'),
-#    path('project/episode/scene', render_scene_view, name='scene'),
-
-    # pythonic object oriented (attempting to make functional)
     path('', include('storyboard.urls'), name='storyboard_urls'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# + static is from 18 dec guide

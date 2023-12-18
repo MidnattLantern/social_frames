@@ -7,6 +7,7 @@ from .models import SketchItem
 # .forms
 from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
 from .forms import CreateSketchItem, CreateSketchItemComment
+import cloudinary.uploader
 # authentication to lock out wrong users
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -141,7 +142,6 @@ class RenderHomeView(View):
                 'create_project_item': CreateProjectItem(),
             },
         )
-    # tutor this code. Class: Django Blog 011b: Commenting - part 2
     def post (self, request, *args, **kwargs):
         project_item = ProjectItem.objects.filter(project_property_to_director=request.user)
         project_item_form = CreateProjectItem(data=request.POST)
@@ -179,7 +179,6 @@ class RenderProjectView(View):
                 'create_episode_item': CreateEpisodeItem(),
             },
         )
-    # tutor this code. Class: Django Blog 011b: Commenting - part 2
     def post (self, request, project_slug, *args, **kwargs):
         project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
         episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item)
@@ -246,6 +245,25 @@ class RenderSceneView(View):
     def get (self, request, scene_slug, *args, **kwargs):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
         sketch_item = SketchItem.objects.filter(sketch_property_to_scene=scene_item)
+        return render(
+            request,
+            'scene_view.html',
+            {
+                'scene_item': scene_item,
+                'sketch_item': sketch_item,
+                'create_sketch_item': CreateSketchItem(),
+            },
+        )
+    def post (self, request, scene_slug, *args, **kwargs):
+        scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
+        sketch_item = SketchItem.objects.filter(sketch_property_to_scene=scene_item)
+        sketch_item_form = CreateSketchItem(request.POST, request.FILES)
+        if sketch_item_form.is_valid():
+            sketch = sketch_item_form.save(commit=False)
+            sketch.post = sketch_item
+            sketch.save()
+        else:
+            sketch_item_form = CreateSketchItem()
         return render(
             request,
             'scene_view.html',

@@ -33,11 +33,10 @@ class CreateSceneItem(forms.ModelForm):
 class CreateSketchItem(forms.ModelForm):
     class Meta:
         model = SketchItem
-        fields = ['sketch_name',]
+        fields = ['sketch_name', 'sketch_slug', 'sketch_image', 'sketch_property_to_scene', 'sketch_artist',]
 
 
 class CreateSketchItemComment(forms.ModelForm):
     class Meta:
         model = SketchItem
         fields = ['sketch_directors_comment',]
-

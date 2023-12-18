@@ -85,3 +85,5 @@ Making changes to models, specifically if outdated items need to be removed, it 
 The sites initially rendered as functions, but was replaced with classes
 
 Inputs for adding and editing items are handled with crispy forms
+
+Cloudyboard use Pillow to handle sketch uploading and Cloudinary to store the sketches
