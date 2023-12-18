@@ -19,7 +19,8 @@
 <a href="{% url 'project_url_path' i.project_slug %}">
   project name: {{ i.project_name }}
 </a>
-<p> belongs to {{ i.project_property_to_director }} </p>
+<br>
+<button>delete project</button>
 <hr>
 <br>
 
@@ -29,7 +30,7 @@
 <form method="post" style="margin-top: 1.3em;">
   {{ create_project_item | crispy }}
   {% csrf_token %}
-  <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+  <button type="submit" class="btn btn-signup btn-lg">Create project</button>
 </form>
 
 {% endif %}

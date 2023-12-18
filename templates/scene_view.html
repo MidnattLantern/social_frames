@@ -5,23 +5,25 @@
 <p>Pinned sketch goes here</p>
 
 <!-- see models.py SketchItem() -->
-{% if user.is_authenticated %}  {% for i in sketch_item %}
+{% if user.is_authenticated %}
+<p>Signed in as {{ user.username }}</p>
+{% for i in sketch_item %}
 <div>
     <div>
-        <p>
-            Sketch upload:
-        </p>
         <img src="{{ i.sketch_image.url }}" style="max-width: 100px; max-width: auto;">
     </div>
     <p>Artist: {{ i.sketch_artist }}</p>
 </div>
-<p> {{ i.sketch_property_to_scene }} </p>
+<p>Sketch for scene: {{ i.sketch_property_to_scene }} </p>
+
+<button>delete sketch</button>
+
 <hr>
 <br>
 
 {% endfor %}
 <p>upload sketch</p>
-<form actin="" method="POST" style="margin-top: 1.3em;" enctype="multipart/form-data">
+<form action="" method="POST" style="margin-top: 1.3em;" enctype="multipart/form-data">
     {{ create_sketch_item | crispy }}
     {% csrf_token %}
     <button type="submit" class="btn btn-signup btn-lg">Submit</button>

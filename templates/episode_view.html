@@ -4,25 +4,7 @@
 
     <!-- see models.py SceneItem() -->
     {% if user.is_authenticated %}
-    {% for i in show_scenes %}
-    <div>
-        <p>
-            chronology: {{ i.chronology}}
-        </p>
-        <a href="{% url 'scene_url_path' i.scene_slug %}"></a>
-            Scene name: {{ i.scene_name }}
-        </a>
-        <div>
-            <p>(pin image goes here)</p>
-        </div>
-        <p>
-            Notes: {{ i.scene_event_notes }}
-        </p>
-        <p>
-            Most recent update: {{ i.updated_date }}
-        </p>
-    </div>
-    {% endfor %}
+    <p>Signed in as {{ user.username }}</p>
 
 <table>
 <!-- see models.py EpisodeItem() -->
@@ -31,7 +13,10 @@
       scene name: {{ i.scene_name }}
     </a>
 </table>
-<p> {{ i.scene_property_to_episode }} </p>
+<p>Scene notes: <br> {{ i.scene_event_notes }} </p>
+
+<button>delete scene</button>
+
 <hr>
 <br>
     {% endfor %}
@@ -39,7 +24,7 @@
     <form method="post" style="margin-top: 1.3em;">
         {{ create_scene_item | crispy}}
         {% csrf_token %}
-        <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+        <button type="submit" class="btn btn-signup btn-lg">Create scene</button>
       </form>
 
     {% endif %}

@@ -25,8 +25,8 @@ class ProjectItem(models.Model):
         max_length=50, null=False, blank=False, default='', unique=False)
     project_slug = models.SlugField(
         max_length=50, unique=True, default='', null=False)
-    project_poster = CloudinaryField(
-        'image', default='', blank=True, null=True)
+#    project_poster = CloudinaryField(
+#        'image', default='', blank=True, null=True)
     project_creation_date = models.DateTimeField(
         auto_now_add=True)
     project_updated_date = models.DateTimeField(
@@ -69,8 +69,6 @@ class SceneItem(models.Model):
     scene_creation_date = models.DateTimeField(auto_now_add=True)
     scene_updated_date = models.DateTimeField(auto_now=True)
     scene_event_notes = models.TextField(max_length=300, null=True, blank=True)
-    scene_artist_assignment = models.ForeignKey(
-        User, on_delete=models.CASCADE, default='')
 
     class Meta:
         ordering = ['scene_chronology']
@@ -89,8 +87,8 @@ class SketchItem(models.Model):
     sketch_updated_date = models.DateTimeField(auto_now=True)
     sketch_directors_comment = models.CharField(
         max_length=300, null=True, blank=True, default='')
-    sketch_artist = models.ForeignKey(
-        User, on_delete=models.CASCADE, default='')
+    sketch_artist = models.CharField(
+        max_length=50, null=False, blank=False, default='', unique=False)
     sketch_pin = models.BooleanField(default=False)
 #    sketch_image = CloudinaryField('image', default='')
     sketch_image = models.ImageField(null=False, blank=False, upload_to='images/')

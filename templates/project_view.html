@@ -4,11 +4,15 @@
 <h1>Project view</h1>
 
 
-{% if user.is_authenticated %}  {% for i in episode_item %}
+{% if user.is_authenticated %}
+<p>Signed in as {{ user.username }}</p>
+{% for i in episode_item %}
 <a href="{% url 'episode_url_path' i.episode_slug %}">
   episode name: {{ i.episode_name }}
 </a>
-<p> {{ i.episode_property_to_project }} </p>
+<br>
+<button>delete episode</button>
+
 <hr>
 <br>
 
@@ -18,7 +22,7 @@
 <form method="post" style="margin-top: 1.3em;">
   {{ create_episode_item | crispy}}
   {% csrf_token %}
-  <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+  <button type="submit" class="btn btn-signup btn-lg">Create Episode</button>
 </form>
 
 {% endif %}

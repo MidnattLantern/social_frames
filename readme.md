@@ -1,5 +1,7 @@
 Social Frames (alias "Beta Frames"), was advised by Emma Fyrmark, a screen writer within the animation industry for insight. We created issues that makes up a long wish list of useful features an animation team would valuate, then we tagged the most crucial features as "must have", and put on a project board. The other issues were tagged as "feature request".
 
+Cloudyboard is a create, read, update, delete ("CRUD") platform targeted for animation teams. The animation team share a team account, where directors can create metadata for projects, episodes and scenes, and where animators can upload sketches. This enable the team to work remotely.
+
 Social Frames was developed on a Macintosh ("Mac" for short), because some crucial features for development are only available on Linux and MacOS.
 
 Repository setup
