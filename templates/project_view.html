@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block content %}
+{% load crispy_forms_tags %}
+
+<h1>Episodes</h1>
+
+
+{% if user.is_authenticated %}
+<p>Animation team: {{ user.username }}</p>
+<a href="{% url 'account_logout' %}">sign out</a>
+<hr>
+<br>
+{% for i in episode_item %}
+<a href="{% url 'episode_url_path' i.episode_slug %}">
+  <!-- episode name -->
+  {{ i.episode_name }}
+</a>
+<br>
+<button href="#">Edit episode</button>
+
+<hr>
+<br>
+
+{% endfor %}
+<div class="new_item_styling">
+<p>Create new episode</p>
+<form method="post" style="margin-top: 1.3em;">
+  {{ create_episode_item | crispy}}
+  {% csrf_token %}
+  <button type="submit" class="btn btn-signup btn-lg">Create Episode</button>
+</form>
+</div>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% load static %}
+<!-- see views.py to see every view within any for i loop -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Document</title>
+</head>
+
+<body class="main_window">
+    <!-- Header -->
+    <a href="{% url 'home_url_path' %}">
+        Cloudyboard
+    </a>
+
+    <main class="flex-shrink-0 main-bg">
+        {% block content %}
+        <!-- Content Goes here -->
+        {% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="">
+
+    </footer>
+</body>
+
+</html>

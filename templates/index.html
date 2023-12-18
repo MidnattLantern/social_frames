@@ -1,0 +1,42 @@
+{% extends "base.html" %} {% block content %}
+{% load crispy_forms_tags %}
+<h1>Your projects</h1>
+<!-- Note for all views: any content is only accessible when signed in -->
+{% if user.is_authenticated %}
+<p>Animation team: {{ user.username }}</p>
+<a href="{% url 'account_logout' %}">sign out</a>
+<hr>
+<br>
+<!-- Display if not signed in -->
+{% else %}
+<a href="{% url 'account_login' %}">sign_in</a>
+<br>
+<a href="{% url 'account_signup' %}">sign_up</a>
+<br>
+{% endif %}
+
+{% if user.is_authenticated %}  {% for i in project_item %}
+<a href="{% url 'project_url_path' i.project_slug %}">
+  <!-- project name -->
+  {{ i.project_name }}
+</a>
+<br>
+<button href="#">Edit project</button>
+<hr>
+<br>
+
+{% endfor %}
+<div class="new_item_styling">
+  <p>Create new project</p>
+
+  <form method="post" style="margin-top: 1.3em;">
+  {{ create_project_item | crispy }}
+  {% csrf_token %}
+  <button type="submit" class="btn btn-signup btn-lg">Create project</button>
+</form>
+</div>
+
+
+{% endif %}
+
+{% endblock %}

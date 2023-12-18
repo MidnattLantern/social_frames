@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block content %}
+{% load crispy_forms_tags %}
+
+<h1>all submitted sketches</h1>
+<!-- Pinned sketch goes here-->
+
+<!-- see models.py SketchItem() -->
+{% if user.is_authenticated %}
+<p>Animation team: {{ user.username }}</p>
+<a href="{% url 'account_logout' %}">sign out</a>
+<br>
+<hr>
+{% for i in sketch_item %}
+<div>
+    <div>
+        <img src="{{ i.sketch_image.url }}" style="max-width: 100px; max-width: auto;">
+    </div>
+    <p>Artist: {{ i.sketch_artist }}</p>
+</div>
+<p>Sketch for scene: {{ i.sketch_property_to_scene }} </p>
+
+<button href="#">Edit sketch</button>
+
+<hr>
+<br>
+
+{% endfor %}
+<div class="new_item_styling">
+<p>upload sketch</p>
+<form action="" method="POST" style="margin-top: 1.3em;" enctype="multipart/form-data">
+    {{ create_sketch_item | crispy }}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+  </form>
+</div>
+
+{% endif %}
+{% endblock %}

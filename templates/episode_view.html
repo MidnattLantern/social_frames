@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block content %}
+{% load crispy_forms_tags %}
+    <h1>Scenes</h1>
+
+    <!-- see models.py SceneItem() -->
+    {% if user.is_authenticated %}
+    <p>Animation team: {{ user.username }}</p>
+    <a href="{% url 'account_logout' %}">sign out</a>
+<hr>
+<br>
+
+<table>
+<!-- see models.py EpisodeItem() -->
+{% for i in scene_item %}
+    <a href="{% url 'scene_url_path' i.scene_slug %}">
+      <!-- scene name -->
+      {{ i.scene_name }}
+    </a>
+</table>
+<p>Scene notes: <br> {{ i.scene_event_notes }} </p>
+
+<button href="#">Edit scene</button>
+
+<hr>
+<br>
+    {% endfor %}
+    <div class="new_item_styling">
+    <p>Create new scene</p>
+    <form method="post" style="margin-top: 1.3em;">
+        {{ create_scene_item | crispy}}
+        {% csrf_token %}
+        <button type="submit" class="btn btn-signup btn-lg">Create scene</button>
+      </form>
+    </div>
+
+    {% endif %}
+{% endblock %}
