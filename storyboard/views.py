@@ -71,7 +71,10 @@ class RenderProjectView(View):
             episode.save()
         else:
             episode_item_form = CreateEpisodeItem()
-
+        if 'delete_episode' in request.POST:
+            delete_episode_slug = request.POST.get('delete_episode')
+            delete_episode = EpisodeItem.objects.get(episode_slug=delete_episode_slug)
+            delete_episode.delete()
         return render(
             request,
             'project_view.html',

@@ -16,7 +16,12 @@
   {{ i.episode_name }}
 </a>
 <br>
-<button href="#">Delete episode</button>
+
+<!-- delete form -->
+<form action="" method="POST">
+  {% csrf_token %} {{ delete_episode_item | crispy }}
+  <button type="submit" name="delete_episode" value="{{ i.episode_slug }}">Delete episode</button>
+</form>
 
 <hr>
 <br>
