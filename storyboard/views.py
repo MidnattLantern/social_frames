@@ -143,10 +143,10 @@ class RenderSceneView(View):
             sketch.save()
         else:
             sketch_item_form = CreateSketchItem()
-
-        # tutoring help
-        delete_scene = SketchItem.objects.get(pk=scene_slug)
-        delete_scene.delete()
+        if 'delete_sketch' in request.POST:
+            delete_sketch_slug = request.POST.get('delete_sketch')
+            delete_sketch = SketchItem.objects.get(sketch_slug=delete_sketch_slug)
+            delete_sketch.delete()
 
         return render(
             request,
@@ -155,9 +155,6 @@ class RenderSceneView(View):
                 'scene_item': scene_item,
                 'sketch_item': sketch_item,
                 'create_sketch_item': CreateSketchItem(),
-
-                # tutoring help
-                'delete_sketch_item': delete_scene,
 
             },
         )

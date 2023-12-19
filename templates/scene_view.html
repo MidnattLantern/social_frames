@@ -20,10 +20,10 @@
 <p>Sketch for scene: {{ i.sketch_property_to_scene }} </p>
 
 <button href="#">Edit sketch</button>
-<form>
-    {{ delete_sketch_item | crispy }}
-<button>Delete sketch</button>
-</form>
+<form action="" method="POST">
+    {% csrf_token %} {{ delete_sketch_item | crispy }}
+    <button type="submit" name="delete_sketch" value="{{ i.sketch_slug }}">Delete sketch</button>
+  </form>
 
 <hr>
 <br>
