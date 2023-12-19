@@ -21,7 +21,13 @@
   {{ i.project_name }}
 </a>
 <br>
-<button href="#">Delete project</button>
+
+<!-- delete form -->
+<form action="" method="POST">
+  {% csrf_token %} {{ delete_project_item | crispy }}
+  <button type="submit" name="delete_project" value="{{ i.project_slug }}">Delete project</button>
+</form>
+
 <hr>
 <br>
 

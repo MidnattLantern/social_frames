@@ -35,6 +35,10 @@ class RenderHomeView(View):
             project.save()
         else:
             project_item_form = CreateProjectItem()
+        if 'delete_project' in request.POST:
+            delete_project_slug = request.POST.get('delete_project')
+            delete_project = ProjectItem.objects.get(project_slug=delete_project_slug)
+            delete_project.delete()
         return render(
             request,
             'index.html',
