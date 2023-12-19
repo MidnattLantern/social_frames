@@ -19,7 +19,11 @@
 </div>
 <p>Sketch for scene: {{ i.sketch_property_to_scene }} </p>
 
-<button href="#">Delete sketch</button>
+<button href="#">Edit sketch</button>
+<form>
+    {{ delete_sketch_item | crispy }}
+<button>Delete sketch</button>
+</form>
 
 <hr>
 <br>

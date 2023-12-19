@@ -143,6 +143,11 @@ class RenderSceneView(View):
             sketch.save()
         else:
             sketch_item_form = CreateSketchItem()
+
+        # tutoring help
+        delete_scene = SketchItem.objects.get(pk=scene_slug)
+        delete_scene.delete()
+
         return render(
             request,
             'scene_view.html',
@@ -150,5 +155,9 @@ class RenderSceneView(View):
                 'scene_item': scene_item,
                 'sketch_item': sketch_item,
                 'create_sketch_item': CreateSketchItem(),
+
+                # tutoring help
+                'delete_sketch_item': delete_scene,
+
             },
         )
