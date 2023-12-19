@@ -10,12 +10,13 @@
 <hr>
 <br>
 {% for i in episode_item %}
+<p>Episode: {{ i.episode_chronology }}</p>
 <a href="{% url 'episode_url_path' i.episode_slug %}">
   <!-- episode name -->
   {{ i.episode_name }}
 </a>
 <br>
-<button href="#">Edit episode</button>
+<button href="#">Delete episode</button>
 
 <hr>
 <br>
@@ -26,7 +27,7 @@
 <form method="post" style="margin-top: 1.3em;">
   {{ create_episode_item | crispy}}
   {% csrf_token %}
-  <button type="submit" class="btn btn-signup btn-lg">Create Episode</button>
+  <button type="submit" class="btn btn btn-lg">Create Episode</button>
 </form>
 </div>
 

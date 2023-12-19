@@ -152,4 +152,3 @@ class RenderSceneView(View):
                 'create_sketch_item': CreateSketchItem(),
             },
         )
-

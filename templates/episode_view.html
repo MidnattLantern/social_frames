@@ -12,6 +12,7 @@
 <table>
 <!-- see models.py EpisodeItem() -->
 {% for i in scene_item %}
+<p>Scene: {{ i.scene_chronology }}</p>
     <a href="{% url 'scene_url_path' i.scene_slug %}">
       <!-- scene name -->
       {{ i.scene_name }}
@@ -19,7 +20,7 @@
 </table>
 <p>Scene notes: <br> {{ i.scene_event_notes }} </p>
 
-<button href="#">Edit scene</button>
+<button href="#">Delete scene</button>
 
 <hr>
 <br>

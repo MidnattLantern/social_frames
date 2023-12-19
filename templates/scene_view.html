@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 {% load crispy_forms_tags %}
 
-<h1>all submitted sketches</h1>
+<h1>All submitted sketches</h1>
 <!-- Pinned sketch goes here-->
 
 <!-- see models.py SketchItem() -->
@@ -19,7 +19,7 @@
 </div>
 <p>Sketch for scene: {{ i.sketch_property_to_scene }} </p>
 
-<button href="#">Edit sketch</button>
+<button href="#">Delete sketch</button>
 
 <hr>
 <br>
