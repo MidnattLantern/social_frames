@@ -108,6 +108,10 @@ class RenderEpisodeView(View):
             scene.save()
         else:
             scene_item_form = CreateSceneItem()
+        if 'delete_scene' in request.POST:
+            delete_scene_slug = request.POST.get('delete_scene')
+            delete_scene = SceneItem.objects.get(scene_slug=delete_scene_slug)
+            delete_scene.delete()
         return render(
             request,
             'episode_view.html',
