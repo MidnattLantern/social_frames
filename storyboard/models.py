@@ -49,6 +49,10 @@ class EpisodeItem(models.Model):
     episode_property_to_project = models.ForeignKey(
         ProjectItem, on_delete=models.CASCADE, default='', null=True,
         blank=True)
+    #test
+    episode_property_to_director = models.ForeignKey(
+        User, on_delete=models.CASCADE, default='')
+    #endtest
     episode_creation_date = models.DateTimeField(auto_now_add=True)
     episode_updated_date = models.DateTimeField(auto_now=True)
 
@@ -66,6 +70,10 @@ class SceneItem(models.Model):
     scene_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
     scene_property_to_episode = models.ForeignKey(
         EpisodeItem, on_delete=models.CASCADE, default='')
+    #test
+    scene_property_to_director = models.ForeignKey(
+        User, on_delete=models.CASCADE, default='')
+    #endtest
     scene_creation_date = models.DateTimeField(auto_now_add=True)
     scene_updated_date = models.DateTimeField(auto_now=True)
     scene_event_notes = models.TextField(max_length=300, null=True, blank=True)
@@ -83,6 +91,10 @@ class SketchItem(models.Model):
     sketch_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
     sketch_property_to_scene = models.ForeignKey(
         SceneItem, on_delete=models.CASCADE, default='')
+    #test
+    sketch_property_to_director = models.ForeignKey(
+        User, on_delete=models.CASCADE, default='')
+    #endtest
     sketch_creation_date = models.DateTimeField(auto_now_add=True)
     sketch_updated_date = models.DateTimeField(auto_now=True)
     sketch_directors_comment = models.CharField(

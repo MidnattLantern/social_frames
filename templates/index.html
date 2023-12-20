@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 {% load crispy_forms_tags %}
-<h1>Your projects</h1>
+<h1>Projects</h1>
 <!-- Note for all views: any content is only accessible when signed in -->
 {% if user.is_authenticated %}
 <p>Animation team: {{ user.username }}</p>
@@ -15,7 +15,7 @@
 <br>
 {% endif %}
 
-{% if user.is_authenticated %}  {% for i in project_item %}
+  {% for i in project_item %}
 <a href="{% url 'project_url_path' i.project_slug %}">
   <!-- project name -->
   {{ i.project_name }}
@@ -23,10 +23,13 @@
 <br>
 
 <!-- delete form -->
-<form action="" method="POST">
-  {% csrf_token %} {{ delete_project_item | crispy }}
-  <button type="submit" name="delete_project" value="{{ i.project_slug }}">Delete project</button>
-</form>
+<div>
+  <form action="" method="POST">
+    {% csrf_token %} {{ delete_project_item | crispy }}
+    <button class="delete-button" type="submit" name="delete_project" value="{{ i.project_slug }}">Delete project</button>
+  </form>
+</div>
+
 
 <hr>
 <br>
@@ -41,8 +44,5 @@
   <button type="submit" class="btn btn-signup btn-lg">Create project</button>
 </form>
 </div>
-
-
-{% endif %}
 
 {% endblock %}

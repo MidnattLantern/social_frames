@@ -6,7 +6,10 @@ from .models import ProjectItem, EpisodeItem, SceneItem
 from .models import SketchItem
 # .forms
 from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
-from .forms import CreateSketchItem, CreateSketchItemComment
+from .forms import CreateSketchItem
+
+
+
 import cloudinary.uploader
 # authentication to lock out wrong users
 from django.contrib.auth.decorators import login_required
@@ -57,7 +60,8 @@ class RenderHomeView(View, LoginRequiredMixin):
 class RenderProjectView(View, LoginRequiredMixin):
     def get (self, request, project_slug, *args, **kwargs):
         project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
-        episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item)
+        #users with access to link can't access to other teams episode(s)
+        episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item, episode_property_to_director=request.user)
         return render(
             request,
             'project_view.html',
@@ -69,11 +73,13 @@ class RenderProjectView(View, LoginRequiredMixin):
         )
     def post (self, request, project_slug, *args, **kwargs):
         project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
-        episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item)
+        #users with access to link can't access to other teams episode(s)
+        episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item, episode_property_to_director=request.user)
         episode_item_form = CreateEpisodeItem(data=request.POST)
         if episode_item_form.is_valid():
             episode = episode_item_form.save(commit=False)
             episode.episode_property_to_project = project_item
+            episode.episode_property_to_director = request.user
             episode.post = episode_item
             episode.save()
         else:
