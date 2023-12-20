@@ -4,14 +4,6 @@ from .models import ProjectItem, EpisodeItem, SceneItem
 from .models import SketchItem
 
 
-""" DRY template:
-class Create<name>(forms.ModelForm):
-    class Meta:
-        model: <name>
-        fields = ()
-"""
-
-
 class CreateProjectItem(forms.ModelForm):
     class Meta:
         model = ProjectItem
@@ -35,10 +27,9 @@ class CreateEpisodeItem(forms.ModelForm):
 class CreateSceneItem(forms.ModelForm):
     class Meta:
         model = SceneItem
-        fields = ['scene_name', 'scene_slug', 'scene_property_to_episode', 'scene_chronology', 'scene_event_notes',]
+        fields = ['scene_name', 'scene_slug', 'scene_chronology', 'scene_event_notes',]
         labels = {'scene_name': 'Scene name',
                   'scene_slug': 'Link name',
-                  'scene_property_to_episode': 'Episode',
                   'scene_chronology': 'Chronology',
                   'scene_event_notes': 'Scene event notes'
                   }
@@ -47,11 +38,10 @@ class CreateSceneItem(forms.ModelForm):
 class CreateSketchItem(forms.ModelForm):
     class Meta:
         model = SketchItem
-        fields = ['sketch_name', 'sketch_slug', 'sketch_image', 'sketch_property_to_scene', 'sketch_artist',]
+        fields = ['sketch_name', 'sketch_slug', 'sketch_image', 'sketch_artist',]
         labels = {'sketch_name': 'Sketch name',
                   'sketch_slug': 'Link name',
                   'sketch_image': 'JPG/ PNG',
-                  'scene_property_to_episode': 'Scene',
                   'sketch_artist': 'Artist',
                   }
 

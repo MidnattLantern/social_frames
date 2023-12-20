@@ -33,6 +33,7 @@ class RenderHomeView(View, LoginRequiredMixin):
         project_item_form = CreateProjectItem(data=request.POST)
         if project_item_form.is_valid():
             project = project_item_form.save(commit=False)
+            project.project_property_to_director = request.user
             project.post = project_item
             project.save()
         else:
@@ -113,6 +114,7 @@ class RenderEpisodeView(View, LoginRequiredMixin):
         scene_item_form = CreateSceneItem(data=request.POST)
         if scene_item_form.is_valid():
             scene = scene_item_form.save(commit=False)
+            scene.scene_property_to_episode = episode_item
             scene.post = scene_item
             scene.save()
         else:
@@ -153,6 +155,7 @@ class RenderSceneView(View, LoginRequiredMixin):
         sketch_item_form = CreateSketchItem(request.POST, request.FILES)
         if sketch_item_form.is_valid():
             sketch = sketch_item_form.save(commit=False)
+            sketch.sketch_property_to_scene = scene_item
             sketch.post = sketch_item
             sketch.save()
         else:
