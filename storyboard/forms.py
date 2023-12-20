@@ -32,6 +32,11 @@ class CreateSceneItem(forms.ModelForm):
                   'scene_chronology': 'Chronology',
                   'scene_event_notes': 'Scene event notes'
                   }
+# tutor assistane
+class EditSceneItem(forms.ModelForm):
+    class Meta:
+        model = SceneItem
+        fields = ['scene_name', 'scene_chronology', 'scene_event_notes',]
 
 
 class CreateSketchItem(forms.ModelForm):
@@ -43,7 +48,6 @@ class CreateSketchItem(forms.ModelForm):
                   'sketch_image': 'JPG/ PNG',
                   'sketch_artist': 'Artist',
                   }
-
 
 
 class CreateSketchItemComment(forms.ModelForm):

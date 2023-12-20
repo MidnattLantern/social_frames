@@ -46,7 +46,7 @@ class EpisodeItem(models.Model):
     episode_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=False)
     episode_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
-    #episode_property_to_... create authorisation for episode items
+    # episode_property_to_... create authorisation for episode items
     episode_property_to_project = models.ForeignKey(
         ProjectItem, on_delete=models.CASCADE, default='', null=True,
         blank=True)
@@ -67,12 +67,11 @@ class SceneItem(models.Model):
     scene_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=False)
     scene_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
+    # scene_property_to_... create authorisation for episode items
     scene_property_to_episode = models.ForeignKey(
         EpisodeItem, on_delete=models.CASCADE, default='')
-    #test
     scene_property_to_director = models.ForeignKey(
         User, on_delete=models.CASCADE, default='')
-    #endtest
     scene_creation_date = models.DateTimeField(auto_now_add=True)
     scene_updated_date = models.DateTimeField(auto_now=True)
     scene_event_notes = models.TextField(max_length=300, null=True, blank=True)
@@ -88,12 +87,11 @@ class SketchItem(models.Model):
     sketch_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=False)
     sketch_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
+    # scene_property_to_... create authorisation for episode items
     sketch_property_to_scene = models.ForeignKey(
         SceneItem, on_delete=models.CASCADE, default='')
-    #test
     sketch_property_to_director = models.ForeignKey(
         User, on_delete=models.CASCADE, default='')
-    #endtest
     sketch_creation_date = models.DateTimeField(auto_now_add=True)
     sketch_updated_date = models.DateTimeField(auto_now=True)
     sketch_directors_comment = models.CharField(

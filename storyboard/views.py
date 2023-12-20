@@ -7,6 +7,7 @@ from .models import SketchItem
 # .forms
 from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
 from .forms import CreateSketchItem
+from .forms import EditSceneItem
 
 
 
@@ -117,6 +118,8 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 'episode_item': episode_item,
                 'scene_item': scene_item,
                 'create_scene_item': CreateSceneItem(),
+                # test
+                'edit_scene_item': EditSceneItem(),
             },
         )
     def post (self, request, episode_slug, *args, **kwargs):
@@ -137,6 +140,14 @@ class RenderEpisodeView(View, LoginRequiredMixin):
             delete_scene_slug = request.POST.get('delete_scene')
             delete_scene = SceneItem.objects.get(scene_slug=delete_scene_slug)
             delete_scene.delete()
+        # tutor assistance
+        edit_scene_item_form = EditSceneItem(data=request.POST)
+        if 'edit_scene' in request.POST:
+            if edit_scene_item_form.is_valid():
+                edit_scene_slug = request.POST.get('edit_scene')
+                edit_scene = SceneItem.objects.get(scene_slug=edit_scene_slug)
+                edit_scene.save()
+            
         return render(
             request,
             'episode_view.html',
@@ -144,6 +155,8 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 'episode_item': episode_item,
                 'scene_item': scene_item,
                 'create_scene_item': CreateSceneItem(),
+                # tutor assistance
+                'edit_scene_item': EditSceneItem(),
             },
         )
 
