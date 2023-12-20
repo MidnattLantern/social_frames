@@ -25,10 +25,9 @@ class CreateProjectItem(forms.ModelForm):
 class CreateEpisodeItem(forms.ModelForm):
     class Meta:
         model = EpisodeItem
-        fields = ['episode_name', 'episode_slug', 'episode_property_to_project', 'episode_chronology',]
+        fields = ['episode_name', 'episode_slug', 'episode_chronology',]
         labels = {'episode_name': 'Episode name',
                   'episode_slug': 'Link name',
-                  'episode_property_to_project': 'Project',
                   'episode_chronology': 'Chronology',
                   }
 

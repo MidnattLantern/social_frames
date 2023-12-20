@@ -10,12 +10,14 @@ from .forms import CreateSketchItem, CreateSketchItemComment
 import cloudinary.uploader
 # authentication to lock out wrong users
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 
 
 # user enter a project, expects to see episodes
+# request.USER for all
 @method_decorator(login_required, name='dispatch')
-class RenderHomeView(View):
+class RenderHomeView(View, LoginRequiredMixin):
     def get (self, request, *args, **kwargs):
         project_item = ProjectItem.objects.filter(project_property_to_director=request.user)
         return render(
@@ -51,7 +53,7 @@ class RenderHomeView(View):
 
 # user enter a project, expects to see episodes
 @method_decorator(login_required, name='dispatch')
-class RenderProjectView(View):
+class RenderProjectView(View, LoginRequiredMixin):
     def get (self, request, project_slug, *args, **kwargs):
         project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
         episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item)
@@ -67,10 +69,10 @@ class RenderProjectView(View):
     def post (self, request, project_slug, *args, **kwargs):
         project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
         episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item)
-
         episode_item_form = CreateEpisodeItem(data=request.POST)
         if episode_item_form.is_valid():
             episode = episode_item_form.save(commit=False)
+            episode.episode_property_to_project = project_item
             episode.post = episode_item
             episode.save()
         else:
@@ -92,7 +94,7 @@ class RenderProjectView(View):
 
 # user enter a episode, expects to see scenes
 @method_decorator(login_required, name='dispatch')
-class RenderEpisodeView(View):
+class RenderEpisodeView(View, LoginRequiredMixin):
     def get (self, request, episode_slug, *args, **kwargs):
         episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
         scene_item = SceneItem.objects.filter(scene_property_to_episode=episode_item)
@@ -131,7 +133,8 @@ class RenderEpisodeView(View):
 
 
 # user enter a scene, expects to see sketches
-class RenderSceneView(View):
+@method_decorator(login_required, name='dispatch')
+class RenderSceneView(View, LoginRequiredMixin):
     def get (self, request, scene_slug, *args, **kwargs):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
         sketch_item = SketchItem.objects.filter(sketch_property_to_scene=scene_item)
