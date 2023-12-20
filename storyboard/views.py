@@ -22,6 +22,7 @@ from django.utils.decorators import method_decorator
 @method_decorator(login_required, name='dispatch')
 class RenderHomeView(View, LoginRequiredMixin):
     def get (self, request, *args, **kwargs):
+        #restricts unauthorised accounts from accessing other accounts item(s)
         project_item = ProjectItem.objects.filter(project_property_to_director=request.user)
         return render(
             request,
@@ -32,6 +33,7 @@ class RenderHomeView(View, LoginRequiredMixin):
             },
         )
     def post (self, request, *args, **kwargs):
+        #restricts unauthorised accounts from accessing other accounts item(s)
         project_item = ProjectItem.objects.filter(project_property_to_director=request.user)
         project_item_form = CreateProjectItem(data=request.POST)
         if project_item_form.is_valid():
@@ -106,7 +108,8 @@ class RenderProjectView(View, LoginRequiredMixin):
 class RenderEpisodeView(View, LoginRequiredMixin):
     def get (self, request, episode_slug, *args, **kwargs):
         episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
-        scene_item = SceneItem.objects.filter(scene_property_to_episode=episode_item)
+        #restricts unauthorised accounts from accessing other accounts item(s)
+        scene_item = SceneItem.objects.filter(scene_property_to_episode=episode_item, scene_property_to_director=request.user)
         return render(
             request,
             'episode_view.html',
@@ -150,7 +153,8 @@ class RenderEpisodeView(View, LoginRequiredMixin):
 class RenderSceneView(View, LoginRequiredMixin):
     def get (self, request, scene_slug, *args, **kwargs):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
-        sketch_item = SketchItem.objects.filter(sketch_property_to_scene=scene_item)
+        #restricts unauthorised accounts from accessing other accounts item(s)
+        sketch_item = SketchItem.objects.filter(sketch_property_to_scene=scene_item, sketch_property_to_director=request.user)
         return render(
             request,
             'scene_view.html',
@@ -166,14 +170,17 @@ class RenderSceneView(View, LoginRequiredMixin):
         sketch_item_form = CreateSketchItem(request.POST, request.FILES)
         if sketch_item_form.is_valid():
             sketch = sketch_item_form.save(commit=False)
+            #scene_property_to_... create authorisation for episode items
             sketch.sketch_property_to_scene = scene_item
+            sketch.sketch_property_to_director = request.user
             sketch.post = sketch_item
             sketch.save()
         else:
             sketch_item_form = CreateSketchItem()
         if 'delete_sketch' in request.POST:
             delete_sketch_slug = request.POST.get('delete_sketch')
-            delete_sketch = SketchItem.objects.get(sketch_slug=delete_sketch_slug)
+            #restricts unauthorised accounts from accessing other accounts item(s)
+            delete_sketch = SketchItem.objects.get(sketch_slug=delete_sketch_slug, sketch_property_to_director=request.user)
             delete_sketch.delete()
 
         return render(
