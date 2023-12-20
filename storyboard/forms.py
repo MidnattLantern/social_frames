@@ -7,10 +7,9 @@ from .models import SketchItem
 class CreateProjectItem(forms.ModelForm):
     class Meta:
         model = ProjectItem
-        fields = ['project_name', 'project_slug', 'project_property_to_director',]
+        fields = ['project_name', 'project_slug',]
         labels = {'project_name': 'Project name',
                   'project_slug': 'Link name',
-                  'project_property_to_director': 'Animation team',
                   }
 
 
