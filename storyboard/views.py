@@ -36,6 +36,7 @@ class RenderHomeView(View, LoginRequiredMixin):
         project_item_form = CreateProjectItem(data=request.POST)
         if project_item_form.is_valid():
             project = project_item_form.save(commit=False)
+            #project_property_to_... create authorisation for project items
             project.project_property_to_director = request.user
             project.post = project_item
             project.save()
@@ -60,7 +61,7 @@ class RenderHomeView(View, LoginRequiredMixin):
 class RenderProjectView(View, LoginRequiredMixin):
     def get (self, request, project_slug, *args, **kwargs):
         project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
-        #users with access to link can't access to other teams episode(s)
+        #restricts unauthorised accounts from accessing other accounts item(s)
         episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item, episode_property_to_director=request.user)
         return render(
             request,
@@ -73,11 +74,12 @@ class RenderProjectView(View, LoginRequiredMixin):
         )
     def post (self, request, project_slug, *args, **kwargs):
         project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
-        #users with access to link can't access to other teams episode(s)
+        #restricts unauthorised accounts from accessing other accounts item(s)
         episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item, episode_property_to_director=request.user)
         episode_item_form = CreateEpisodeItem(data=request.POST)
         if episode_item_form.is_valid():
             episode = episode_item_form.save(commit=False)
+            #episode_property_to_... create authorisation for episode items
             episode.episode_property_to_project = project_item
             episode.episode_property_to_director = request.user
             episode.post = episode_item
@@ -116,11 +118,14 @@ class RenderEpisodeView(View, LoginRequiredMixin):
         )
     def post (self, request, episode_slug, *args, **kwargs):
         episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
-        scene_item = SceneItem.objects.filter(scene_property_to_episode=episode_item)
+        #restricts unauthorised accounts from accessing other accounts item(s)
+        scene_item = SceneItem.objects.filter(scene_property_to_episode=episode_item, scene_property_to_director=request.user)
         scene_item_form = CreateSceneItem(data=request.POST)
         if scene_item_form.is_valid():
             scene = scene_item_form.save(commit=False)
+            #scene_property_to_... create authorisation for episode items
             scene.scene_property_to_episode = episode_item
+            scene.scene_property_to_director = request.user
             scene.post = scene_item
             scene.save()
         else:

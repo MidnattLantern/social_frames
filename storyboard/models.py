@@ -46,13 +46,12 @@ class EpisodeItem(models.Model):
     episode_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=False)
     episode_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
+    #episode_property_to_... create authorisation for episode items
     episode_property_to_project = models.ForeignKey(
         ProjectItem, on_delete=models.CASCADE, default='', null=True,
         blank=True)
-    #test
     episode_property_to_director = models.ForeignKey(
         User, on_delete=models.CASCADE, default='')
-    #endtest
     episode_creation_date = models.DateTimeField(auto_now_add=True)
     episode_updated_date = models.DateTimeField(auto_now=True)
 
