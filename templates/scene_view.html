@@ -18,6 +18,28 @@
     <p>Artist: {{ i.sketch_artist }}</p>
 </div>
 <p>Sketch: {{ i.sketch_name }} </p>
+<p>director's comment:</p>
+<p>{{ i.sketch_directors_comment }}</p>
+
+<!-- edit form -->
+<div class="new_item_styling">
+  <p>Edit {{ i.sketch_name }}</p>
+  <form method="post">
+    {{ edit_sketch_item | crispy }}
+    {% csrf_token %}
+    <button type="submit" name="edit_sketch" value="{{ i.sketch_slug }}">Save changes</button>
+  </form>
+</div>
+
+<!-- comment form -->
+<div class="new_item_styling">
+  <p>Comment {{ i.sketch_name }}</p>
+  <form method="post">
+    {{ comment_sketch_item | crispy }}
+    {% csrf_token %}
+    <button type="submit" name="comment_sketch" value="{{ i.sketch_slug }}">Save comment</button>
+  </form>
+</div>
 
 <!-- delete form -->
 <form action="" method="POST">

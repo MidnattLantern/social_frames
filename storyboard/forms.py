@@ -36,7 +36,11 @@ class CreateSceneItem(forms.ModelForm):
 class EditSceneItem(forms.ModelForm):
     class Meta:
         model = SceneItem
-        fields = ['scene_name', 'scene_event_notes',]
+        fields = ['scene_name', 'scene_chronology', 'scene_event_notes',]
+        labels = {'scene_name': 'Scene name',
+                  'scene_chronology': 'Chronology',
+                  'scene_event_notes': 'Scene event notes'
+                  }
 
 
 class CreateSketchItem(forms.ModelForm):
@@ -48,9 +52,17 @@ class CreateSketchItem(forms.ModelForm):
                   'sketch_image': 'JPG/ PNG (max 3MB)',
                   'sketch_artist': 'Artist',
                   }
-
-
-class CreateSketchItemComment(forms.ModelForm):
+# Edit sketch item
+class EditSketchItem(forms.ModelForm):
+    class Meta:
+        model = SketchItem
+        fields = ['sketch_name',]
+        labels = {'sketch_name': 'Edit sketch name',
+                  }
+# Edit sketch item
+class CommentSketchItem(forms.ModelForm):
     class Meta:
         model = SketchItem
         fields = ['sketch_directors_comment',]
+        labels = {'sketch_directors_comment': 'Comment',
+                  }

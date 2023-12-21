@@ -5,12 +5,12 @@ from django.views.generic.edit import UpdateView
 # .models
 from .models import ProjectItem, EpisodeItem, SceneItem
 from .models import SketchItem
-# .forms
+# .forms that create new objects
 from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
 from .forms import CreateSketchItem
-from .forms import EditSceneItem
-
-
+# .forms that edit existing objects
+from .forms import EditSceneItem, EditSketchItem
+from .forms import CommentSketchItem
 
 import cloudinary.uploader
 # authentication to lock out wrong users
@@ -119,7 +119,6 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 'episode_item': episode_item,
                 'scene_item': scene_item,
                 'create_scene_item': CreateSceneItem(),
-                # test
                 'edit_scene_item': EditSceneItem(),
             },
         )
@@ -148,7 +147,6 @@ class RenderEpisodeView(View, LoginRequiredMixin):
             if 'edit_scene' in request.POST:
                 edit_scene_slug = request.POST.get('edit_scene')
                 edit_scene = SceneItem.objects.get(scene_slug=edit_scene_slug)
-                edit_scene.scene_event_notes = edit_scene_item_form.cleaned_data.get('scene_event_notes')
                 edit_scene.scene_name = edit_scene_item_form.cleaned_data.get('scene_name')
                 edit_scene.save()
 
@@ -159,17 +157,17 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 'episode_item': episode_item,
                 'scene_item': scene_item,
                 'create_scene_item': CreateSceneItem(),
-                # tutor assistance
                 'edit_scene_item': EditSceneItem(),
             },
         )
 
 #test
+"""
 class UpdateSceneItem(UpdateView):
     model = SceneItem
     form_class = CreateSceneItem
     template_name = 'episode.html'
-
+"""
 
 # user enter a scene, expects to see sketches
 @method_decorator(login_required, name='dispatch')
@@ -185,6 +183,8 @@ class RenderSceneView(View, LoginRequiredMixin):
                 'scene_item': scene_item,
                 'sketch_item': sketch_item,
                 'create_sketch_item': CreateSketchItem(),
+                'edit_sketch_item': EditSketchItem(),
+                'comment_sketch_item': CommentSketchItem(),
             },
         )
     def post (self, request, scene_slug, *args, **kwargs):
@@ -205,6 +205,22 @@ class RenderSceneView(View, LoginRequiredMixin):
             #restricts unauthorised accounts from accessing other accounts item(s)
             delete_sketch = SketchItem.objects.get(sketch_slug=delete_sketch_slug, sketch_property_to_director=request.user)
             delete_sketch.delete()
+        # U in "CRUD"
+        edit_sketch_item_form = EditSketchItem(data=request.POST)
+        if edit_sketch_item_form.is_valid():
+            if 'edit_sketch' in request.POST:
+                edit_sketch_slug = request.POST.get('edit_sketch')
+                edit_sketch = SketchItem.objects.get(sketch_slug=edit_sketch_slug)
+                edit_sketch.sketch_name = edit_sketch_item_form.cleaned_data.get('sketch_name')
+                edit_sketch.save()
+        # U in "CRUD"
+        comment_sketch_item_form = CommentSketchItem(data=request.POST)
+        if comment_sketch_item_form.is_valid():
+            if 'comment_sketch' in request.POST:
+                comment_sketch_slug = request.POST.get('comment_sketch')
+                comment_sketch = SketchItem.objects.get(sketch_slug=comment_sketch_slug)
+                comment_sketch.sketch_directors_comment = comment_sketch_item_form.cleaned_data.get('sketch_directors_comment')
+                comment_sketch.save()
 
         return render(
             request,
@@ -213,6 +229,7 @@ class RenderSceneView(View, LoginRequiredMixin):
                 'scene_item': scene_item,
                 'sketch_item': sketch_item,
                 'create_sketch_item': CreateSketchItem(),
-
+                'edit_sketch_item': EditSketchItem(),
+                'comment_sketch_item': CommentSketchItem(),
             },
         )
