@@ -11,6 +11,13 @@ class CreateProjectItem(forms.ModelForm):
         labels = {'project_name': 'Project name',
                   'project_slug': 'Link name (no spaces)',
                   }
+# Edit project item
+class EditProjectItem(forms.ModelForm):
+    class Meta:
+        model = ProjectItem
+        fields = ['project_name',]
+        labels = {'project_name': 'project_name'
+                  }
 
 
 class CreateEpisodeItem(forms.ModelForm):

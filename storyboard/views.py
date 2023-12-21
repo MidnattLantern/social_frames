@@ -10,6 +10,7 @@ from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
 from .forms import CreateSketchItem
 # .forms that edit existing objects
 from .forms import EditSceneItem, EditSketchItem, EditEpisodeItem
+from .forms import EditProjectItem
 from .forms import CommentSketchItem
 
 import cloudinary.uploader
@@ -32,6 +33,7 @@ class RenderHomeView(View, LoginRequiredMixin):
             {
                 'project_item': project_item,
                 'create_project_item': CreateProjectItem(),
+                'edit_project_item': EditProjectItem(),
             },
         )
     def post (self, request, *args, **kwargs):
@@ -52,6 +54,15 @@ class RenderHomeView(View, LoginRequiredMixin):
             delete_project_slug = request.POST.get('delete_project')
             delete_project = ProjectItem.objects.get(project_slug=delete_project_slug)
             delete_project.delete()
+        
+        # U in "CRUD"
+        edit_project_item_form = EditProjectItem(data=request.POST)
+        if edit_project_item_form.is_valid():
+            if 'edit_project' in request.POST:
+                edit_project_slug = request.POST.get('edit_project')
+                edit_project = ProjectItem.objects.get(project_slug=edit_project_slug)
+                edit_project.project_name = edit_project_item_form.cleaned_data.get('project_name')
+                edit_project.save()
 
         return render(
             request,
@@ -59,6 +70,7 @@ class RenderHomeView(View, LoginRequiredMixin):
             {
                 'project_item': project_item,
                 'create_project_item': CreateProjectItem(),
+                'edit_project_item': EditProjectItem(),
             },
         )         
 
