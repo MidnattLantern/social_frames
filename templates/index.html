@@ -3,8 +3,9 @@
 <h1>Projects</h1>
 <!-- Note for all views: any content is only accessible when signed in -->
 {% if user.is_authenticated %}
-<p>Animation team: {{ user.username }}</p>
-<a href="{% url 'account_logout' %}">sign out</a>
+<!-- this <p> mimics Finder so that the user purpose feels familiar -->
+<p><a href="{% url 'account_logout' %}">{{ user.username }}</a> / <strong>Projects</strong></p>
+
 <hr>
 <br>
 <!-- Display if not signed in -->

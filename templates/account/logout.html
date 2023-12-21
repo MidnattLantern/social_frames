@@ -4,10 +4,13 @@
     {% trans "Sign Out" %}
 {% endblock head_title %}
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Out" %}
-    {% endelement %}
-    <p>{% trans 'Are you sure you want to sign out?' %}</p>
+<h1>{{ user.username }}</h1>
+<!-- this <p> mimics Finder so that the user purpose feels familiar -->
+<p><strong>{{ user.username }}</strong></p>
+<hr>
+<a href="{% url 'home_url_path' %}">View projects</a>
+<hr>
+<br>
     {% url 'account_logout' as action_url %}
     {% element form method="post" action=action_url no_visible_fields=True %}
         {% slot body %}
