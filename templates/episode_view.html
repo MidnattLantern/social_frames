@@ -21,12 +21,12 @@
 <p>Scene notes: <br> {{ i.scene_event_notes }} </p>
 
 <!-- edit form (tutor assistance) -->
-<div>
-  <p>Edit scene</p>
+<div class="new_item_styling">
+  <p>Edit {{ i.scene_name }}</p>
   <form method="post">
     {{ edit_scene_item | crispy }}
     {% csrf_token %}
-    <button type="submit" name="edit_scene" value="{{ i.ecene_slug }}">Save changes</button>
+    <button type="submit" name="edit_scene" value="{{ i.scene_slug }}">Save changes</button>
   </form>
 </div>
 

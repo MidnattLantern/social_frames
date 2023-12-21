@@ -36,7 +36,7 @@ class CreateSceneItem(forms.ModelForm):
 class EditSceneItem(forms.ModelForm):
     class Meta:
         model = SceneItem
-        fields = ['scene_name', 'scene_chronology', 'scene_event_notes',]
+        fields = ['scene_event_notes',]
 
 
 class CreateSketchItem(forms.ModelForm):

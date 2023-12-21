@@ -1,6 +1,7 @@
 # 3rd party
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
+from django.views.generic.edit import UpdateView
 # .models
 from .models import ProjectItem, EpisodeItem, SceneItem
 from .models import SketchItem
@@ -136,18 +137,20 @@ class RenderEpisodeView(View, LoginRequiredMixin):
             scene.save()
         else:
             scene_item_form = CreateSceneItem()
+        # D in "CRUD"
         if 'delete_scene' in request.POST:
             delete_scene_slug = request.POST.get('delete_scene')
             delete_scene = SceneItem.objects.get(scene_slug=delete_scene_slug)
             delete_scene.delete()
-        # tutor assistance
+        # U in "CRUD"
         edit_scene_item_form = EditSceneItem(data=request.POST)
-        if 'edit_scene' in request.POST:
-            if edit_scene_item_form.is_valid():
+        if edit_scene_item_form.is_valid():
+            if 'edit_scene' in request.POST:
                 edit_scene_slug = request.POST.get('edit_scene')
                 edit_scene = SceneItem.objects.get(scene_slug=edit_scene_slug)
+                edit_scene.scene_event_notes = edit_scene_item_form.cleaned_data.get('scene_event_notes')
                 edit_scene.save()
-            
+
         return render(
             request,
             'episode_view.html',
@@ -159,6 +162,12 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 'edit_scene_item': EditSceneItem(),
             },
         )
+
+#test
+class UpdateSceneItem(UpdateView):
+    model = SceneItem
+    form_class = CreateSceneItem
+    template_name = 'episode.html'
 
 
 # user enter a scene, expects to see sketches
