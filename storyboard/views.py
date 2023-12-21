@@ -149,6 +149,7 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 edit_scene_slug = request.POST.get('edit_scene')
                 edit_scene = SceneItem.objects.get(scene_slug=edit_scene_slug)
                 edit_scene.scene_event_notes = edit_scene_item_form.cleaned_data.get('scene_event_notes')
+                edit_scene.scene_name = edit_scene_item_form.cleaned_data.get('scene_name')
                 edit_scene.save()
 
         return render(
