@@ -21,6 +21,14 @@ class CreateEpisodeItem(forms.ModelForm):
                   'episode_slug': 'Link name (no spaces)',
                   'episode_chronology': 'Chronology',
                   }
+# Edit episode item
+class EditEpisodeItem(forms.ModelForm):
+    class Meta:
+        model = EpisodeItem
+        fields = ['episode_name', 'episode_chronology',]
+        labels = {'episode_name': 'Episode name',
+                  'episode_chronology': 'Chronology'
+                  }
 
 
 class CreateSceneItem(forms.ModelForm):

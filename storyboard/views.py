@@ -9,7 +9,7 @@ from .models import SketchItem
 from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
 from .forms import CreateSketchItem
 # .forms that edit existing objects
-from .forms import EditSceneItem, EditSketchItem
+from .forms import EditSceneItem, EditSketchItem, EditEpisodeItem
 from .forms import CommentSketchItem
 
 import cloudinary.uploader
@@ -46,10 +46,13 @@ class RenderHomeView(View, LoginRequiredMixin):
             project.save()
         else:
             project_item_form = CreateProjectItem()
+
+        # D in "CRUD"
         if 'delete_project' in request.POST:
             delete_project_slug = request.POST.get('delete_project')
             delete_project = ProjectItem.objects.get(project_slug=delete_project_slug)
             delete_project.delete()
+
         return render(
             request,
             'index.html',
@@ -74,6 +77,7 @@ class RenderProjectView(View, LoginRequiredMixin):
                 'project_item': project_item,
                 'episode_item': episode_item,
                 'create_episode_item': CreateEpisodeItem(),
+                'edit_episode_item': EditEpisodeItem(),
             },
         )
     def post (self, request, project_slug, *args, **kwargs):
@@ -90,10 +94,23 @@ class RenderProjectView(View, LoginRequiredMixin):
             episode.save()
         else:
             episode_item_form = CreateEpisodeItem()
+
+        # D in "CRUD"
         if 'delete_episode' in request.POST:
             delete_episode_slug = request.POST.get('delete_episode')
             delete_episode = EpisodeItem.objects.get(episode_slug=delete_episode_slug)
             delete_episode.delete()
+        
+        # U in "CRUD"
+        edit_episode_item_form = EditEpisodeItem(data=request.POST)
+        if edit_episode_item_form.is_valid():
+            if 'edit_episode' in request.POST:
+                edit_episode_slug = request.POST.get('edit_episode')
+                edit_episode = EpisodeItem.objects.get(episode_slug=edit_episode_slug)
+                edit_episode.episode_name = edit_episode_item_form.cleaned_data.get('episode_name')
+                edit_episode.episode_chronology = edit_episode_item_form.cleaned_data.get('episode_chronology')
+                edit_episode.save()
+
         return render(
             request,
             'project_view.html',
@@ -101,6 +118,7 @@ class RenderProjectView(View, LoginRequiredMixin):
                 'project_item': project_item,
                 'episode_item': episode_item,
                 'create_episode_item': CreateEpisodeItem(),
+                'edit_episode_item': EditEpisodeItem(),
             },
         )
 
@@ -136,11 +154,13 @@ class RenderEpisodeView(View, LoginRequiredMixin):
             scene.save()
         else:
             scene_item_form = CreateSceneItem()
+
         # D in "CRUD"
         if 'delete_scene' in request.POST:
             delete_scene_slug = request.POST.get('delete_scene')
             delete_scene = SceneItem.objects.get(scene_slug=delete_scene_slug)
             delete_scene.delete()
+
         # U in "CRUD"
         edit_scene_item_form = EditSceneItem(data=request.POST)
         if edit_scene_item_form.is_valid():
@@ -200,11 +220,14 @@ class RenderSceneView(View, LoginRequiredMixin):
             sketch.save()
         else:
             sketch_item_form = CreateSketchItem()
+
+        # D in "CRUD"
         if 'delete_sketch' in request.POST:
             delete_sketch_slug = request.POST.get('delete_sketch')
             #restricts unauthorised accounts from accessing other accounts item(s)
             delete_sketch = SketchItem.objects.get(sketch_slug=delete_sketch_slug, sketch_property_to_director=request.user)
             delete_sketch.delete()
+
         # U in "CRUD"
         edit_sketch_item_form = EditSketchItem(data=request.POST)
         if edit_sketch_item_form.is_valid():
@@ -213,6 +236,7 @@ class RenderSceneView(View, LoginRequiredMixin):
                 edit_sketch = SketchItem.objects.get(sketch_slug=edit_sketch_slug)
                 edit_sketch.sketch_name = edit_sketch_item_form.cleaned_data.get('sketch_name')
                 edit_sketch.save()
+
         # U in "CRUD"
         comment_sketch_item_form = CommentSketchItem(data=request.POST)
         if comment_sketch_item_form.is_valid():

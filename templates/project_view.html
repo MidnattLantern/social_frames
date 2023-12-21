@@ -17,6 +17,16 @@
 </a>
 <br>
 
+<!-- edit form -->
+<div class="new_item_styling">
+  <p>Edit {{ i.episode_name }}</p>
+  <form method="post">
+    {{ edit_episode_item | crispy }}
+    {% csrf_token %}
+    <button type="submit" name="edit_episode" value="{{ i.episode_slug }}">Save changes</button>
+  </form>
+</div>
+
 <!-- delete form -->
 <form action="" method="POST">
   {% csrf_token %} {{ delete_episode_item | crispy }}
