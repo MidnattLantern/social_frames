@@ -101,6 +101,10 @@ Sketch View
 - The user can upload JP(E)G or PNG maximum of 1 MB. Storyboard artists in the animation industry never need high resolution images, so to prevent massive unneccessary storage space, Cloudyboard will check the image and reject if the file is bigger than 1 MB. Cloudyboard reckon that people within the industry have the tools and know how to resize JP(E)Gs and PNGs.
 - What if you create a new sketch with the same name as an existing? Cloudyboard use `IntegrityError` to prevent duplicate slugs.
 
+Scene View
+------
+- Scene is a CRUD page, views.py use if statements for the C, U, and D to know which of these action they want to perform. for example: `if 'add_episode' in request.POST:` without this if statement, the scene view could create a duplicate item when the user intend to rename a scene.
+
 Technical debt
 ======
 - Being my first time working with Django, I'm not familiar with what strings and blocks of code will eventually bite me in the tail. There are some mistakes I did spot but couldn't adress due to a deadline.

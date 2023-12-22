@@ -52,7 +52,7 @@
   <form method="post" style="margin-top: 1.3em;">
   {{ create_project_item | crispy }}
   {% csrf_token %}
-  <button type="submit" class="btn btn-signup btn-lg">Create project</button>
+  <button type="submit" class="btn btn-signup btn-lg" name="add_project">Create project</button>
 </form>
 </div>
 
