@@ -49,6 +49,9 @@ class RenderHomeView(View, LoginRequiredMixin):
             #project_property_to_... create authorisation for project items
             project.project_property_to_director = request.user
             project.post = project_item
+# test
+            project.project_slug = slugify(str(request.user)+"_"+str(project.project_name))
+# end test
             project.save()
         else:
             project_item_form = CreateProjectItem()
@@ -108,6 +111,9 @@ class RenderProjectView(View, LoginRequiredMixin):
             #episode_property_to_... create authorisation for episode items
             episode.episode_property_to_project = project_item
             episode.episode_property_to_director = request.user
+# test
+            episode.episode_slug = slugify(str(request.user)+"_"+str(episode.episode_name))
+# end test
             episode.post = episode_item
             episode.save()
         else:

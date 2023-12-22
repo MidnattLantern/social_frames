@@ -7,9 +7,8 @@ from .models import SketchItem
 class CreateProjectItem(forms.ModelForm):
     class Meta:
         model = ProjectItem
-        fields = ['project_name', 'project_slug',]
+        fields = ['project_name',]
         labels = {'project_name': 'Project name',
-                  'project_slug': 'Link name (no spaces)',
                   }
 # Edit project item
 class EditProjectItem(forms.ModelForm):
@@ -23,9 +22,8 @@ class EditProjectItem(forms.ModelForm):
 class CreateEpisodeItem(forms.ModelForm):
     class Meta:
         model = EpisodeItem
-        fields = ['episode_name', 'episode_slug', 'episode_chronology',]
+        fields = ['episode_name', 'episode_chronology',]
         labels = {'episode_name': 'Episode name',
-                  'episode_slug': 'Link name (no spaces)',
                   'episode_chronology': 'Chronology',
                   }
 # Edit episode item
