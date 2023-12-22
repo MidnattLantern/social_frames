@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 {% load crispy_forms_tags %}
-    <h1>Scenes</h1>
+    <h1>Scenes for {{ scene_4_header }}</h1>
 
 <!-- see models.py SceneItem() -->
 {% if user.is_authenticated %}
@@ -8,10 +8,6 @@
 <p><a href="{% url 'account_logout' %}">{{ user.username }}</a> / <a href="{% url 'home_url_path' %}">Projects</a> / <a href="{% url 'home_url_path' %}">Episodes</a> / <strong>Scenes</strong></p>
 <hr>
 <br>
-
-<!-- test -->
-<input type="text" name="slug_value" value="{{ test }}">
-<!-- endtest -->
 
 <table>
 <!-- see models.py EpisodeItem() -->

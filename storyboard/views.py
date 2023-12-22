@@ -37,6 +37,7 @@ class RenderHomeView(View, LoginRequiredMixin):
                 'project_item': project_item,
                 'create_project_item': CreateProjectItem(),
                 'edit_project_item': EditProjectItem(),
+                'project_4_header': str(request.user),
             },
         )
     def post (self, request, *args, **kwargs):
@@ -100,6 +101,7 @@ class RenderProjectView(View, LoginRequiredMixin):
                 'episode_item': episode_item,
                 'create_episode_item': CreateEpisodeItem(),
                 'edit_episode_item': EditEpisodeItem(),
+                'episode_4_header': str(project_item),
             },
         )
     def post (self, request, project_slug, *args, **kwargs):
@@ -167,9 +169,7 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 'scene_item': scene_item,
                 'create_scene_item': CreateSceneItem(),
                 'edit_scene_item': EditSceneItem(),
-# test filter away illegal slug symbols
-                'test': slugify(str(episode_item))
-# end test
+                'scene_4_header': str(episode_item),
             },
         )
     def post (self, request, episode_slug, *args, **kwargs):
@@ -295,5 +295,6 @@ class RenderSceneView(View, LoginRequiredMixin):
                 'create_sketch_item': CreateSketchItem(),
                 'edit_sketch_item': EditSketchItem(),
                 'comment_sketch_item': CommentSketchItem(),
+                'sketch_4_header': str(scene_item),
             },
         )
