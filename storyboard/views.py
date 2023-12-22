@@ -27,6 +27,7 @@ class RenderHomeView(View, LoginRequiredMixin):
     def get (self, request, *args, **kwargs):
         #restricts unauthorised accounts from accessing other accounts item(s)
         project_item = ProjectItem.objects.filter(project_property_to_director=request.user)
+
         return render(
             request,
             'index.html',
@@ -40,6 +41,8 @@ class RenderHomeView(View, LoginRequiredMixin):
         #restricts unauthorised accounts from accessing other accounts item(s)
         project_item = ProjectItem.objects.filter(project_property_to_director=request.user)
         project_item_form = CreateProjectItem(data=request.POST)
+
+        # C in "CRUD"
         if project_item_form.is_valid():
             project = project_item_form.save(commit=False)
             #project_property_to_... create authorisation for project items
@@ -97,6 +100,8 @@ class RenderProjectView(View, LoginRequiredMixin):
         #restricts unauthorised accounts from accessing other accounts item(s)
         episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item, episode_property_to_director=request.user)
         episode_item_form = CreateEpisodeItem(data=request.POST)
+
+        # C in "CRUD"
         if episode_item_form.is_valid():
             episode = episode_item_form.save(commit=False)
             #episode_property_to_... create authorisation for episode items
@@ -157,6 +162,8 @@ class RenderEpisodeView(View, LoginRequiredMixin):
         #restricts unauthorised accounts from accessing other accounts item(s)
         scene_item = SceneItem.objects.filter(scene_property_to_episode=episode_item, scene_property_to_director=request.user)
         scene_item_form = CreateSceneItem(data=request.POST)
+
+        # C in "CRUD"
         if scene_item_form.is_valid():
             scene = scene_item_form.save(commit=False)
             #scene_property_to_... create authorisation for episode items
@@ -208,6 +215,7 @@ class RenderSceneView(View, LoginRequiredMixin):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
         #restricts unauthorised accounts from accessing other accounts item(s)
         sketch_item = SketchItem.objects.filter(sketch_property_to_scene=scene_item, sketch_property_to_director=request.user)
+
         return render(
             request,
             'scene_view.html',
@@ -223,6 +231,8 @@ class RenderSceneView(View, LoginRequiredMixin):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
         sketch_item = SketchItem.objects.filter(sketch_property_to_scene=scene_item)
         sketch_item_form = CreateSketchItem(request.POST, request.FILES)
+
+        # C in "CRUD"
         if sketch_item_form.is_valid():
             sketch = sketch_item_form.save(commit=False)
             #scene_property_to_... create authorisation for episode items

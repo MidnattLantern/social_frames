@@ -1,5 +1,7 @@
 from django.db import models
 # additional
+from django.core.exceptions import ValidationError
+from django.core.validators import FileExtensionValidator
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
@@ -83,6 +85,13 @@ class SceneItem(models.Model):
         return self.scene_name
 
 
+# SketchItem, rejects images larger than 1 MB
+def validate_image_size(value):
+    limit = 1024 * 1024  # 1 MB
+    if value.size > limit:
+        raise ValidationError('File size cannot exceed 1 MB.')
+
+
 class SketchItem(models.Model):
     sketch_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=False)
@@ -100,7 +109,7 @@ class SketchItem(models.Model):
         max_length=50, null=False, blank=False, default='', unique=False)
     sketch_pin = models.BooleanField(default=False)
 #    sketch_image = CloudinaryField('image', default='')
-    sketch_image = models.ImageField(null=False, blank=False, upload_to='images/')
+    sketch_image = models.ImageField(null=False, blank=False, upload_to='images/', validators=[validate_image_size, FileExtensionValidator(['jpg', 'jpeg', 'png'])])
 
     class Meta:
         ordering = ['sketch_updated_date']
