@@ -213,13 +213,6 @@ class RenderEpisodeView(View, LoginRequiredMixin):
             },
         )
 
-#test
-"""
-class UpdateSceneItem(UpdateView):
-    model = SceneItem
-    form_class = CreateSceneItem
-    template_name = 'episode.html'
-"""
 
 # user enter scene_view.html, expects to see sketches
 @method_decorator(login_required, name='dispatch')
@@ -252,6 +245,9 @@ class RenderSceneView(View, LoginRequiredMixin):
             sketch.sketch_property_to_scene = scene_item
             sketch.sketch_property_to_director = request.user
             sketch.post = sketch_item
+# test
+            sketch.sketch_slug = slugify(str(request.user)+"_"+str(sketch.sketch_name))
+# end test
             sketch.save()
         else:
             sketch_item_form = CreateSketchItem()

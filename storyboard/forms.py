@@ -58,9 +58,8 @@ class EditSceneItem(forms.ModelForm):
 class CreateSketchItem(forms.ModelForm):
     class Meta:
         model = SketchItem
-        fields = ['sketch_name', 'sketch_slug', 'sketch_image', 'sketch_artist',]
+        fields = ['sketch_name', 'sketch_image', 'sketch_artist',]
         labels = {'sketch_name': 'Sketch name',
-                  'sketch_slug': 'Link name (no spaces)',
                   'sketch_image': 'JPG or PNG (max 1MB)',
                   'sketch_artist': 'Artist',
                   }
