@@ -41,9 +41,8 @@ class EditEpisodeItem(forms.ModelForm):
 class CreateSceneItem(forms.ModelForm):
     class Meta:
         model = SceneItem
-        fields = ['scene_name', 'scene_slug', 'scene_chronology', 'scene_event_notes',]
+        fields = ['scene_name', 'scene_chronology', 'scene_event_notes',]
         labels = {'scene_name': 'Scene name',
-                  'scene_slug': 'Link name (no spaces)',
                   'scene_chronology': 'Chronology',
                   'scene_event_notes': 'Scene event notes'
                   }

@@ -89,3 +89,18 @@ The sites initially rendered as functions, but was replaced with classes
 Inputs for adding and editing items are handled with crispy forms
 
 Cloudyboard use Pillow to handle sketch uploading and Cloudinary to store the sketches
+
+
+Features
+======
+
+Sketch View
+------
+- The user can name and rename their images.
+- The user can credit themselves but not edit it.
+- The user can upload JP(E)G or PNG maximum of 1 MB. Storyboard artists in the animation industry never need high resolution images, so to prevent massive unneccessary storage space, Cloudyboard will check the image and reject if the file is bigger than 1 MB. Cloudyboard reckon that people within the industry have the tools and know how to resize JP(E)Gs and PNGs.
+
+Technical debt
+======
+- Being my first time working with Django, I'm not familiar with what strings and blocks of code will eventually bite me in the tail. There are some mistakes I did spot but couldn't adress due to a deadline.
+- Project view as ´index.html´: Cloudyboard doesn't have a 'lounge' or 'home page', as it's deseigned to not have one. the Cloudyboard logo and index.html will lead to Project view as the default. If a 'lounge' or 'home' page should be introduced in the future, you'd first need to change the entire relationship to the project view.

@@ -7,7 +7,7 @@
 <!-- see models.py SketchItem() -->
 {% if user.is_authenticated %}
 <!-- this <p> mimics Finder so that the user purpose feels familiar -->
-<p><a href="{% url 'account_logout' %}">{{ user.username }}</a>  / <a href="{% url 'home_url_path' %}">Projects</a> / Episodes / Scenes / <strong>Sketches</strong></p>
+<p><a href="{% url 'account_logout' %}">{{ user.username }}</a>  / <a href="{% url 'home_url_path' %}">Projects</a> / <a href="{% url 'home_url_path' %}">Episodes</a> / <a href="{% url 'home_url_path' %}">Scenes</a> / <strong>Sketches</strong></p>
 <br>
 <hr>
 {% for i in sketch_item %}

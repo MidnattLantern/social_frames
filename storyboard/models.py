@@ -108,7 +108,7 @@ class SketchItem(models.Model):
     sketch_artist = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=False)
     sketch_pin = models.BooleanField(default=False)
-#    sketch_image = CloudinaryField('image', default='')
+    # sketch_image rejects more than 1MB and non JP(E)Gs and PNGs
     sketch_image = models.ImageField(null=False, blank=False, upload_to='images/', validators=[validate_image_size, FileExtensionValidator(['jpg', 'jpeg', 'png'])])
 
     class Meta:

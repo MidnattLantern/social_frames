@@ -18,9 +18,10 @@ import cloudinary.uploader
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
+from django.utils.text import slugify
 
 
-# user enter a project, expects to see episodes
+# user enter index.html, expects to see projects
 # request.USER for all
 @method_decorator(login_required, name='dispatch')
 class RenderHomeView(View, LoginRequiredMixin):
@@ -78,7 +79,7 @@ class RenderHomeView(View, LoginRequiredMixin):
         )         
 
 
-# user enter a project, expects to see episodes
+# user enter project_view.html, expects to see episodes
 @method_decorator(login_required, name='dispatch')
 class RenderProjectView(View, LoginRequiredMixin):
     def get (self, request, project_slug, *args, **kwargs):
@@ -140,7 +141,7 @@ class RenderProjectView(View, LoginRequiredMixin):
         )
 
 
-# user enter a episode, expects to see scenes
+# user enter episode_view.html, expects to see scenes
 @method_decorator(login_required, name='dispatch')
 class RenderEpisodeView(View, LoginRequiredMixin):
     def get (self, request, episode_slug, *args, **kwargs):
@@ -155,6 +156,9 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 'scene_item': scene_item,
                 'create_scene_item': CreateSceneItem(),
                 'edit_scene_item': EditSceneItem(),
+# test filter away illegal slug symbols
+                'test': slugify(str(episode_item))
+# end test
             },
         )
     def post (self, request, episode_slug, *args, **kwargs):
@@ -169,6 +173,9 @@ class RenderEpisodeView(View, LoginRequiredMixin):
             #scene_property_to_... create authorisation for episode items
             scene.scene_property_to_episode = episode_item
             scene.scene_property_to_director = request.user
+# test
+            scene.scene_slug = slugify(str(request.user)+str(scene.scene_name))
+# end test
             scene.post = scene_item
             scene.save()
         else:
@@ -208,7 +215,7 @@ class UpdateSceneItem(UpdateView):
     template_name = 'episode.html'
 """
 
-# user enter a scene, expects to see sketches
+# user enter scene_view.html, expects to see sketches
 @method_decorator(login_required, name='dispatch')
 class RenderSceneView(View, LoginRequiredMixin):
     def get (self, request, scene_slug, *args, **kwargs):
