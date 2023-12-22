@@ -112,17 +112,20 @@ class RenderProjectView(View, LoginRequiredMixin):
 
         # C in "CRUD"
         if episode_item_form.is_valid():
-            # try and except prevent duplicate auto-generated episode_slug
-            try:
-                episode = episode_item_form.save(commit=False)
-                #episode_property_to_... create authorisation for episode items
-                episode.episode_property_to_project = project_item
-                episode.episode_property_to_director = request.user
-                episode.episode_slug = slugify(str(project_item.project_slug))+slugify(str(episode.episode_name))
-                episode.post = episode_item
-                episode.save()
-            except IntegrityError:
-                CreateEpisodeItem()
+            if 'add_episode' in request.POST:
+                # try and except prevent duplicate auto-generated episode_slug
+                try:
+                    episode = episode_item_form.save(commit=False)
+                    #episode_property_to_... create authorisation for episode items
+                    episode.episode_property_to_project = project_item
+                    episode.episode_property_to_director = request.user
+                    episode.episode_slug = slugify(str(project_item.project_slug))+slugify(str(episode.episode_name))
+                    episode.post = episode_item
+                    #test
+                    print("--- CREATE ---")
+                    episode.save()
+                except IntegrityError:
+                    CreateEpisodeItem()
         else:
             episode_item_form = CreateEpisodeItem()
 
@@ -130,6 +133,8 @@ class RenderProjectView(View, LoginRequiredMixin):
         if 'delete_episode' in request.POST:
             delete_episode_slug = request.POST.get('delete_episode')
             delete_episode = EpisodeItem.objects.get(episode_slug=delete_episode_slug)
+            #test
+            print("--- DELETE ---")
             delete_episode.delete()
         
         # U in "CRUD"
@@ -140,6 +145,8 @@ class RenderProjectView(View, LoginRequiredMixin):
                 edit_episode = EpisodeItem.objects.get(episode_slug=edit_episode_slug)
                 edit_episode.episode_name = edit_episode_item_form.cleaned_data.get('episode_name')
                 edit_episode.episode_chronology = edit_episode_item_form.cleaned_data.get('episode_chronology')
+                #test
+                print("--- UPDATE ---")
                 edit_episode.save()
 
         return render(

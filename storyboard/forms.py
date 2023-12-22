@@ -15,7 +15,7 @@ class EditProjectItem(forms.ModelForm):
     class Meta:
         model = ProjectItem
         fields = ['project_name',]
-        labels = {'project_name': 'project_name'
+        labels = {'project_name': 'Project Name'
                   }
 
 

@@ -2,7 +2,6 @@
 {% load crispy_forms_tags %}
 
 <h1>Sketches for {{ sketch_4_header }}</h1>
-<!-- Pinned sketch goes here-->
 
 <!-- see models.py SketchItem() -->
 {% if user.is_authenticated %}
@@ -10,6 +9,8 @@
 <p><a href="{% url 'account_logout' %}">{{ user.username }}</a>  / <a href="{% url 'home_url_path' %}">Projects</a> / <a href="{% url 'home_url_path' %}">Episodes</a> / <a href="{% url 'home_url_path' %}">Scenes</a> / <strong>Sketches</strong></p>
 <br>
 <hr>
+<p>notes:</p>
+<p> {{  }}</p>
 
 {% for i in sketch_item %}
 <div>
