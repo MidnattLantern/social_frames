@@ -7,9 +7,9 @@
 {% if user.is_authenticated %}
 <!-- this <p> mimics Finder so that the user purpose feels familiar -->
 <p><a href="{% url 'account_logout' %}">{{ user.username }}</a>  / <a href="{% url 'home_url_path' %}">Projects</a> / <strong>Episodes</strong></p>
-
 <hr>
 <br>
+
 {% for i in episode_item %}
 <p>Episode: {{ i.episode_chronology }}</p>
 <a href="{% url 'episode_url_path' i.episode_slug %}">

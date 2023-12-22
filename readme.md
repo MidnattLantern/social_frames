@@ -105,3 +105,4 @@ Technical debt
 ======
 - Being my first time working with Django, I'm not familiar with what strings and blocks of code will eventually bite me in the tail. There are some mistakes I did spot but couldn't adress due to a deadline.
 - Project view as ´index.html´: Cloudyboard doesn't have a 'lounge' or 'home page', as it's deseigned to not have one. the Cloudyboard logo and index.html will lead to Project view as the default. If a 'lounge' or 'home' page should be introduced in the future, you'd first need to change the entire relationship to the project view.
+- The authorisation system is built upon a user filter. This means that unauthorised users with an URL-link to any stranger's item aren't kicked out, the items are just not visible.

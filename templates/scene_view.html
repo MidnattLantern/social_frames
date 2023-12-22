@@ -10,6 +10,7 @@
 <p><a href="{% url 'account_logout' %}">{{ user.username }}</a>  / <a href="{% url 'home_url_path' %}">Projects</a> / <a href="{% url 'home_url_path' %}">Episodes</a> / <a href="{% url 'home_url_path' %}">Scenes</a> / <strong>Sketches</strong></p>
 <br>
 <hr>
+
 {% for i in sketch_item %}
 <div>
     <div>

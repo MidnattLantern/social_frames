@@ -118,7 +118,7 @@ class RenderProjectView(View, LoginRequiredMixin):
                 #episode_property_to_... create authorisation for episode items
                 episode.episode_property_to_project = project_item
                 episode.episode_property_to_director = request.user
-                episode.episode_slug = slugify(str(request.user)+"_"+str(episode.episode_name))
+                episode.episode_slug = slugify(str(project_item.project_slug))+slugify(str(episode.episode_name))
                 episode.post = episode_item
                 episode.save()
             except IntegrityError:
@@ -186,7 +186,7 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 #scene_property_to_... create authorisation for episode items
                 scene.scene_property_to_episode = episode_item
                 scene.scene_property_to_director = request.user
-                scene.scene_slug = slugify(str(request.user)+str(scene.scene_name))
+                scene.scene_slug = slugify(str(episode_item.episode_slug))+slugify(str(scene.scene_name))
                 scene.post = scene_item
                 scene.save()
             except IntegrityError:
@@ -254,7 +254,7 @@ class RenderSceneView(View, LoginRequiredMixin):
                 sketch.sketch_property_to_scene = scene_item
                 sketch.sketch_property_to_director = request.user
                 sketch.post = sketch_item
-                sketch.sketch_slug = slugify(str(request.user)+"_"+str(sketch.sketch_name))
+                sketch.sketch_slug = slugify(str(request.user))+slugify(str(sketch.sketch_name))
                 sketch.save()
             except IntegrityError:
                 CreateSketchItem()
