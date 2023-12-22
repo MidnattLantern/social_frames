@@ -19,6 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.utils.text import slugify
+from django.db import IntegrityError
 
 
 # user enter index.html, expects to see projects
@@ -45,14 +46,16 @@ class RenderHomeView(View, LoginRequiredMixin):
 
         # C in "CRUD"
         if project_item_form.is_valid():
-            project = project_item_form.save(commit=False)
-            #project_property_to_... create authorisation for project items
-            project.project_property_to_director = request.user
-            project.post = project_item
-# test
-            project.project_slug = slugify(str(request.user)+"_"+str(project.project_name))
-# end test
-            project.save()
+            # try and except prevent duplicate auto-generated episode_slug
+            try:
+                project = project_item_form.save(commit=False)
+                #project_property_to_... create authorisation for project items
+                project.project_property_to_director = request.user
+                project.post = project_item
+                project.project_slug = slugify(str(request.user)+"_"+str(project.project_name))
+                project.save()
+            except IntegrityError:
+                CreateProjectItem()
         else:
             project_item_form = CreateProjectItem()
 
@@ -107,15 +110,17 @@ class RenderProjectView(View, LoginRequiredMixin):
 
         # C in "CRUD"
         if episode_item_form.is_valid():
-            episode = episode_item_form.save(commit=False)
-            #episode_property_to_... create authorisation for episode items
-            episode.episode_property_to_project = project_item
-            episode.episode_property_to_director = request.user
-# test
-            episode.episode_slug = slugify(str(request.user)+"_"+str(episode.episode_name))
-# end test
-            episode.post = episode_item
-            episode.save()
+            # try and except prevent duplicate auto-generated episode_slug
+            try:
+                episode = episode_item_form.save(commit=False)
+                #episode_property_to_... create authorisation for episode items
+                episode.episode_property_to_project = project_item
+                episode.episode_property_to_director = request.user
+                episode.episode_slug = slugify(str(request.user)+"_"+str(episode.episode_name))
+                episode.post = episode_item
+                episode.save()
+            except IntegrityError:
+                CreateEpisodeItem()
         else:
             episode_item_form = CreateEpisodeItem()
 
@@ -175,15 +180,17 @@ class RenderEpisodeView(View, LoginRequiredMixin):
 
         # C in "CRUD"
         if scene_item_form.is_valid():
-            scene = scene_item_form.save(commit=False)
-            #scene_property_to_... create authorisation for episode items
-            scene.scene_property_to_episode = episode_item
-            scene.scene_property_to_director = request.user
-# test
-            scene.scene_slug = slugify(str(request.user)+str(scene.scene_name))
-# end test
-            scene.post = scene_item
-            scene.save()
+            # try and except prevent duplicate auto-generated scene_slug
+            try:
+                scene = scene_item_form.save(commit=False)
+                #scene_property_to_... create authorisation for episode items
+                scene.scene_property_to_episode = episode_item
+                scene.scene_property_to_director = request.user
+                scene.scene_slug = slugify(str(request.user)+str(scene.scene_name))
+                scene.post = scene_item
+                scene.save()
+            except IntegrityError:
+                CreateSceneItem()
         else:
             scene_item_form = CreateSceneItem()
 
@@ -240,15 +247,17 @@ class RenderSceneView(View, LoginRequiredMixin):
 
         # C in "CRUD"
         if sketch_item_form.is_valid():
-            sketch = sketch_item_form.save(commit=False)
-            #scene_property_to_... create authorisation for episode items
-            sketch.sketch_property_to_scene = scene_item
-            sketch.sketch_property_to_director = request.user
-            sketch.post = sketch_item
-# test
-            sketch.sketch_slug = slugify(str(request.user)+"_"+str(sketch.sketch_name))
-# end test
-            sketch.save()
+            # try and except prevent duplicate auto-generated sketch_slug
+            try:
+                sketch = sketch_item_form.save(commit=False)
+                #scene_property_to_... create authorisation for episode items
+                sketch.sketch_property_to_scene = scene_item
+                sketch.sketch_property_to_director = request.user
+                sketch.post = sketch_item
+                sketch.sketch_slug = slugify(str(request.user)+"_"+str(sketch.sketch_name))
+                sketch.save()
+            except IntegrityError:
+                CreateSketchItem()
         else:
             sketch_item_form = CreateSketchItem()
 

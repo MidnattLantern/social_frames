@@ -99,6 +99,7 @@ Sketch View
 - The user can name and rename their images.
 - The user can credit themselves but not edit it.
 - The user can upload JP(E)G or PNG maximum of 1 MB. Storyboard artists in the animation industry never need high resolution images, so to prevent massive unneccessary storage space, Cloudyboard will check the image and reject if the file is bigger than 1 MB. Cloudyboard reckon that people within the industry have the tools and know how to resize JP(E)Gs and PNGs.
+- What if you create a new sketch with the same name as an existing? Cloudyboard use `IntegrityError` to prevent duplicate slugs.
 
 Technical debt
 ======
