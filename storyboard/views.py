@@ -62,6 +62,7 @@ class RenderHomeView(View, LoginRequiredMixin):
                     CreateProjectItem()
         else:
             project_item_form = CreateProjectItem()
+            print("failed to create project item")
 
         # D in "CRUD"
         if 'delete_project' in request.POST:
@@ -135,6 +136,7 @@ class RenderProjectView(View, LoginRequiredMixin):
                     CreateEpisodeItem()
         else:
             episode_item_form = CreateEpisodeItem()
+            print("failed to create episode item")
 
         # D in "CRUD"
         if 'delete_episode' in request.POST:
@@ -194,24 +196,30 @@ class RenderEpisodeView(View, LoginRequiredMixin):
 
         # C in "CRUD"
         if scene_item_form.is_valid():
-            # try and except prevent duplicate auto-generated scene_slug
-            try:
-                scene = scene_item_form.save(commit=False)
-                #scene_property_to_... create authorisation for episode items
-                scene.scene_property_to_episode = episode_item
-                scene.scene_property_to_director = request.user
-                scene.scene_slug = slugify(str(episode_item.episode_slug))+slugify(str(scene.scene_name))
-                scene.post = scene_item
-                scene.save()
-            except IntegrityError:
-                CreateSceneItem()
+            if 'add_scene' in request.POST:
+                # try and except prevent duplicate auto-generated scene_slug
+                try:
+                    scene = scene_item_form.save(commit=False)
+                    #scene_property_to_... create authorisation for episode items
+                    scene.scene_property_to_episode = episode_item
+                    scene.scene_property_to_director = request.user
+                    scene.scene_slug = slugify(str(episode_item.episode_slug))+slugify(str(scene.scene_name))
+                    scene.post = scene_item
+                    # dev testing
+                    print("--- CREATE ---")
+                    scene.save()
+                except IntegrityError:
+                    CreateSceneItem()
         else:
             scene_item_form = CreateSceneItem()
+            print("failed to create scene item")
 
         # D in "CRUD"
         if 'delete_scene' in request.POST:
             delete_scene_slug = request.POST.get('delete_scene')
             delete_scene = SceneItem.objects.get(scene_slug=delete_scene_slug)
+            # dev testing
+            print("--- DELETE ---")
             delete_scene.delete()
 
         # U in "CRUD"
@@ -221,6 +229,8 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 edit_scene_slug = request.POST.get('edit_scene')
                 edit_scene = SceneItem.objects.get(scene_slug=edit_scene_slug)
                 edit_scene.scene_name = edit_scene_item_form.cleaned_data.get('scene_name')
+                # dev testing
+                print("--- UPDATE ---")
                 edit_scene.save()
 
         return render(
@@ -252,6 +262,7 @@ class RenderSceneView(View, LoginRequiredMixin):
                 'create_sketch_item': CreateSketchItem(),
                 'edit_sketch_item': EditSketchItem(),
                 'comment_sketch_item': CommentSketchItem(),
+                'sketch_4_header': str(scene_item),
             },
         )
     def post (self, request, scene_slug, *args, **kwargs):
@@ -261,25 +272,32 @@ class RenderSceneView(View, LoginRequiredMixin):
 
         # C in "CRUD"
         if sketch_item_form.is_valid():
-            # try and except prevent duplicate auto-generated sketch_slug
-            try:
-                sketch = sketch_item_form.save(commit=False)
-                #scene_property_to_... create authorisation for episode items
-                sketch.sketch_property_to_scene = scene_item
-                sketch.sketch_property_to_director = request.user
-                sketch.post = sketch_item
-                sketch.sketch_slug = slugify(str(request.user))+slugify(str(sketch.sketch_name))
-                sketch.save()
-            except IntegrityError:
-                CreateSketchItem()
+            if 'add_sketch' in request.POST:
+                # try and except prevent duplicate auto-generated sketch_slug
+                try:
+                    sketch = sketch_item_form.save(commit=False)
+                    #scene_property_to_... create authorisation for episode items
+                    sketch.sketch_property_to_scene = scene_item
+                    sketch.sketch_property_to_director = request.user
+                    sketch.post = sketch_item
+                    sketch.sketch_slug = slugify(str(request.user))+slugify(str(sketch.sketch_name))
+                    # dev testing
+                    print("--- CREATE ---")
+                    sketch.save()
+                except IntegrityError:
+                    CreateSketchItem()
+                    print("duplicate sketch error")
         else:
             sketch_item_form = CreateSketchItem()
+            print("failed to create sketch item")
 
         # D in "CRUD"
         if 'delete_sketch' in request.POST:
             delete_sketch_slug = request.POST.get('delete_sketch')
             #restricts unauthorised accounts from accessing other accounts item(s)
             delete_sketch = SketchItem.objects.get(sketch_slug=delete_sketch_slug, sketch_property_to_director=request.user)
+            # dev testing
+            print("--- DELETE ---")
             delete_sketch.delete()
 
         # U in "CRUD"
@@ -289,6 +307,8 @@ class RenderSceneView(View, LoginRequiredMixin):
                 edit_sketch_slug = request.POST.get('edit_sketch')
                 edit_sketch = SketchItem.objects.get(sketch_slug=edit_sketch_slug)
                 edit_sketch.sketch_name = edit_sketch_item_form.cleaned_data.get('sketch_name')
+                # dev testing
+                print("--- UPDATE ---")
                 edit_sketch.save()
 
         # U in "CRUD"
