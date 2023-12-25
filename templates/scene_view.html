@@ -2,9 +2,9 @@
 {% load crispy_forms_tags %}
 <div class="header_window">
 <h1>Sketches for {{ sketch_4_header }}</h1>
-<!-- see models.py SketchItem() -->
+<!-- See models.py SketchItem() -->
 {% if user.is_authenticated %}
-<!-- this <p> mimics Finder so that the user purpose feels familiar -->
+<!-- This <p> mimics Finder so that the user purpose feels familiar -->
 <p><a href="{% url 'account_logout' %}">{{ user.username }}</a>  / <a href="{% url 'home_url_path' %}">Projects</a> / <a href="{% url 'home_url_path' %}">Episodes</a> / <a href="{% url 'home_url_path' %}">Scenes</a> / <strong>Sketches</strong></p>
 </div>
 
@@ -14,44 +14,51 @@
     <p>Artist: {{ i.sketch_artist }}</p>
       <h2 class="white_font">Sketch: {{ i.sketch_name }} </h2>
       <div>
-          <div>
-              <img src="{{ i.sketch_image.url }}" style="max-width: 600px; max-width: auto;">
-          </div>
+        <div>
+          <img src="{{ i.sketch_image.url }}" class="image">
+        </div>
       </div>
-    <p>director's comment:</p>
-    <p>{{ i.sketch_directors_comment }}</p>
+  </div>
 
-    <!-- edit form -->
-    <div class="new_item_styling">
-      <p>Edit {{ i.sketch_name }}</p>
-      <form method="post"  class="white_font">
-        {{ edit_sketch_item | crispy }}
-        {% csrf_token %}
-        <button type="submit" name="edit_sketch" value="{{ i.sketch_slug }}">Save changes</button>
-      </form>
+  <div class="">
+    <!-- Comment (3/4) -->
+    <div class="object_window">
+      <p>director's comment:</p>
+      <p>{{ i.sketch_directors_comment }}</p>
     </div>
+    <!-- End comment -->
+    <!-- Edit/ comment and delete (1/4) -->
+    <!-- Edit form -->
+    <div class="object_window">
+      <div class="new_item_styling">
+        <p>Edit {{ i.sketch_name }}</p>
+        <form method="post"  class="white_font">
+          {{ edit_sketch_item | crispy }}
+          {% csrf_token %}
+          <button type="submit" name="edit_sketch" value="{{ i.sketch_slug }}">Save changes</button>
+        </form>
+      </div>
 
-    <!-- comment form -->
-    <div class="new_item_styling">
-      <p>Comment {{ i.sketch_name }}</p>
-      <form method="post" class="white_font">
-        {{ comment_sketch_item | crispy }}
-        {% csrf_token %}
-        <button type="submit" name="comment_sketch" value="{{ i.sketch_slug }}">Save comment</button>
-      </form>
-    </div>
+      <!-- Comment form -->
+      <div class="new_item_styling">
+        <p>Comment {{ i.sketch_name }}</p>
+        <form method="post" class="white_font">
+          {{ comment_sketch_item | crispy }}
+          {% csrf_token %}
+          <button type="submit" name="comment_sketch" value="{{ i.sketch_slug }}">Save comment</button>
+        </form>
+      </div>
 
-    <!-- delete form -->
-    <form action="" method="POST">
+      <!-- Delete form -->
+      <form action="" method="POST">
         {% csrf_token %} {{ delete_sketch_item | crispy }}
         <button type="submit" name="delete_sketch" value="{{ i.sketch_slug }}">Delete sketch</button>
       </form>
-
-    <hr>
-    <br>
+  <!-- End edit/ comment and delete -->
+    </div>
   </div>
-
 {% endfor %}
+
 <div class="new_item_styling">
 <p>upload sketch</p>
 <form action="" method="POST" style="margin-top: 1.3em;" enctype="multipart/form-data" class="white_font">

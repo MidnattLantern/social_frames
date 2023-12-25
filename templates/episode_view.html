@@ -9,38 +9,46 @@
 </div>
 
 <div class="body_window">
-{% for i in scene_item %}
-  <div class="object_window">
-    <p>Scene: {{ i.scene_chronology }}</p>
+  {% for i in scene_item %}
+  <div class="">
+  <!-- Object (3/4) -->
+    <div class="object_window">
+      <p>Scene: {{ i.scene_chronology }}</p>
       <h2>
         <a href="{% url 'scene_url_path' i.scene_slug %}">
           <!-- scene name -->
           {{ i.scene_name }}
         </a>
       </h2>
-    <p>Scene notes: <br> {{ i.scene_event_notes }} </p>
-
-<!-- edit form -->
-<div class="new_item_styling">
-  <p>Edit {{ i.scene_name }}</p>
-  <form method="post" class="white_font">
-    {{ edit_scene_item | crispy }}
-    {% csrf_token %}
-    <button type="submit" name="edit_scene" value="{{ i.scene_slug }}">Save changes</button>
-  </form>
+      <p>Scene notes: <br> {{ i.scene_event_notes }} </p>
+    </div>
+  <!-- End for object -->
+  <!-- Edit and delete (1/4) -->
+<div class="object_window">
+  <!-- edit form -->
+  <div class="new_item_styling">
+    <div>
+      <p>Edit {{ i.scene_name }}</p>
+      <form method="post" class="white_font">
+        {{ edit_scene_item | crispy }}
+        {% csrf_token %}
+        <button type="submit" name="edit_scene" value="{{ i.scene_slug }}">Save changes</button>
+      </form>
+    </div>
+  </div>
+  <!-- Delete form -->
+  <div>
+    <form action="" method="POST">
+      {% csrf_token %} {{ delete_scene_item | crispy }}
+      <button type="submit" name="delete_scene" value="{{ i.scene_slug }}">Delete scene</button>
+    </form>
+  </div>
+</div>
+  <!-- End for edit and delete -->
 </div>
 
-
-<!-- delete form -->
-<form action="" method="POST">
-  {% csrf_token %} {{ delete_scene_item | crispy }}
-  <button type="submit" name="delete_scene" value="{{ i.scene_slug }}">Delete scene</button>
-</form>
-  </div>
-
-<hr>
-<br>
     {% endfor %}
+
     <div class="new_item_styling">
     <p>Create new scene</p>
     <form method="post" style="margin-top: 1.3em;" class="white_font">
