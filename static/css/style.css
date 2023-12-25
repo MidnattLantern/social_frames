@@ -7,10 +7,13 @@ h1, p, a, .white_font {
     color: #fafafa;
 }
 a:hover {
-    color: #98a3ff;
+    color: #98baff;
+}
+.visible_link {
+    color: #98baff;
 }
 .main_window {
-    width: 600px;
+    width: 800px;
     min-height: 100%;
     margin-top: 50px;
     margin-bottom: 50px;
@@ -35,4 +38,9 @@ a:hover {
 }
 .delete-button{
     text-align: right;
+}
+.object_window {
+    border: 1px solid #fafafa;
+    border-radius: 10px;
+    padding: 25px;
 }

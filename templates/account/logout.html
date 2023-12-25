@@ -4,10 +4,13 @@
     {% trans "Sign Out" %}
 {% endblock head_title %}
 {% block content %}
+<div class="header_window">
 <h1>{{ user.username }}</h1>
 <!-- this <p> mimics Finder so that the user purpose feels familiar -->
 <p><strong>{{ user.username }}</strong></p>
-<hr>
+</div>
+
+<div class="body_window">
 <a href="{% url 'home_url_path' %}">View projects</a>
 <hr>
 <br>
@@ -27,4 +30,5 @@
             {% endelement %}
         {% endslot %}
     {% endelement %}
+</div>
 {% endblock content %}
