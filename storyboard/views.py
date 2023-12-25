@@ -19,7 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 from django.utils.text import slugify
-from django.db import IntegrityError
+from django.db import IntegrityError, DataError
 
 
 # user enter index.html, expects to see projects
@@ -60,6 +60,9 @@ class RenderHomeView(View, LoginRequiredMixin):
                     project.save()
                 except IntegrityError:
                     CreateProjectItem()
+                except DataError:
+                    CreateProjectItem()
+                    print("error: project name too long")
         else:
             project_item_form = CreateProjectItem()
             print("failed to create project item")
@@ -134,6 +137,9 @@ class RenderProjectView(View, LoginRequiredMixin):
                     episode.save()
                 except IntegrityError:
                     CreateEpisodeItem()
+                except DataError:
+                    CreateEpisodeItem()
+                    print("error: episode name too long")
         else:
             episode_item_form = CreateEpisodeItem()
             print("failed to create episode item")
@@ -210,6 +216,9 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                     scene.save()
                 except IntegrityError:
                     CreateSceneItem()
+                except DataError:
+                    CreateSceneItem()
+                    print("error: scene name too long")
         else:
             scene_item_form = CreateSceneItem()
             print("failed to create scene item")
@@ -286,7 +295,11 @@ class RenderSceneView(View, LoginRequiredMixin):
                     sketch.save()
                 except IntegrityError:
                     CreateSketchItem()
-                    print("duplicate sketch error")
+                    print("error: duplicate sketch")
+                except DataError:
+                    CreateSketchItem()
+                    print("error: name sketch too long")
+
         else:
             sketch_item_form = CreateSketchItem()
             print("failed to create sketch item")
