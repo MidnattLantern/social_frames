@@ -2,9 +2,24 @@
 body {
     background-color: #1b1b1c;
 }
-h1, p, a, .white_font {
+h1, h2, h3, p, a, .white_font {
     font-family: "Raleway", sans-serif;
     color: #fafafa;
+}
+h1 {
+    font-size: 4rem;
+}
+h2 {
+    font-size: 3rem;
+}
+h3 {
+    font-size: 1.5rem;
+}
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    border-top: 1px solid #fafafa50;
 }
 a:hover {
     color: #98baff;
@@ -101,6 +116,9 @@ a:hover {
     background-color: #1b1b1c;
     width: 100%;
 }
+.numberinput {
+    width: 75px;
+}
 .btn {
     color: #fafafa;
     background-color: #1b1b1c;
@@ -112,7 +130,7 @@ a:hover {
     width: 130px;
 }
 .btn-lg {
-    width: 170px;
+    width: 180px;
 }
 .btn:hover {
     color: #98baff;

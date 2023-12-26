@@ -37,7 +37,7 @@ class CreateEpisodeItem(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateEpisodeItem, self).__init__(*args, **kwargs)
         self.fields['episode_name'].widget.attrs['placeholder'] = 'Max 50 characters'
-        self.fields['episode_chronology'].widget.attrs['placeholder'] = 'Any whole number'
+        self.fields['episode_chronology'].widget.attrs['placeholder'] = '___'
 # Edit episode item
 class EditEpisodeItem(forms.ModelForm):
     class Meta:
@@ -49,7 +49,7 @@ class EditEpisodeItem(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EditEpisodeItem, self).__init__(*args, **kwargs)
         self.fields['episode_name'].widget.attrs['placeholder'] = 'Max 50 characters'
-        self.fields['episode_chronology'].widget.attrs['placeholder'] = 'Any whole number'
+        self.fields['episode_chronology'].widget.attrs['placeholder'] = '___'
 
 
 class CreateSceneItem(forms.ModelForm):
@@ -63,7 +63,7 @@ class CreateSceneItem(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CreateSceneItem, self).__init__(*args, **kwargs)
         self.fields['scene_name'].widget.attrs['placeholder'] = 'Max 50 characters'
-        self.fields['scene_chronology'].widget.attrs['placeholder'] = 'Any whole number'
+        self.fields['scene_chronology'].widget.attrs['placeholder'] = '___'
         self.fields['scene_event_notes'].widget.attrs['placeholder'] = 'Max 300 characters'
 # Edit scene item
 class EditSceneItem(forms.ModelForm):
@@ -77,7 +77,7 @@ class EditSceneItem(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(EditSceneItem, self).__init__(*args, **kwargs)
         self.fields['scene_name'].widget.attrs['placeholder'] = 'Max 50 characters'
-        self.fields['scene_chronology'].widget.attrs['placeholder'] = 'Any whole number'
+        self.fields['scene_chronology'].widget.attrs['placeholder'] = '___'
         self.fields['scene_event_notes'].widget.attrs['placeholder'] = 'Max 300 characters'
 
 

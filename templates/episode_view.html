@@ -11,9 +11,9 @@
 <div class="body_window">
   {% for i in scene_item %}
   <div class="row" style="margin: 0px;">
-  <!-- Object (3/4) -->
+  <!-- Object (2/3) -->
     <div class="object_window col-md-8">
-      <p>Scene: {{ i.scene_chronology }}</p>
+      <h3>Scene: {{ i.scene_chronology }}</h3>
       <h2>
         <a href="{% url 'scene_url_path' i.scene_slug %}">
           <!-- scene name -->
@@ -23,17 +23,17 @@
       <p>Scene notes: <br> {{ i.scene_event_notes }} </p>
     </div>
   <!-- End for object -->
-  <!-- Edit and delete (1/4) -->
+  <!-- Edit and delete (1/3) -->
   <div class="edit_window col-md-4">
 
-    <p>Edit {{ i.scene_name }}</p>
+    <h3>Edit {{ i.scene_name }}</h3>
       <form method="post" class="white_font">
         {{ edit_scene_item | crispy }}
         {% csrf_token %}
         <button class="btn btn-sm" type="submit" name="edit_scene" value="{{ i.scene_slug }}">Save changes</button>
       </form>
 
-    <br>
+    <hr>
 
     <!-- Delete -->
     <form action="" method="POST" onsubmit="return confirmDelete()">
@@ -77,7 +77,7 @@
 {% endfor %}
 
     <div class="new_item_styling">
-    <p>Create new scene</p>
+    <h3>Create new scene</h3>
     <form method="post" style="margin-top: 1.3em;" class="white_font">
         {{ create_scene_item | crispy}}
         {% csrf_token %}
