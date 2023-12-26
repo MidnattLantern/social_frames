@@ -34,21 +34,21 @@
         <form method="post"  class="white_font">
           {{ edit_sketch_item | crispy }}
           {% csrf_token %}
-          <button type="submit" name="edit_sketch" value="{{ i.sketch_slug }}">Save changes</button>
+          <button class="btn btn-sm" type="submit" name="edit_sketch" value="{{ i.sketch_slug }}">Save changes</button>
         </form>
 
         <p>Comment {{ i.sketch_name }}</p>
         <form method="post" class="white_font">
           {{ comment_sketch_item | crispy }}
           {% csrf_token %}
-          <button type="submit" name="comment_sketch" value="{{ i.sketch_slug }}">Save comment</button>
+          <button class="btn btn-sm" type="submit" name="comment_sketch" value="{{ i.sketch_slug }}">Save comment</button>
         </form>
 
       <br>
       <!-- Delete -->
       <form action="" method="POST" onsubmit="return confirmDelete()">
         {% csrf_token %} {{ delete_sketch_item | crispy }}
-        <button type="submit" name="delete_sketch" value="{{ i.sketch_slug }}">Delete sketch</button>
+        <button class="delete-button btn btn-sm btn-delete" type="submit" name="delete_sketch" value="{{ i.sketch_slug }}">Delete sketch</button>
       </form>
       <script>
         function confirmDelete() {
@@ -100,7 +100,7 @@
 <form action="" method="POST" style="margin-top: 1.3em;" enctype="multipart/form-data" class="white_font">
     {{ create_sketch_item | crispy }}
     {% csrf_token %}
-    <button type="submit" class="" name="add_sketch">Submit sketch</button>
+    <button type="submit" class="btn btn-lg" name="add_sketch">Submit sketch</button>
   </form>
 </div>
 

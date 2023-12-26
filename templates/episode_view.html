@@ -30,14 +30,15 @@
       <form method="post" class="white_font">
         {{ edit_scene_item | crispy }}
         {% csrf_token %}
-        <button type="submit" name="edit_scene" value="{{ i.scene_slug }}">Save changes</button>
+        <button class="btn btn-sm" type="submit" name="edit_scene" value="{{ i.scene_slug }}">Save changes</button>
       </form>
 
     <br>
 
+    <!-- Delete -->
     <form action="" method="POST" onsubmit="return confirmDelete()">
       {% csrf_token %} {{ delete_scene_item | crispy }}
-      <button type="submit" name="delete_scene" value="{{ i.scene_slug }}">Delete scene</button>
+      <button class="btn btn-sm btn-delete" type="submit" name="delete_scene" value="{{ i.scene_slug }}">Delete scene</button>
     </form>
     <script>
       function confirmDelete() {
@@ -80,7 +81,7 @@
     <form method="post" style="margin-top: 1.3em;" class="white_font">
         {{ create_scene_item | crispy}}
         {% csrf_token %}
-        <button type="submit" class="" name="add_scene">Create scene</button>
+        <button type="submit" class="btn btn-lg" name="add_scene">Create scene</button>
       </form>
     </div>
     {% endif %}

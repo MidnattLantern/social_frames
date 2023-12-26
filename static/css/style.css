@@ -95,6 +95,32 @@ a:hover {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* input */
+.form-control {
+    background-color: #1b1b1c;
+    width: 100%;
+}
+.btn {
+    color: #fafafa;
+    background-color: #1b1b1c;
+    border: 1px solid;
+    width: 170px;
+    text-align: center;
+}
+.btn-sm {
+    width: 130px;
+}
+.btn-lg {
+    width: 170px;
+}
+.btn:hover {
+    color: #98baff;
+}
+.btn-delete:hover {
+    background-color: #000000;
+    color: #ff0000;
+}
 @media screen and (max-width: 1000px) {
     .main_window {
         padding: 0px;
