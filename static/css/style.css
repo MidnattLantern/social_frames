@@ -41,7 +41,7 @@ a:hover {
 /* object */
 .object_window {
     border: 1px solid #fafafa;
-    border: 1px solid #fafafa;
+    background-color: #2a2a2b;
     border-radius: 10px 0 0 10px;
     padding: 25px;
 }
@@ -94,4 +94,47 @@ a:hover {
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
+}
+@media screen and (max-width: 1000px) {
+    .main_window {
+        padding: 0px;
+        width: 100%;
+    }
+    .body_window {
+        padding: 0;
+    }
+
+    .object_window {
+        border-radius: 10px 10px 0 0;
+        padding: 10px;
+    }
+    .object_window:hover {
+        border-radius: 10px 10px 0 0;
+        padding: 10px;
+    }
+
+    .edit_window {
+        border-radius: 0 0 10px 10px;
+        padding: 10px;
+    }
+
+    /* sketch */
+    .sketch_window {
+        border-radius: 10px 10px 0 0;
+        padding: 10px;
+    }
+    .comment_window {
+        border-radius: 0;
+        padding: 10px;
+    }
+    .edit_sketch_window {
+        border-radius: 0 0 10px 10px;
+        padding: 10px;
+    }
+
+    .new_item_styling {
+        margin: auto;
+        width: 100%;
+        padding: 10px;
+    }
 }
