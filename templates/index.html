@@ -41,10 +41,16 @@
 
       <br>
 
-      <form action="" method="POST">
+      <!-- Delete -->
+      <form action="" method="POST" onsubmit="return confirmDelete()">
         {% csrf_token %} {{ delete_project_item | crispy }}
         <button class="delete-button" type="submit" name="delete_project" value="{{ i.project_slug }}">Delete project</button>
       </form>
+      <script>
+        function confirmDelete() {
+            return confirm("Deleting this project will also delete everything inside it, this cannot be undone!");
+        }
+      </script>
 
     </div>
   </div>

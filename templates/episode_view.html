@@ -35,10 +35,15 @@
 
     <br>
 
-    <form action="" method="POST">
+    <form action="" method="POST" onsubmit="return confirmDelete()">
       {% csrf_token %} {{ delete_scene_item | crispy }}
       <button type="submit" name="delete_scene" value="{{ i.scene_slug }}">Delete scene</button>
     </form>
+    <script>
+      function confirmDelete() {
+          return confirm("Deleting this scene will also delete everything inside it, this cannot be undone!");
+      }
+    </script>
 
   </div>
   </div>
