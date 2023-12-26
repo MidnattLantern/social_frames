@@ -44,7 +44,7 @@ a:hover, .object_window:hover {
     padding: 25px;
 }
 .object_window:hover {
-    border: 1px solid #98baff;
+    border: 3px solid #98baff;
     border-radius: 10px;
     padding: 25px;
 }

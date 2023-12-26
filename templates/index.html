@@ -16,9 +16,9 @@
 
 <div class="body_window">
   {% for i in project_item %}
-  <div class="">
+  <div class="row" style="margin: 0px;">
     <!--  Object (3/4) -->
-    <div class="object_window">
+    <div class="object_window col-md-9">
       <p>Project</p>
       <h2>
         <a href="{% url 'project_url_path' i.project_slug %}">
@@ -27,10 +27,17 @@
         </a>
       </h2>
     <br>
-  </div>
+    </div>
   <!-- End for object -->
   <!-- Edit and delete (1/4) -->
+    <div class="object_window col-md-3">
+      <p>Edit</p>
+      <br>
+      <p>Delete</p>
+    </div>
+  </div>
   <div class="object_window">
+
     <!-- Edit form -->
     <div class="body_window">
       <div class="new_item_styling">
@@ -51,8 +58,8 @@
     </div>
   </div>
     <!-- End for edit and delete -->
-  </div>
-  {% endfor %}
+  <br>
+{% endfor %}
 
   <div class="new_item_styling">
     <p>Create new project</p>

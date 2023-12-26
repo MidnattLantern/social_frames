@@ -20,14 +20,21 @@
       </div>
   </div>
 
-  <div class="">
+  <div class="row" style="margin: 0px;">
     <!-- Comment (3/4) -->
-    <div class="object_window">
+    <div class="object_window col-md-9">
       <p>director's comment:</p>
       <p>{{ i.sketch_directors_comment }}</p>
     </div>
     <!-- End comment -->
     <!-- Edit/ comment and delete (1/4) -->
+    <div class="object_window col-md-3">
+      <p>Edit</p>
+      <p>Comment</p>
+      <br>
+      <p>Delete</p>
+    </div>
+  </div>
     <!-- Edit form -->
     <div class="object_window">
       <div class="new_item_styling">
@@ -56,7 +63,7 @@
       </form>
   <!-- End edit/ comment and delete -->
     </div>
-  </div>
+  <br>
 {% endfor %}
 
 <div class="new_item_styling">

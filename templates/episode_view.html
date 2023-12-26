@@ -10,9 +10,9 @@
 
 <div class="body_window">
   {% for i in scene_item %}
-  <div class="">
+  <div class="row" style="margin: 0px;">
   <!-- Object (3/4) -->
-    <div class="object_window">
+    <div class="object_window col-md-9">
       <p>Scene: {{ i.scene_chronology }}</p>
       <h2>
         <a href="{% url 'scene_url_path' i.scene_slug %}">
@@ -24,8 +24,14 @@
     </div>
   <!-- End for object -->
   <!-- Edit and delete (1/4) -->
-<div class="object_window">
+  <div class="object_window col-md-3">
+    <p>Edit</p>
+    <br>
+    <p>Delete</p>
+  </div>
+  </div>
   <!-- edit form -->
+<div class="object_window">
   <div class="new_item_styling">
     <div>
       <p>Edit {{ i.scene_name }}</p>
@@ -45,9 +51,8 @@
   </div>
 </div>
   <!-- End for edit and delete -->
-</div>
-
-    {% endfor %}
+<br>
+{% endfor %}
 
     <div class="new_item_styling">
     <p>Create new scene</p>
@@ -57,7 +62,6 @@
         <button type="submit" class="" name="add_scene">Create scene</button>
       </form>
     </div>
-
     {% endif %}
 </div>
 

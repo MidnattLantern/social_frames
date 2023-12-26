@@ -10,9 +10,9 @@
 
 <div class="body_window">
   {% for i in episode_item %}
-  <div class="">
+  <div class="row" style="margin: 0px;">
   <!-- Object (3/4) -->
-    <div class="object_window">
+    <div class="object_window col-md-9">
       <p>Episode: {{ i.episode_chronology }}</p>
       <h2>
         <a href="{% url 'episode_url_path' i.episode_slug %}">
@@ -22,26 +22,31 @@
       </h2>
       <br>
     </div>
-  </div>
   <!-- End for object -->
   <!-- Edit and delete (1/4) -->
-  <div class="object_window">
-    <!-- edit form -->
-    <div class="new_item_styling">
-      <p>Edit {{ i.episode_name }}</p>
-      <form method="post" class="white_font">
-        {{ edit_episode_item | crispy }}
-        {% csrf_token %}
-        <button type="submit" name="edit_episode" value="{{ i.episode_slug }}">Save changes</button>
-      </form>
+    <div class="object_window col-md-3">
+      <p>Edit</p>
+      <br>
+      <p>Delete</p>
     </div>
-    <!-- delete form -->
-    <form action="" method="POST">
-      {% csrf_token %} {{ delete_episode_item | crispy }}
-      <button type="submit" name="delete_episode" value="{{ i.episode_slug }}">Delete episode</button>
-    </form>
   </div>
+    <!-- edit form -->
+    <div class="object_window">
+      <div class="new_item_styling">
+        <p>Edit {{ i.episode_name }}</p>
+        <form method="post" class="white_font">
+          {{ edit_episode_item | crispy }}
+          {% csrf_token %}
+          <button type="submit" name="edit_episode" value="{{ i.episode_slug }}">Save changes</button>
+        </form>
+      </div>
+      <!-- delete form -->
+      <form action="" method="POST">
+        {% csrf_token %} {{ delete_episode_item | crispy }}
+        <button type="submit" name="delete_episode" value="{{ i.episode_slug }}">Delete episode</button>
+      </form>
   <!-- End for edit and delete -->
+    </div>
   <br>
   {% endfor %}
 
