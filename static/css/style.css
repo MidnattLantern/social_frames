@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
+body {
+    background-color: #1b1b1c;
+}
+h1, p, a, .white_font {
+    font-family: "Raleway", sans-serif;
+    color: #fafafa;
+}
+a:hover {
+    color: #98baff;
+}
+.visible_link {
+    color: #98baff;
+}
+.main_window {
+    width: 1000px;
+    min-height: 100%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+}
+.header_window, .body_window {
+    margin: 25px;
+    padding: 25px;
+    background-color: #2a2a2b;
+}
+.new_item_styling {
+    margin: auto;
+    width: 50%;
+    padding: 25px;
+    border: 1px solid #fafafa;
+}
+.delete-button{
+    text-align: right;
+}
+
+/* object */
+.object_window {
+    border: 1px solid #fafafa;
+    padding: 25px;
+}
+.object_window:hover {
+    border: 3px solid #98baff;
+    padding: 25px;
+}
+
+/* edit */
+.edit_window {
+    border: 1px solid #fafafa;
+    padding: 25px;
+}
+.edit_window:hover {
+    border: 3px solid #ff9898;
+    padding: 25px;
+}
+
+.object_width {
+    flex: auto;
+}
+.edit_width {
+    width: 25%;
+    transition: 0.5s;
+}
+.edit_width:hover {
+    width: 75%;
+    transition: 0.5s;
+}
+
+.comment {
+    max-width: 600px;
+}
+
+.image {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}

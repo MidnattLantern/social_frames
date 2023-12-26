@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block content %}
+{% load crispy_forms_tags %}
+<div class="header_window">
+  <h1>Projects</h1>
+  {% if user.is_authenticated %}
+  <!-- This <p> mimics Finder so that the user purpose feels familiar -->
+  <p><a href="{% url 'account_logout' %}">{{ user.username }}</a> / <strong>Projects</strong></p>
+</div>
+
+{% else %}
+<a href="{% url 'account_login' %}">sign_in</a>
+<br>
+<a href="{% url 'account_signup' %}">sign_up</a>
+<br>
+{% endif %}
+
+<div class="body_window">
+  {% for i in project_item %}
+  <div class="row" style="margin: 0px;">
+    <!--  Object (3/4) -->
+    <div class="object_window col-md-8">
+      <p>Project</p>
+      <h2>
+        <a href="{% url 'project_url_path' i.project_slug %}">
+          <!-- Project name -->
+          {{ i.project_name }}
+        </a>
+      </h2>
+    <br>
+    </div>
+  <!-- End for object -->
+  <!-- Edit and delete (1/4) -->
+    <div class="object_window col-md-4">
+
+      <p>Edit {{ i.project_name }}</p>
+        <form method="post" class="white_font">
+          {{ edit_project_item | crispy }}
+          {% csrf_token %}
+          <button type="submit" name="edit_project" value="{{ i.project_slug }}">Save changes</button>
+        </form>
+
+      <br>
+
+      <form action="" method="POST">
+        {% csrf_token %} {{ delete_project_item | crispy }}
+        <button class="delete-button" type="submit" name="delete_project" value="{{ i.project_slug }}">Delete project</button>
+      </form>
+
+    </div>
+  </div>
+
+<!--  <div class="object_window"> -->
+
+    <!-- Edit form -->
+    <!--
+    <div class="body_window">
+      <div class="new_item_styling">
+        <p>Edit {{ i.project_name }}</p>
+        <form method="post" class="white_font">
+          {{ edit_project_item | crispy }}
+          {% csrf_token %}
+          <button type="submit" name="edit_project" value="{{ i.project_slug }}">Save changes</button>
+        </form>
+      </div>
+    </div>
+  -->
+    <!-- Delete form -->
+    <!--
+    <div>
+      <form action="" method="POST">
+        {% csrf_token %} {{ delete_project_item | crispy }}
+        <button class="delete-button" type="submit" name="delete_project" value="{{ i.project_slug }}">Delete project</button>
+      </form>
+    </div>
+  -->
+<!--  </div> -->
+
+    <!-- End for edit and delete -->
+  <br>
+{% endfor %}
+
+  <div class="new_item_styling">
+    <p>Create new project</p>
+    <form method="post" style="margin-top: 1.3em;" class="white_font">
+    {{ create_project_item | crispy }}
+    {% csrf_token %}
+    <button type="submit" class="" name="add_project">Create project</button>
+  </form>
+  </div>
+</div>
+
+{% endblock %}
