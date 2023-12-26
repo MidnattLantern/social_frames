@@ -10,7 +10,7 @@
 
 <div class="body_window">
 {% for i in sketch_item %}
-  <div class="object_window">
+  <div class="sketch_window">
     <p>Artist: {{ i.sketch_artist }}</p>
       <h2 class="white_font">Sketch: {{ i.sketch_name }} </h2>
       <div>
@@ -22,13 +22,13 @@
 
   <div class="row" style="margin: 0px;">
     <!-- Comment (3/4) -->
-    <div class="object_window col-md-8">
+    <div class="comment_window col-md-8">
       <p>director's comment:</p>
       <p>{{ i.sketch_directors_comment }}</p>
     </div>
     <!-- End comment -->
     <!-- Edit/ comment and delete (1/4) -->
-    <div class="object_window col-md-4">
+    <div class="edit_sketch_window col-md-4">
 
       <p>Edit {{ i.sketch_name }}</p>
         <form method="post"  class="white_font">
