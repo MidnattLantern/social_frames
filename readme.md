@@ -135,3 +135,4 @@ The validator user for Python files were `https://pep8ci.herokuapp.com/`. There 
 - views.py inside storyboard folder (7 exceptions)
 - urls.py inside storyboard folder
 - urls.py inside social_frames folder
+- models.py inside storyboard folder

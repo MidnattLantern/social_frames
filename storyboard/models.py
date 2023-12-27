@@ -47,8 +47,8 @@ class EpisodeItem(models.Model):
     episode_chronology = models.IntegerField(null=False, blank=False)
     episode_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=False)
-    episode_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
-    # episode_property_to_... create authorisation for episode items
+    episode_slug = models.SlugField(
+        max_length=50, unique=True, default='', null=False)
     episode_property_to_project = models.ForeignKey(
         ProjectItem, on_delete=models.CASCADE, default='', null=True,
         blank=True)
@@ -68,8 +68,8 @@ class SceneItem(models.Model):
     scene_chronology = models.IntegerField(null=False, blank=False)
     scene_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=False)
-    scene_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
-    # scene_property_to_... create authorisation for episode items
+    scene_slug = models.SlugField(
+        max_length=50, unique=True, default='', null=False)
     scene_property_to_episode = models.ForeignKey(
         EpisodeItem, on_delete=models.CASCADE, default='')
     scene_property_to_director = models.ForeignKey(
@@ -95,8 +95,8 @@ def validate_image_size(value):
 class SketchItem(models.Model):
     sketch_name = models.CharField(
         max_length=50, null=False, blank=False, default='', unique=False)
-    sketch_slug = models.SlugField(max_length=50, unique=True, default='', null=False)
-    # scene_property_to_... create authorisation for episode items
+    sketch_slug = models.SlugField(
+        max_length=50, unique=True, default='', null=False)
     sketch_property_to_scene = models.ForeignKey(
         SceneItem, on_delete=models.CASCADE, default='')
     sketch_property_to_director = models.ForeignKey(
@@ -109,7 +109,10 @@ class SketchItem(models.Model):
         max_length=50, null=False, blank=False, default='', unique=False)
     sketch_pin = models.BooleanField(default=False)
     # sketch_image rejects more than 1MB and non JP(E)Gs and PNGs
-    sketch_image = models.ImageField(null=False, blank=False, upload_to='images/', validators=[validate_image_size, FileExtensionValidator(['jpg', 'jpeg', 'png'])])
+    sketch_image = models.ImageField(
+        null=False, blank=False, upload_to='images/',
+        validators=[validate_image_size, FileExtensionValidator(
+            ['jpg', 'jpeg', 'png'])])
 
     class Meta:
         ordering = ['sketch_updated_date']
