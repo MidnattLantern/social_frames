@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+from django.contrib.messages import constants as messages
 if os.path.isfile('env.py'):
     import env
 
@@ -30,11 +31,14 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'animeforscandinavia'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+# Summernote isn't used, but this is included anyways
+X_FRAE_OPTIONS = 'SAMEORIGIN'
 
 # Add host before deployment for accessibility
 # Delete personal IP address before release!
-ALLOWED_HOSTS = ['8002-midnattlantern-social-fr-o8s4o65jox.us2.codeanyapp.com',"8000-midnattlantern-social-fr-o8s4o65jox.us2.codeanyapp.com", 'social-frames.herokuapp.com', 'localhost', '127.0.0.1', 'social-frames-ecd39961bdfa.herokuapp.com', '8002-midnattlantern-social-fr-o8s4o65jox.us2.codeanyapp.com']
+ALLOWED_HOSTS = ['social-frames.herokuapp.com', 'localhost', 'social-frames-ecd39961bdfa.herokuapp.com', ]
 
 """
 Additional: storyboard, cloudinary, cloudinary_storage, django.contrib.sites,
@@ -62,6 +66,13 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert-info',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
