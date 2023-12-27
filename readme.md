@@ -132,4 +132,6 @@ Following CSS have been checked by Jigsaw:
 
 The validator user for Python files were `https://pep8ci.herokuapp.com/`. There are some exceptions where raised warnings couldn't be solved, but the consequence is minimal. following Python files have been checked:
 ------
-- views.py inside storyboard (7 exceptions)
+- views.py inside storyboard folder (7 exceptions)
+- urls.py inside storyboard folder
+- urls.py inside social_frames folder
