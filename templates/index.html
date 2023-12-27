@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cloudyboard Projects</title>
+  </head>
 {% extends "base.html" %} {% block content %}
 {% load crispy_forms_tags %}
 <div class="header_window">
@@ -31,7 +36,7 @@
 
   <!-- Edit and delete (1/3) -->
     <div class="edit_window col-md-4">
-
+      
       <h3>Edit {{ i.project_name }}</h3>
         <form method="post" class="white_font">
           {{ edit_project_item | crispy }}
@@ -42,7 +47,7 @@
       <hr>
 
       <!-- Delete -->
-      <form action="" method="POST" onsubmit="return confirmDelete()">
+      <form method="POST" onsubmit="return confirmDelete()">
         {% csrf_token %} {{ delete_project_item | crispy }}
         <button class="delete-button btn btn-sm btn-delete" type="submit" name="delete_project" value="{{ i.project_slug }}">Delete project</button>
       </form>
@@ -55,33 +60,6 @@
     </div>
   </div>
 
-<!--  <div class="object_window"> -->
-
-    <!-- Edit form -->
-    <!--
-    <div class="body_window">
-      <div class="new_item_styling">
-        <p>Edit {{ i.project_name }}</p>
-        <form method="post" class="white_font">
-          {{ edit_project_item | crispy }}
-          {% csrf_token %}
-          <button type="submit" name="edit_project" value="{{ i.project_slug }}">Save changes</button>
-        </form>
-      </div>
-    </div>
-  -->
-    <!-- Delete form -->
-    <!--
-    <div>
-      <form action="" method="POST">
-        {% csrf_token %} {{ delete_project_item | crispy }}
-        <button class="delete-button" type="submit" name="delete_project" value="{{ i.project_slug }}">Delete project</button>
-      </form>
-    </div>
-  -->
-<!--  </div> -->
-
-    <!-- End for edit and delete -->
   <br>
 {% endfor %}
 
@@ -96,3 +74,4 @@
 </div>
 
 {% endblock %}
+</html>

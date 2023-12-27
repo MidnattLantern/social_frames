@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cloudyboard Sign in</title>
+  </head>
 {% extends "base.html" %}
 
 {% load i18n %}
@@ -11,9 +16,9 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 mt-3 offset-md-2 white_font">
-      <h3>{% trans "Sign In" %}</h3>
+      <h1>{% trans "Sign in" %}</h1>
 
-      <p>{% blocktrans %} Sign in to your animation team account, or <a class="link" href="{{ signup_url }}" class="visible_link">create a team account</a>
+      <p>{% blocktrans %} Sign in to your animation team account, or <a class="link visible_link" href="{{ signup_url }}">create a team account</a>
       {% endblocktrans %}</p>
     </div>
   </div>
@@ -25,10 +30,11 @@
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
-        <button class="" type="submit">{% trans "Sign In" %}</button>
+        <button class="btn btn-lg" type="submit">{% trans "Sign In" %}</button>
       </form>
     </div>
   </div>
 </div>
 </div>
 {% endblock %}
+</html>

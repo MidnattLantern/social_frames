@@ -1,38 +1,36 @@
-{% load static %}
-<!-- see views.py to see every view within any for i loop -->
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/4b0d3e328e.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.1/css/hover-min.css" type="text/css" />
-    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <title>Document</title>
-</head>
+<html>
+    <head>
+        <title>Cloudyboard</title>
+        {% load static %}
+        <!--<meta charset="UTF-8">-->
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+        <script src="https://kit.fontawesome.com/4b0d3e328e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.1/css/hover-min.css" type="text/css" />
+        <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div class="main_window">
+        <!-- Header -->
+        <a href="{% url 'home_url_path' %}" style="margin-left: 25px">
+            Cloudyboard
+        </a>
 
-<body>
-    <div class="main_window">
-    <!-- Header -->
-    <a href="{% url 'home_url_path' %}" style="margin-left: 25px">
-        Cloudyboard
-    </a>
+        <main class="flex-shrink-0 main-bg">
+            {% block content %}
+            <!-- Content Goes here -->
+            {% endblock %}
+        </main>
 
-    <main class="flex-shrink-0 main-bg">
-        {% block content %}
-        <!-- Content Goes here -->
-        {% endblock %}
-    </main>
+        <!-- Footer -->
+        <footer>
 
-    <!-- Footer -->
-    <footer>
-
-    </footer>
-    </div>
-</body>
+        </footer>
+        </div>
+    </body>
 
 </html>

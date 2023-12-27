@@ -107,6 +107,21 @@ Scene View
 
 Technical debt
 ======
-- Being my first time working with Django, I'm not familiar with what strings and blocks of code will eventually bite me in the tail. There are some mistakes I did spot but couldn't adress due to a deadline.
+Being my first time working with Django, I'm not familiar with what strings and blocks of code will eventually bite me in the tail. There are some mistakes I did spot but couldn't adress due to a deadline:
 - Project view as ´index.html´: Cloudyboard doesn't have a 'lounge' or 'home page', as it's deseigned to not have one. the Cloudyboard logo and index.html will lead to Project view as the default. If a 'lounge' or 'home' page should be introduced in the future, you'd first need to change the entire relationship to the project view.
 - The authorisation system is built upon a user filter. This means that unauthorised users with an URL-link to any stranger's item aren't kicked out, the items are just not visible.
+- The CSS `ul>li` styling is currently occupied to satisfy a neccessary styling for the sign-up page.
+
+Validation
+======
+
+W3 warnings about Flask related strings/ blocks were ignored. This is because W3 will return `Bad value` errors for legitemate flask strings/ blocks, most commonly `{ is not allwoed`. Following HTML have been checked by W3:
+------
+- scene_view.html (5 Flask-related `bad value` raised)
+- project_view.html (3 Flask-related `bad value` raised)
+- index.html (4 Flask-related `bad value` raised)
+- episode_view.html (4 Flask-related `bad value` raised)
+- base.html (2 Flask-related `bad value` raised)
+- logout.html (1 Flask-related `bad value` raised)
+- logout.html (1 Flask-related `bad value` raised)
+- signup.html (1 Flask-related `bad value` raised)

@@ -15,6 +15,12 @@ h2 {
 h3 {
     font-size: 1.5rem;
 }
+
+/* for the sign up text */
+ul>li {
+    color: #fafafa;
+}
+
 hr {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -67,6 +73,10 @@ a:hover, .visible_link{
     border: 1px solid #fafafa;
     border-radius: 0 10px 10px 0;
     padding: 25px;
+}
+.edit_cover {
+    background-color: #2a2a2b;
+    z-index: 1;
 }
 
 /* sketch */

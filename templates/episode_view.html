@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cloudyboard Scenes</title>
+  </head>
 {% extends "base.html" %} {% block content %}
 {% load crispy_forms_tags %}
 <div class="header_window">
@@ -36,7 +41,7 @@
     <hr>
 
     <!-- Delete -->
-    <form action="" method="POST" onsubmit="return confirmDelete()">
+    <form method="POST" onsubmit="return confirmDelete()">
       {% csrf_token %} {{ delete_scene_item | crispy }}
       <button class="btn btn-sm btn-delete" type="submit" name="delete_scene" value="{{ i.scene_slug }}">Delete scene</button>
     </form>
@@ -47,32 +52,8 @@
     </script>
 
   </div>
-  </div>
-  <!-- edit form -->
-  <!--
-<div class="object_window">
-  <div class="new_item_styling">
-    <div>
-      <p>Edit {{ i.scene_name }}</p>
-      <form method="post" class="white_font">
-        {{ edit_scene_item | crispy }}
-        {% csrf_token %}
-        <button type="submit" name="edit_scene" value="{{ i.scene_slug }}">Save changes</button>
-      </form>
-    </div>
-  </div>
-  -->
-  <!-- Delete form -->
-  <!--
-  <div>
-    <form action="" method="POST">
-      {% csrf_token %} {{ delete_scene_item | crispy }}
-      <button type="submit" name="delete_scene" value="{{ i.scene_slug }}">Delete scene</button>
-    </form>
-  </div>
--->
-<!-- </div> -->
-  <!-- End for edit and delete -->
+</div>
+
 <br>
 {% endfor %}
 
@@ -88,3 +69,4 @@
 </div>
 
 {% endblock %}
+</html>

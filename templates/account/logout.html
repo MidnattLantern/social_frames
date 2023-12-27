@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Cloudyboard signout</title>
+    </head>
 {% extends "base.html" %}
 {% load allauth i18n %}
 {% block head_title %}
@@ -5,7 +10,7 @@
 {% endblock head_title %}
 {% block content %}
 <div class="header_window">
-<h1>{{ user.username }}</h1>
+<h1>Team account</h1>
 <!-- this <p> mimics Finder so that the user purpose feels familiar -->
 <p><strong>{{ user.username }}</strong></p>
 </div>
@@ -16,6 +21,7 @@
     </div>
     <hr>
     <br>
+    <p>Click the button below to sign out</p>
     {% url 'account_logout' as action_url %}
     {% element form method="post" action=action_url no_visible_fields=True %}
         {% slot body %}
@@ -27,10 +33,11 @@
             {% endif %}
         {% endslot %}
         {% slot actions %}
-            {% element button type="submit" %}
+            <button class="btn btn-lg">
                 {% trans 'Sign Out' %}
-            {% endelement %}
+            </button>
         {% endslot %}
     {% endelement %}
 </div>
 {% endblock content %}
+</html>

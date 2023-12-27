@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cloudyboard Episodes</title>
+  </head>
 {% extends "base.html" %} {% block content %}
 {% load crispy_forms_tags %}
 <div class="header_window">
@@ -35,7 +40,7 @@
       <hr>
 
       <!-- Delete -->
-      <form action="" method="POST" onsubmit="return confirmDelete()">
+      <form method="POST" onsubmit="return confirmDelete()">
         {% csrf_token %} {{ delete_episode_item | crispy }}
         <button class="btn btn-sm btn-delete" type="submit" name="delete_episode" value="{{ i.episode_slug }}">Delete episode</button>
       </form>
@@ -45,30 +50,8 @@
         }
       </script>
     
-
     </div>
   </div>
-    <!-- edit form -->
-    <!--
-    <div class="object_window">
-      <div class="new_item_styling">
-        <p>Edit {{ i.episode_name }}</p>
-        <form method="post" class="white_font">
-          {{ edit_episode_item | crispy }}
-          {% csrf_token %}
-          <button type="submit" name="edit_episode" value="{{ i.episode_slug }}">Save changes</button>
-        </form>
-      </div>
-    -->
-      <!-- delete form -->
-      <!--
-      <form action="" method="POST">
-        {% csrf_token %} {{ delete_episode_item | crispy }}
-        <button type="submit" name="delete_episode" value="{{ i.episode_slug }}">Delete episode</button>
-      </form>
-    -->
-  <!-- End for edit and delete -->
-    <!--</div>-->
   <br>
   {% endfor %}
 
@@ -85,3 +68,4 @@
 </div>
 
 {% endblock %}
+</html>
