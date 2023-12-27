@@ -38,7 +38,7 @@ X_FRAE_OPTIONS = 'SAMEORIGIN'
 
 # Add host before deployment for accessibility
 # Delete personal IP address before release!
-ALLOWED_HOSTS = ['social-frames.herokuapp.com', 'localhost', 'social-frames-ecd39961bdfa.herokuapp.com', ]
+ALLOWED_HOSTS = ['social-frames.herokuapp.com', 'localhost', 'social-frames-ecd39961bdfa.herokuapp.com', 'social-frames-661ae1751b8d.herokuapp.com']
 
 """
 Additional: storyboard, cloudinary, cloudinary_storage, django.contrib.sites,
