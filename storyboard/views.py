@@ -26,9 +26,11 @@ from django.db import IntegrityError, DataError
 # request.USER for all
 @method_decorator(login_required, name='dispatch')
 class RenderHomeView(View, LoginRequiredMixin):
-    def get (self, request, *args, **kwargs):
-        #restricts unauthorised accounts from accessing other accounts item(s)
-        project_item = ProjectItem.objects.filter(project_property_to_director=request.user)
+
+    def get(self, request, *args, **kwargs):
+        # restricts unauthorised accounts from accessing other accounts item(s)
+        project_item = ProjectItem.objects.filter(
+            project_property_to_director=request.user)
 
         return render(
             request,
@@ -40,9 +42,11 @@ class RenderHomeView(View, LoginRequiredMixin):
                 'project_4_header': str(request.user),
             },
         )
-    def post (self, request, *args, **kwargs):
-        #restricts unauthorised accounts from accessing other accounts item(s)
-        project_item = ProjectItem.objects.filter(project_property_to_director=request.user)
+
+    def post(self, request, *args, **kwargs):
+        # restricts unauthorised accounts from accessing other accounts item(s)
+        project_item = ProjectItem.objects.filter(
+            project_property_to_director=request.user)
         project_item_form = CreateProjectItem(data=request.POST)
 
         # C in "CRUD"
@@ -51,10 +55,11 @@ class RenderHomeView(View, LoginRequiredMixin):
                 # try and except prevent duplicate auto-generated episode_slug
                 try:
                     project = project_item_form.save(commit=False)
-                    #project_property_to_... create authorisation for project items
+            # project_property_to_... create authorisation for project items
                     project.project_property_to_director = request.user
                     project.post = project_item
-                    project.project_slug = slugify(str(request.user)+"_"+str(project.project_name))
+                    project.project_slug = slugify(str(
+                        request.user)+"_"+str(project.project_name))
                     # dev testing
                     print("--- CREATE ---")
                     project.save()
@@ -70,18 +75,22 @@ class RenderHomeView(View, LoginRequiredMixin):
         # D in "CRUD"
         if 'delete_project' in request.POST:
             delete_project_slug = request.POST.get('delete_project')
-            delete_project = ProjectItem.objects.get(project_slug=delete_project_slug)
+            delete_project = ProjectItem.objects.get(
+                project_slug=delete_project_slug)
             # dev testing
             print("--- DELETE ---")
             delete_project.delete()
-        
+
         # U in "CRUD"
         edit_project_item_form = EditProjectItem(data=request.POST)
         if edit_project_item_form.is_valid():
             if 'edit_project' in request.POST:
                 edit_project_slug = request.POST.get('edit_project')
-                edit_project = ProjectItem.objects.get(project_slug=edit_project_slug)
-                edit_project.project_name = edit_project_item_form.cleaned_data.get('project_name')
+                edit_project = ProjectItem.objects.get(
+                    project_slug=edit_project_slug)
+                # validation exception: less than 79 characters is impossible
+                edit_project.project_name = edit_project_item_form.cleaned_data.get(
+                    'project_name')
                 # dev testing
                 print("--- UPDATE ---")
                 edit_project.save()
@@ -94,16 +103,19 @@ class RenderHomeView(View, LoginRequiredMixin):
                 'create_project_item': CreateProjectItem(),
                 'edit_project_item': EditProjectItem(),
             },
-        )         
+        )
 
 
 # user enter project_view.html, expects to see episodes
 @method_decorator(login_required, name='dispatch')
 class RenderProjectView(View, LoginRequiredMixin):
-    def get (self, request, project_slug, *args, **kwargs):
-        project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
-        #restricts unauthorised accounts from accessing other accounts item(s)
-        episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item, episode_property_to_director=request.user)
+    def get(self, request, project_slug, *args, **kwargs):
+        project_item = get_object_or_404(
+            ProjectItem, project_slug=project_slug)
+        # restricts unauthorised accounts from accessing other accounts item(s)
+        episode_item = EpisodeItem.objects.filter(
+            episode_property_to_project=project_item,
+            episode_property_to_director=request.user)
         return render(
             request,
             'project_view.html',
@@ -115,10 +127,14 @@ class RenderProjectView(View, LoginRequiredMixin):
                 'episode_4_header': str(project_item),
             },
         )
-    def post (self, request, project_slug, *args, **kwargs):
-        project_item = get_object_or_404(ProjectItem, project_slug=project_slug)
-        #restricts unauthorised accounts from accessing other accounts item(s)
-        episode_item = EpisodeItem.objects.filter(episode_property_to_project=project_item, episode_property_to_director=request.user)
+
+    def post(self, request, project_slug, *args, **kwargs):
+        project_item = get_object_or_404(
+            ProjectItem, project_slug=project_slug)
+        # restricts unauthorised accounts from accessing other accounts item(s)
+        episode_item = EpisodeItem.objects.filter(
+            episode_property_to_project=project_item,
+            episode_property_to_director=request.user)
         episode_item_form = CreateEpisodeItem(data=request.POST)
 
         # C in "CRUD"
@@ -127,10 +143,12 @@ class RenderProjectView(View, LoginRequiredMixin):
                 # try and except prevent duplicate auto-generated episode_slug
                 try:
                     episode = episode_item_form.save(commit=False)
-                    #episode_property_to_... create authorisation for episode items
+            # episode_property_to_... create authorisation for episode items
                     episode.episode_property_to_project = project_item
                     episode.episode_property_to_director = request.user
-                    episode.episode_slug = slugify(str(project_item.project_slug))+slugify(str(episode.episode_name))
+                    episode.episode_slug = slugify(str(
+                        project_item.project_slug))+slugify(
+                            str(episode.episode_name))
                     episode.post = episode_item
                     # dev testing
                     print("--- CREATE ---")
@@ -147,19 +165,25 @@ class RenderProjectView(View, LoginRequiredMixin):
         # D in "CRUD"
         if 'delete_episode' in request.POST:
             delete_episode_slug = request.POST.get('delete_episode')
-            delete_episode = EpisodeItem.objects.get(episode_slug=delete_episode_slug)
+            delete_episode = EpisodeItem.objects.get(
+                episode_slug=delete_episode_slug)
             # dev testing
             print("--- DELETE ---")
             delete_episode.delete()
-        
+
         # U in "CRUD"
         edit_episode_item_form = EditEpisodeItem(data=request.POST)
         if edit_episode_item_form.is_valid():
             if 'edit_episode' in request.POST:
                 edit_episode_slug = request.POST.get('edit_episode')
-                edit_episode = EpisodeItem.objects.get(episode_slug=edit_episode_slug)
-                edit_episode.episode_name = edit_episode_item_form.cleaned_data.get('episode_name')
-                edit_episode.episode_chronology = edit_episode_item_form.cleaned_data.get('episode_chronology')
+                edit_episode = EpisodeItem.objects.get(
+                    episode_slug=edit_episode_slug)
+                # validation exception: less than 79 characters is impossible
+                edit_episode.episode_name = edit_episode_item_form.cleaned_data.get(
+                    'episode_name')
+                # validation exception: less than 79 characters is impossible
+                edit_episode.episode_chronology = edit_episode_item_form.cleaned_data.get(
+                    'episode_chronology')
                 # dev testing
                 print("--- UPDATE ---")
                 edit_episode.save()
@@ -179,10 +203,13 @@ class RenderProjectView(View, LoginRequiredMixin):
 # user enter episode_view.html, expects to see scenes
 @method_decorator(login_required, name='dispatch')
 class RenderEpisodeView(View, LoginRequiredMixin):
-    def get (self, request, episode_slug, *args, **kwargs):
-        episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
-        #restricts unauthorised accounts from accessing other accounts item(s)
-        scene_item = SceneItem.objects.filter(scene_property_to_episode=episode_item, scene_property_to_director=request.user)
+    def get(self, request, episode_slug, *args, **kwargs):
+        episode_item = get_object_or_404(
+            EpisodeItem, episode_slug=episode_slug)
+        # restricts unauthorised accounts from accessing other accounts item(s)
+        scene_item = SceneItem.objects.filter(
+            scene_property_to_episode=episode_item,
+            scene_property_to_director=request.user)
         return render(
             request,
             'episode_view.html',
@@ -194,10 +221,14 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 'scene_4_header': str(episode_item),
             },
         )
-    def post (self, request, episode_slug, *args, **kwargs):
-        episode_item = get_object_or_404(EpisodeItem, episode_slug=episode_slug)
-        #restricts unauthorised accounts from accessing other accounts item(s)
-        scene_item = SceneItem.objects.filter(scene_property_to_episode=episode_item, scene_property_to_director=request.user)
+
+    def post(self, request, episode_slug, *args, **kwargs):
+        episode_item = get_object_or_404(
+            EpisodeItem, episode_slug=episode_slug)
+        # restricts unauthorised accounts from accessing other accounts item(s)
+        scene_item = SceneItem.objects.filter(
+            scene_property_to_episode=episode_item,
+            scene_property_to_director=request.user)
         scene_item_form = CreateSceneItem(data=request.POST)
 
         # C in "CRUD"
@@ -206,10 +237,12 @@ class RenderEpisodeView(View, LoginRequiredMixin):
                 # try and except prevent duplicate auto-generated scene_slug
                 try:
                     scene = scene_item_form.save(commit=False)
-                    #scene_property_to_... create authorisation for episode items
+            # scene_property_to_... create authorisation for episode items
                     scene.scene_property_to_episode = episode_item
                     scene.scene_property_to_director = request.user
-                    scene.scene_slug = slugify(str(episode_item.episode_slug))+slugify(str(scene.scene_name))
+                    scene.scene_slug = slugify(str(
+                        episode_item.episode_slug))+slugify(str(
+                            scene.scene_name))
                     scene.post = scene_item
                     # dev testing
                     print("--- CREATE ---")
@@ -237,9 +270,15 @@ class RenderEpisodeView(View, LoginRequiredMixin):
             if 'edit_scene' in request.POST:
                 edit_scene_slug = request.POST.get('edit_scene')
                 edit_scene = SceneItem.objects.get(scene_slug=edit_scene_slug)
-                edit_scene.scene_name = edit_scene_item_form.cleaned_data.get('scene_name')
-                edit_scene.scene_chronology = edit_scene_item_form.cleaned_data.get('scene_chronology')
-                edit_scene.scene_event_notes = edit_scene_item_form.cleaned_data.get('scene_event_notes')
+                # validation exception: less than 79 characters is impossible
+                edit_scene.scene_name = edit_scene_item_form.cleaned_data.get(
+                    'scene_name')
+                # validation exception: less than 79 characters is impossible
+                edit_scene.scene_chronology = edit_scene_item_form.cleaned_data.get(
+                    'scene_chronology')
+                # validation exception: less than 79 characters is impossible
+                edit_scene.scene_event_notes = edit_scene_item_form.cleaned_data.get(
+                    'scene_event_notes')
                 # dev testing
                 print("--- UPDATE ---")
                 edit_scene.save()
@@ -259,10 +298,12 @@ class RenderEpisodeView(View, LoginRequiredMixin):
 # user enter scene_view.html, expects to see sketches
 @method_decorator(login_required, name='dispatch')
 class RenderSceneView(View, LoginRequiredMixin):
-    def get (self, request, scene_slug, *args, **kwargs):
+    def get(self, request, scene_slug, *args, **kwargs):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
-        #restricts unauthorised accounts from accessing other accounts item(s)
-        sketch_item = SketchItem.objects.filter(sketch_property_to_scene=scene_item, sketch_property_to_director=request.user)
+        # restricts unauthorised accounts from accessing other accounts item(s)
+        sketch_item = SketchItem.objects.filter(
+            sketch_property_to_scene=scene_item,
+            sketch_property_to_director=request.user)
 
         return render(
             request,
@@ -276,9 +317,11 @@ class RenderSceneView(View, LoginRequiredMixin):
                 'sketch_4_header': str(scene_item),
             },
         )
-    def post (self, request, scene_slug, *args, **kwargs):
+
+    def post(self, request, scene_slug, *args, **kwargs):
         scene_item = get_object_or_404(SceneItem, scene_slug=scene_slug)
-        sketch_item = SketchItem.objects.filter(sketch_property_to_scene=scene_item)
+        sketch_item = SketchItem.objects.filter(
+            sketch_property_to_scene=scene_item)
         sketch_item_form = CreateSketchItem(request.POST, request.FILES)
 
         # C in "CRUD"
@@ -287,11 +330,13 @@ class RenderSceneView(View, LoginRequiredMixin):
                 # try and except prevent duplicate auto-generated sketch_slug
                 try:
                     sketch = sketch_item_form.save(commit=False)
-                    #scene_property_to_... create authorisation for episode items
+                # scene_property_to_... create authorisation for episode items
                     sketch.sketch_property_to_scene = scene_item
                     sketch.sketch_property_to_director = request.user
                     sketch.post = sketch_item
-                    sketch.sketch_slug = slugify(str(request.user))+slugify(str(sketch.sketch_name))
+                    sketch.sketch_slug = slugify(str(
+                        request.user))+slugify(str(
+                            sketch.sketch_name))
                     # dev testing
                     print("--- CREATE ---")
                     sketch.save()
@@ -309,8 +354,10 @@ class RenderSceneView(View, LoginRequiredMixin):
         # D in "CRUD"
         if 'delete_sketch' in request.POST:
             delete_sketch_slug = request.POST.get('delete_sketch')
-            #restricts unauthorised accounts from accessing other accounts item(s)
-            delete_sketch = SketchItem.objects.get(sketch_slug=delete_sketch_slug, sketch_property_to_director=request.user)
+        # restricts unauthorised accounts from accessing other accounts item(s)
+            delete_sketch = SketchItem.objects.get(
+                sketch_slug=delete_sketch_slug,
+                sketch_property_to_director=request.user)
             # dev testing
             print("--- DELETE ---")
             delete_sketch.delete()
@@ -320,8 +367,11 @@ class RenderSceneView(View, LoginRequiredMixin):
         if edit_sketch_item_form.is_valid():
             if 'edit_sketch' in request.POST:
                 edit_sketch_slug = request.POST.get('edit_sketch')
-                edit_sketch = SketchItem.objects.get(sketch_slug=edit_sketch_slug)
-                edit_sketch.sketch_name = edit_sketch_item_form.cleaned_data.get('sketch_name')
+                edit_sketch = SketchItem.objects.get(
+                    sketch_slug=edit_sketch_slug)
+                # validation exception: less than 79 characters is impossible
+                edit_sketch.sketch_name = edit_sketch_item_form.cleaned_data.get(
+                    'sketch_name')
                 # dev testing
                 print("--- UPDATE ---")
                 edit_sketch.save()
@@ -331,8 +381,11 @@ class RenderSceneView(View, LoginRequiredMixin):
         if comment_sketch_item_form.is_valid():
             if 'comment_sketch' in request.POST:
                 comment_sketch_slug = request.POST.get('comment_sketch')
-                comment_sketch = SketchItem.objects.get(sketch_slug=comment_sketch_slug)
-                comment_sketch.sketch_directors_comment = comment_sketch_item_form.cleaned_data.get('sketch_directors_comment')
+                comment_sketch = SketchItem.objects.get(
+                    sketch_slug=comment_sketch_slug)
+                # validation exception: less than 79 characters is impossible
+                comment_sketch.sketch_directors_comment = comment_sketch_item_form.cleaned_data.get(
+                    'sketch_directors_comment')
                 comment_sketch.save()
 
         return render(

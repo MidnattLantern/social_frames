@@ -125,3 +125,11 @@ W3 warnings about Flask related strings/ blocks were ignored. This is because W3
 - logout.html (1 Flask-related `bad value` raised)
 - logout.html (1 Flask-related `bad value` raised)
 - signup.html (1 Flask-related `bad value` raised)
+
+Following CSS have been checked by Jigsaw:
+------
+- style.css
+
+The validator user for Python files were `https://pep8ci.herokuapp.com/`. There are some exceptions where raised warnings couldn't be solved, but the consequence is minimal. following Python files have been checked:
+------
+- views.py inside storyboard (7 exceptions)
