@@ -3,69 +3,70 @@
   <head>
     <title>Cloudyboard Episodes</title>
   </head>
-{% extends "base.html" %} {% block content %}
-{% load crispy_forms_tags %}
-<div class="header_window">
-  <h1>Episodes for {{ episode_4_header }}</h1>
-  {% if user.is_authenticated %}
-  <!-- this <p> mimics Finder so that the user purpose feels familiar -->
-  <p><a href="{% url 'account_logout' %}">{{ user.username }}</a>  / <a href="{% url 'home_url_path' %}">Projects</a> / <strong>Episodes</strong></p>
-</div>
-
-<div class="body_window">
-  {% for i in episode_item %}
-  <div class="row" style="margin: 0px;">
-    <!-- Object (2/3) -->
-
-    <a class="object_window col-md-8" href="{% url 'episode_url_path' i.episode_slug %}">
-      <h3>Episode: {{ i.episode_chronology }}</h3>
-      <h2>
-        <!-- episode name -->
-        {{ i.episode_name }}
-      </h2>
-      <br>
-    </a>
-    <!-- End for object -->
-
-    <!-- Edit and delete (1/3) -->
-    <div class="edit_window col-md-4">
-
-      <h3>Edit {{ i.episode_name }}</h3>
-        <form method="post" class="white_font">
-          {{ edit_episode_item | crispy }}
-          {% csrf_token %}
-          <button class="btn btn-sm" type="submit" name="edit_episode" value="{{ i.episode_slug }}">Save changes</button>
-        </form>
-
-      <hr>
-
-      <!-- Delete -->
-      <form method="POST" onsubmit="return confirmDelete()">
-        {% csrf_token %} {{ delete_episode_item | crispy }}
-        <button class="btn btn-sm btn-delete" type="submit" name="delete_episode" value="{{ i.episode_slug }}">Delete episode</button>
-      </form>
-      <script>
-        function confirmDelete() {
-            return confirm("Deleting this episode will also delete everything inside it, this cannot be undone!");
-        }
-      </script>
-    
-    </div>
+  {% extends "base.html" %} {% block content %}
+  {% load crispy_forms_tags %}
+  <div class="header_window">
+    <h1>Episodes for {{ episode_4_header }}</h1>
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'account_logout' %}">{{ user.username }}</a>  / <a href="{% url 'home_url_path' %}">Projects</a> / <strong>Episodes</strong></p>
   </div>
-  <br>
-  {% endfor %}
 
-  <div class="new_item_styling">
-  <h3>Create new episode</h3>
-  <form method="post" style="margin-top: 1.3em;" class="white_font">
-    {{ create_episode_item | crispy}}
-    {% csrf_token %}
-    <button type="submit" class="btn btn-lg" name="add_episode">Create Episode</button>
-  </form>
+  <!-- Row (_/3) -->
+  <div class="body_window">
+    {% for i in episode_item %}
+    <div class="row" style="margin: 0px;">
+
+      <!-- Object (2/3) -->
+      <a class="object_window col-md-8" href="{% url 'episode_url_path' i.episode_slug %}">
+        <h3>Episode: {{ i.episode_chronology }}</h3>
+        <h2>
+          <!-- episode name -->
+          {{ i.episode_name }}
+        </h2>
+        <br>
+      </a>
+
+      <!-- Edit and delete (1/3) -->
+      <div class="edit_window col-md-4">
+
+        <!-- Edit -->
+        <h3>Edit {{ i.episode_name }}</h3>
+          <form method="post" class="white_font">
+            {{ edit_episode_item | crispy }}
+            {% csrf_token %}
+            <button class="btn btn-sm" type="submit" name="edit_episode" value="{{ i.episode_slug }}">Save changes</button>
+          </form>
+        <hr>
+
+        <!-- Delete -->
+        <form method="POST" onsubmit="return confirmDelete()">
+          {% csrf_token %} {{ delete_episode_item | crispy }}
+          <button class="btn btn-sm btn-delete" type="submit" name="delete_episode" value="{{ i.episode_slug }}">Delete episode</button>
+        </form>
+        <script>
+          function confirmDelete() {
+              return confirm("Deleting this episode will also delete everything inside it, this cannot be undone!");
+          }
+        </script>
+      
+      </div>
+
+    </div>
+
+    <br>
+    {% endfor %}
+
+    <div class="new_item_styling">
+      <h3>Create new episode</h3>
+      <form method="post" style="margin-top: 1.3em;" class="white_font">
+          {{ create_episode_item | crispy}}
+          {% csrf_token %}
+        <button type="submit" class="btn btn-lg" name="add_episode">Create Episode</button>
+      </form>
+    </div>
+
   </div>
 
   {% endif %}
-</div>
-
-{% endblock %}
+  {% endblock %}
 </html>
