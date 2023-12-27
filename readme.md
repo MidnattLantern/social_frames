@@ -137,3 +137,4 @@ The validator used for the Python files were the Code Institute Python Linter `h
 - urls.py inside social_frames folder
 - models.py inside storyboard folder
 - forms.py inside storyboard folder
+- admin.py inside storyboard folder

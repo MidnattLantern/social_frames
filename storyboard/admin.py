@@ -2,16 +2,14 @@ from django.contrib import admin
 from .models import ProjectItem, EpisodeItem
 from .models import SceneItem, SketchItem
 
-""" naming convention:
-Each item related to a function are appended with "admin"
-"""
-
-
 """
 - Different users can make a project each with the same name.
 Social Frames/ CloudyBoard tell them apart with an index id assigned to each
 user. Hence, `('project_property_to_director', 'project_name',)`.
+- These unique slugs are generated differently at the normal pages.
 """
+
+
 @admin.register(ProjectItem)
 class RegisterProject(admin.ModelAdmin):
     prepopulated_fields = {'project_slug': ('project_property_to_director',
