@@ -21,10 +21,7 @@ hr {
     width: 100%;
     border-top: 1px solid #fafafa50;
 }
-a:hover {
-    color: #98baff;
-}
-.visible_link {
+a:hover, .visible_link{
     color: #98baff;
 }
 .main_window {

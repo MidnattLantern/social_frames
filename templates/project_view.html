@@ -7,23 +7,21 @@
   <p><a href="{% url 'account_logout' %}">{{ user.username }}</a>  / <a href="{% url 'home_url_path' %}">Projects</a> / <strong>Episodes</strong></p>
 </div>
 
-
 <div class="body_window">
   {% for i in episode_item %}
   <div class="row" style="margin: 0px;">
     <!-- Object (2/3) -->
-    <div class="object_window col-md-8">
+
+    <a class="object_window col-md-8" href="{% url 'episode_url_path' i.episode_slug %}">
       <h3>Episode: {{ i.episode_chronology }}</h3>
       <h2>
-        <a href="{% url 'episode_url_path' i.episode_slug %}">
-          <!-- episode name -->
-          {{ i.episode_name }}
-        </a>
+        <!-- episode name -->
+        {{ i.episode_name }}
       </h2>
       <br>
-    </div>
-
+    </a>
     <!-- End for object -->
+
     <!-- Edit and delete (1/3) -->
     <div class="edit_window col-md-4">
 

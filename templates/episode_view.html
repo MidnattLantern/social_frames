@@ -12,17 +12,17 @@
   {% for i in scene_item %}
   <div class="row" style="margin: 0px;">
   <!-- Object (2/3) -->
-    <div class="object_window col-md-8">
+
+    <a class="object_window col-md-8" href="{% url 'scene_url_path' i.scene_slug %}">
       <h3>Scene: {{ i.scene_chronology }}</h3>
       <h2>
-        <a href="{% url 'scene_url_path' i.scene_slug %}">
-          <!-- scene name -->
-          {{ i.scene_name }}
-        </a>
+        <!-- scene name -->
+        {{ i.scene_name }}
       </h2>
       <p>Scene notes: <br> {{ i.scene_event_notes }} </p>
-    </div>
+    </a>
   <!-- End for object -->
+
   <!-- Edit and delete (1/3) -->
   <div class="edit_window col-md-4">
 
