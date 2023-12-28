@@ -8,6 +8,7 @@ from .models import SketchItem
 # .forms that create new objects
 from .forms import CreateProjectItem, CreateEpisodeItem, CreateSceneItem
 from .forms import CreateSketchItem
+from PIL import Image
 # .forms that edit existing objects
 from .forms import EditSceneItem, EditSketchItem, EditEpisodeItem
 from .forms import EditProjectItem
