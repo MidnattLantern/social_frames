@@ -31,14 +31,14 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'animeforscandinavia'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Summernote isn't used, but this is included anyways
 X_FRAE_OPTIONS = 'SAMEORIGIN'
 
 # Add host before deployment for accessibility
 # Delete personal IP address before release!
-ALLOWED_HOSTS = ['social-frames.herokuapp.com', 'localhost', 'social-frames-ecd39961bdfa.herokuapp.com', 'social-frames-661ae1751b8d.herokuapp.com']
+ALLOWED_HOSTS = ['social-frames.herokuapp.com', 'localhost', '127.0.0.1', 'social-frames-661ae1751b8d.herokuapp.com']
 
 """
 Additional: storyboard, cloudinary, cloudinary_storage, django.contrib.sites,
