@@ -31,7 +31,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'animeforscandinavia'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Summernote isn't used, but this is included anyways
 X_FRAE_OPTIONS = 'SAMEORIGIN'
