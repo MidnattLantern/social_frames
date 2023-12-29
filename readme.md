@@ -41,7 +41,7 @@ All pages have the Cloudboard logo at the top that is a hyperlink that either re
 
 Sign-in
 ------
-![image: sign in demostration] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/sign%20in%20demostration.png)
+![image: sign in demostration](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/sign%20in%20demostration.png)
 - If the user isn't signed in to a team account, they'll be prompted to this page. 
 - `Create a team account` hyperlink that redirects them to another page where they can create a team account.
 - Form, where Username and Password are manditory.
@@ -49,20 +49,20 @@ Sign-in
 
 Sign-up
 ------
-![image: signup demostration] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/signup%20demostration.png)
+![image: signup demostration](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/signup%20demostration.png)
 - Hyperlink to go back to the sign-in page.
 - Form, Username, and two password fields are manditory.
 - Button to create the team account.
 
 Sign-out
 ------
-![image: signout demostration] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/signout%20demostration.png)
+![image: signout demostration](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/signout%20demostration.png)
 - Window that redirects the user back to Project-view.
 - Button upon click that log you out.
 
 Project view
 ------
-![image: project view demostration.] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/project%20view%20demostration.png)
+![image: project view demostration.](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/project%20view%20demostration.png)
 - Projects banner and a field below that reminds of Finder/ file explorer: `(account-name)/Projects`, click on the team account username redirects the user to signout page.
 - Each project item are seperated for each of their own "squircle" (rectangle with round corners). Only the projects belonging to the user who is signed in are visible, this is acieved by a filter method checking what team-account is signed in.
 - 2/3:rds of the squircle is a slug-hyperlink to episode view that reveals episodes belonging to that project. It reveals information about the Project: the name.
@@ -75,7 +75,7 @@ Project view
 
 Episode view
 ------
-![image: episode view demostration] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/episode%20view%20demostration.png)
+![image: episode view demostration](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/episode%20view%20demostration.png)
 - Episode view follow a similar model as Project view. To avoid repetition, only the differences are covered:
 - The banner will display the name of the project the user entered. "Episodes for `project name`".
 - The Finder/ file explorer field says: `(account-name)/Projects/Episodes`, clicking on `Projects` redirects the user to Projects view.
@@ -95,9 +95,9 @@ Scene view
 
 Sketch view
 ------
-![image: sketch upload detail demostration] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/sketch%20upload%20detail%20demostration.png)
-![image: sketch overview demostration] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/sketch%20overview%20demostration.png)
-![image: sketch item detail demostration] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/sketch%20item%20detail%20demostration.png)
+![image: sketch upload detail demostration](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/sketch%20upload%20detail%20demostration.png)
+![image: sketch overview demostration](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/sketch%20overview%20demostration.png)
+![image: sketch item detail demostration](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/sketch%20item%20detail%20demostration.png)
 - Sketch view follow a similar model as Project view, Episode view and Scene veiw. To aviod repetition, only the differences are covered. This is the most complex model on Cloudyboard:
 - The banner will display the name of the scene the user entered. "Sketches for `scene name`".
 - The Finder/ file explorer field says: `(account-name)/Projects/Episodes/Scenes/Sketches`.
@@ -133,16 +133,16 @@ This section cover some items from the wishlist of features me and my advisor le
 
 6 Wireframes
 ======
-![image: UX demostration] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/UX%20demostration.png)
+![image: UX demostration](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/UX%20demostration.png)
 - if the model for cloudyboard were to be demostrated on a familiar app, it would be like on Finder/ file explorer.
 - sketcehs goes inside scenes, scenes goes inside episodes, episodes goes inside projects, projects goes inside a team account. And they behave like you'd expect files with this model would.
 - Hence, the navigation bar under the header `team-account/projects/episodes/scenes/sketches`
 
-![image: slug redirect demostration] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/slug%20redirect%20demostration.png)
+![image: slug redirect demostration](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/slug%20redirect%20demostration.png)
 - As demostrated in this wireframe, links to episodes are available in the project-view, links to scenes are available in the episode-view, links to sketches are available in the scene-view.
 
-![image: partner wireframe 1] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/partner%20wireframe%201.png)
-![image: partner wireframe 2] (https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/partner%20wireframe%202.png)
+![image: partner wireframe 1](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/partner%20wireframe%201.png)
+![image: partner wireframe 2](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/partner%20wireframe%202.png)
 - Since Cloudyboard was branstormed with someone with insight to the industry, these sketches images show vague ideas on what would be nice to be implimented.
 - Obviously, a wishlist is just a wishlist, but the UX idea that items are large and take up attention was agreed on. The important objects have big font sizes. When you hover them, they light up in blue, making them stick out from the rest of the page.
 - The wireframes gave two ideas: should the objects be displayed with a flex layout with two squares for each row, or a rectangle taking up one row each? The answer was the rectangle, since most objects are listed with a chronological order, preventing an over-stimulation of information for each row. Users are expected to be on a computer.
