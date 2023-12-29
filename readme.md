@@ -1,4 +1,4 @@
-1. Cloudyboard version 1.0
+1 Cloudyboard version 1.0
 ======
 - Cloudyboard (alias "Social Frames"), was advised by Emma Fyrmark, a screen writer within the animation industry for insight. We created issues that makes up a long wish list of useful features an animation team would valuate, then we tagged the most crucial features as "must have", and put on a project board. The other issues were tagged as "feature request".
 
@@ -8,7 +8,7 @@
 
 - Cloudyboard is a create, read, update, delete ("CRUD") platform targeted for animation teams. The animation team share a team account, where directors can create metadata for projects, episodes and scenes, and where animators can upload sketches. This enable the team to work remotely.
 
-2. User stories:
+2 User stories:
 ======
 There are two primary roles as a "user": the "director", and the "artist/ animator":
 
@@ -35,7 +35,7 @@ There are two primary roles as a "user": the "director", and the "artist/ animat
 - As a user, I can log out so that the browser session and its content isn't connected to me
 
 
-3. Features (user stories)
+3 Features (user stories)
 ======
 All pages have the Cloudboard logo at the top that is a hyperlink that either redirects the user to Project-view page or Sign-in page.
 
@@ -109,7 +109,7 @@ image: sketch item detail demostration
 - Cloudyboard will reject non JP(e)G or PNG files, and images that are larger than 1MB.
 
 
-4. Future features:
+4 Future features:
 ======
 This section cover some items from the wishlist of features me and my advisor left:
 - As a user, I can press a button that toggles a rule-of-thirds-grid over a sketch so that I can see how flawed or well-executed the composition is.
@@ -122,7 +122,7 @@ This section cover some items from the wishlist of features me and my advisor le
 - As a director, I can assign a time on each frame, such as day or night so that my team can agree on what's happening in each scene.
 
 
-5. Typography and colour schemes
+5 Typography and colour schemes
 ======
 - Taking inspiration from Finder/ file explorer, Cloudyboard has a minimalistic visual design, where the objects take the spotlight and the tools surrounding them are available.
 - Cloudyboard use dark colours for the background: `#1b1b1c` and `#2a2a2b` in contrast with thewhite frames and text: `#fafafa`. Contrary to the convention where the background is white, and the text is black, the decision to go the opposite direction was made to be easier on the eyes. Animators tend to work extremely long hours into the night. White text on black background is more clear than black text on white background.
@@ -131,7 +131,7 @@ This section cover some items from the wishlist of features me and my advisor le
 - Each object is a row. 2/3:rds is a hyperlink box with information in large text, 1/3:rd is an edit and delete form with small text.
 
 
-6. Wireframes
+6 Wireframes
 ======
 image: UX demostration
 - if the model for cloudyboard were to be demostrated on a familiar app, it would be like on Finder/ file explorer.
@@ -148,7 +148,7 @@ image: partner wireframe 2
 - The wireframes gave two ideas: should the objects be displayed with a flex layout with two squares for each row, or a rectangle taking up one row each? The answer was the rectangle, since most objects are listed with a chronological order, preventing an over-stimulation of information for each row. Users are expected to be on a computer.
 
 
-7. Technology:
+7 Technology:
 ======
 - Cloudyboard is run using Django.
 - Cloudyboard use ElephantSQL to handle database.
@@ -160,7 +160,7 @@ image: partner wireframe 2
 - there's a csrf token for each submittion object in html for security reasons {% csrf_token %}
 
 
-8. A. Validation Testing:
+8A. Validation Testing:
 ======
 W3 warnings about Flask related strings/ blocks were ignored. This is because W3 will return `Bad value` errors for legitemate flask strings/ blocks, most commonly `{ is not allwoed`. Following HTML have been checked by W3:
 ------
@@ -187,7 +187,7 @@ The validator used for the Python files were the Code Institute Python Linter `h
 - admin.py inside storyboard folder
 
 
-8. B. Manual testing
+8B. Manual testing
 ======
 - Before the paths inside urls.py used slugfields, they had static names, such as `'scene_view/scene'` instead of `'scene_view/<slug:scene_slug>/'`. There were static links to the urls for each view page revealed universally to any user, such as a link to episode view inside project view. This step was done to be sure that the urls.py files are being imported and used properly by Django.
 
@@ -230,14 +230,14 @@ The validator used for the Python files were the Code Institute Python Linter `h
 - This should be going without saying, but it is important: the `DEBUG` inside settings:py was switched to `False` before final Heroku deployment. The first Heroku deployments was set to `True` in order to spot the reason the image upload 500 error would occur. Interestingly, if the debug is set to `True`, Heroku won't read the CSS styling file for Cloudyboard.
 
 
-8. C. Fixed bugs (ver 1.0)
+8C. Fixed bugs (ver 1.0)
 ======
 - As of version 1.0 there are no discovered bugs.
 - As Clodyboard keeps evolving in the future, there are risks of bugs occuring.
 - There's currently no bug report system in Cloudyboard, but if you discover any, you can report them to my email: isakvent@outlook.com .
 
 
-8. D. Technical debt
+8D. Technical debt
 ======
 Being my first time working with Django, I'm not familiar with what strings and blocks of code will eventually bite me in the tail. There are some mistakes I did spot but couldn't adress due to a deadline:
 - Project view as ´index.html´: Cloudyboard doesn't have a 'lounge' or 'home page', as it's deseigned to not have one. the Cloudyboard logo and index.html will lead to Project view as the default. If a 'lounge' or 'home' page should be introduced in the future, you'd first need to change the entire relationship to the project view.
@@ -246,7 +246,7 @@ Being my first time working with Django, I'm not familiar with what strings and 
 - There renaming transition isn't fully complete. There may be traces of "social-frames" that hasn't been renamed due to more important priorities.
 
 
-9. Deployment
+9 Deployment
 ======
 - The source code has its repository hosted on Github.
 - The live site is hosted by Heroku. Important before deploying to heroku: it's manditory to run this in the terminal: `pip3 freeze --local > requirements.txt` so that local requirements are 'on the cloud'.
@@ -299,7 +299,7 @@ Cloudyboard was setup on Cloudinary in following steps:
 - Inside the Dashboard tab, there's an API enviroment variable"
 - The API key can be found inside env.py
 
-10. Credits
+10 Credits
 ======
 - The layout is custom made, with help from Bootstrap 4.
 - The font used is Raleway found at Google Fonts.
