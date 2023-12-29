@@ -220,8 +220,8 @@ The validator used for the Python files was the Code Institute Python Linter `ht
 
 - Most of the CSS styling was implemented after the functionality was stable.
 
-image: responsive demonstration
-- Although an animator would never use Cloudyboard on an iPhone or any horizontal screen, it was still designed to look nice on a small iPhone. Responsive design testing was done using the Firefox development tool called Responsive Design Mode (396 x 854). To enter this mode, press Cmd+Opt+M (assuming MacOS is the operating system). After deployment to Heroku, Cloudyboard was accessible outside Codeanywhere and VS code, making it possible to test with a real iPhone.
+![image: responsive demonstration](https://raw.githubusercontent.com/MidnattLantern/social_frames/main/readme%20images/responsive%20demonstration.png)
+- The image below was screenshot on Firefox for MacOS. Although an animator would never use Cloudyboard on an iPhone or any horizontal screen, it was still designed to look nice on a small iPhone. Responsive design testing was done using the Firefox development tool called Responsive Design Mode (396 x 854). To enter this mode, press Cmd+Opt+M (assuming MacOS is the operating system). After deployment to Heroku, Cloudyboard was accessible outside Codeanywhere and VS code, making it possible to test with a real iPhone.
 
 - The first Heroku deployment had an issue with image uploading, resulting in a 500 error. However, after running a freeze command to update the requirements, it became possible to upload images from the Heroku deployment.
 
