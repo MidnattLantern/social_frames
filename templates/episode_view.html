@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Cloudyboard Scenes</title>
+  </head>
+
+  {% extends "base.html" %} {% block content %}
+  {% load crispy_forms_tags %}
+  <div class="header_window">
+    <h1>Scenes for {{ scene_4_header }}</h1>
+    {% if user.is_authenticated %}
+    <p><a href="{% url 'account_logout' %}">{{ user.username }}</a> / <a href="{% url 'home_url_path' %}">Projects</a> / <a href="{% url 'home_url_path' %}">Episodes</a> / <strong>Scenes</strong></p>
+  </div>
+
+  <!-- Row (_/3) -->
+  <div class="body_window">
+    {% for i in scene_item %}
+    <div class="row" style="margin: 0px;">
+
+      <!-- Object (2/3) -->
+      <a class="object_window col-md-8" href="{% url 'scene_url_path' i.scene_slug %}">
+        <h3>Scene: {{ i.scene_chronology }}</h3>
+        <h2>
+          {{ i.scene_name }}
+        </h2>
+        <p>Scene notes: <br> {{ i.scene_event_notes }} </p>
+      </a>
+
+    <!-- Edit and delete (1/3) -->
+    <div class="edit_window col-md-4">
+
+      <!-- Edit -->
+      <h3>Edit {{ i.scene_name }}</h3>
+      <form method="post" class="white_font">
+        {{ edit_scene_item | crispy }}
+        {% csrf_token %}
+        <button class="btn btn-sm" type="submit" name="edit_scene" value="{{ i.scene_slug }}">Save changes</button>
+      </form>
+      <hr>
+
+      <!-- Delete -->
+      <form method="POST" onsubmit="return confirmDelete()">
+        {% csrf_token %} {{ delete_scene_item | crispy }}
+        <button class="btn btn-sm btn-delete" type="submit" name="delete_scene" value="{{ i.scene_slug }}">Delete scene</button>
+      </form>
+      <script>
+        function confirmDelete() {
+            return confirm("Deleting this scene will also delete everything inside it, this cannot be undone!");
+        }
+      </script>
+
+    </div>
+
+  </div>
+
+  <br>
+  {% endfor %}
+
+    <div class="new_item_styling">
+      <h3>Create new scene</h3>
+      <form method="post" style="margin-top: 1.3em;" class="white_font">
+          {{ create_scene_item | crispy}}
+          {% csrf_token %}
+        <button type="submit" class="btn btn-lg" name="add_scene">Create scene</button>
+      </form>
+    </div>
+
+  </div>
+
+  {% endif %}
+  {% endblock %}
+</html>
